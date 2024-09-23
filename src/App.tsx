@@ -1,4 +1,6 @@
-import {Button} from "./components";
+import {Button, PasswordInput} from "./components";
+
+
 
 function App() {
     return (
@@ -6,7 +8,8 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Nathan Components
             </h1>
-            <Button disabled size="md"  onClick={() => alert("cliecked")} loading>Get started</Button>
+            <Button >Get started</Button>
+            <PasswordInput placeholder="Name"/>
         </section>
     )
 }

@@ -1,9 +1,9 @@
 import {cva} from "class-variance-authority";
-import {cn} from "../../utils/cn.ts";
+import {cn} from "@utils/cn.ts";
 import {LoaderCircle} from "lucide-react";
 
-type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
-    variant?: "primary" | "secondary",
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    variant?: "primary" | "secondary" | "ghost" | "outline",
     size?: "md" | "lg" | "xl",
     radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full",
     block?: boolean,
@@ -16,7 +16,7 @@ const Button = ({variant, size, radius, loading, disabled, className, children, 
     const userProps = {variant, size, radius, loading, disabled};
 
     return (
-        <button className={cn(buttonVariants(userProps), className)} {...props}>
+        <button disabled={disabled} className={cn(buttonVariants(userProps), className)} {...props}>
             {loading && <LoaderCircle className={LoaderVariants({size})}/>}
             {children}
         </button>)
@@ -31,6 +31,7 @@ const buttonVariants = cva('flex items-center   font-medium hover:opacity-50',
                 primary: 'bg-primary text-black',
                 secondary: '',
                 ghost: '',
+                outline : ''
             },
             size: {
                 md: 'px-4 py-2 gap-2',
