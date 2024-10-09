@@ -1,3 +1,5 @@
 export * from "./ui/button"
 export * from "./ui/textInput"
 export * from "./ui/passwordInput"
+export * from "./ui/textArea"
+export * from "./ui/selectInput"

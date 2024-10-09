@@ -7,10 +7,11 @@ export default {
     theme: {
         extend: {
             colors: {
-                'primary': '#fafafa',
+                'primary': '#186DFF',
                 'danger': '#e74c3c',
                 'black' : '#09090b',
                 'white' : '#fafafa',
+                'dark' : '#12161C',
             },
             fontSize : {
                 "title": "56px",
