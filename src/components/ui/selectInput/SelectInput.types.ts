@@ -1,0 +1,50 @@
+
+export interface ItemValues {
+    name: string,
+    content: string,
+}
+
+export interface Items {
+    title: string,
+    values: ItemValues[]
+}
+
+
+export type SelectInputDefaultProps = {
+    items: Items[],
+    onSelect?: (selectedItem: string) => void,
+    placeholder?: string,
+
+    variant?: "outline" | "fill",
+    size?: "md" | "lg" | "xl",
+    radius?: "none" | "sm" | "md" | "lg" | "xl",
+    block?: boolean,
+    className?: string,
+    
+}
+
+export type SelectGroupContainerProps = {
+    children: React.ReactNode,
+    className?: string,
+    visible?: boolean,
+    
+    variant? :  SelectInputDefaultProps['variant'],
+    radius? :  SelectInputDefaultProps['radius'],
+}
+
+
+export type SelectGroupProps = {
+    onSelect?: (selectedItem: string) => void,
+    values: ItemValues[],
+    title: string,
+}
+
+export type SelectTitleProps = {
+    children: React.ReactNode
+}
+
+export type SelectItemProps = {
+    children: React.ReactNode,
+    value: string,
+    onClick?: (value: string) => void,
+}

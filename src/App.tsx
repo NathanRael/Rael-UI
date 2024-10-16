@@ -1,4 +1,4 @@
-import {Button, PasswordInput, SelectInput, TextArea, TextInput} from "./components";
+import {SelectInput} from "./components";
 
 const DESIGNER_TOOLS = [
     {
