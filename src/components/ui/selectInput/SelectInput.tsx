@@ -10,18 +10,3 @@ const SelectInput = (props: SelectInputDefaultProps) => {
 }
 
 export default SelectInput
-
-
-/*
-export const selectGroupVariants = cva('flex items-start outline-none  ', {
-    variants: {}
-})
-
-export const selectTitleVariants = cva('')
-
-
-export const selectItemVariants = cva('flex items-start outline-none  ', {
-    variants: {}
-})
-
-*/

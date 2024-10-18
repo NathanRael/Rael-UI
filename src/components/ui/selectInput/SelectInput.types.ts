@@ -1,3 +1,4 @@
+import {ReactNode} from "react";
 
 export interface ItemValues {
     name: string,
@@ -36,7 +37,7 @@ export type SelectGroupContainerProps = {
 export type SelectGroupProps = {
     onSelect?: (selectedItem: string) => void,
     values: ItemValues[],
-    title: string,
+    title: ReactNode,
 }
 
 export type SelectTitleProps = {

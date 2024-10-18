@@ -1,22 +1,5 @@
-import {SelectInput} from "./components";
+import {RadioGroup} from "./components/ui/radio/Radio.tsx";
 
-const DESIGNER_TOOLS = [
-    {
-        title: "Online",
-        values: [
-            {name: "Figma", content: "Figma"},
-            {name: "Penpot", content: "Penpot"},
-            {name: "Adobe XD", content: "Adobe XD"},
-        ]
-    }, {
-        title: "Offline",
-        values: [
-            {name: "Figma", content: "Figma"},
-            {name: "Penpot", content: "Penpot"},
-            {name: "Adobe XD", content: "Adobe XD"},
-        ]
-    },
-]
 
 function App() {
     return (
@@ -24,15 +7,12 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
-            {/*            <Button>Get started</Button>
-            <TextInput  placeholder="Name"/>
-            <PasswordInput  placeholder="Password"/>
-            <TextArea/>*/}
-            <SelectInput
-                items={DESIGNER_TOOLS}
-                placeholder="Select a designer tool"
-                onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
-            />
+            <RadioGroup defaultValue="1">
+                <RadioGroup.Item value="1" label="First"/>
+                <RadioGroup.Item value="2" label="Second"/>
+                <RadioGroup.Item value="3" label="Nathan"/>
+            </RadioGroup>
+
         </section>
     )
 }
