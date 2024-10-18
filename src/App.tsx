@@ -12,7 +12,6 @@ function App() {
                 <RadioGroup.Item value="2" label="Second"/>
                 <RadioGroup.Item value="3" label="Nathan"/>
             </RadioGroup>
-
         </section>
     )
 }

@@ -1,6 +1,7 @@
 import {cva} from "class-variance-authority";
 import {useRadio} from "./useRadio.ts";
 import {RadioGroupContext, useRadioGroupContext} from "./RadioContext.ts";
+import {useMemo} from "react";
 
 type RadioGroupProps = {
     children: React.ReactNode,
@@ -44,6 +45,7 @@ export const RadioGroup = ({
 
 const RadioItem = ({value, label}: RadioItemProps) => {
     const {selectedValue, setSelectedValue, disabled} = useRadioGroupContext();
+    const selected = useMemo(() => selectedValue == value, [selectedValue, value]);
 
     const handleSelectedValue = () => {
         if (disabled)
@@ -53,8 +55,20 @@ const RadioItem = ({value, label}: RadioItemProps) => {
 
     return (
         <div className={"flex items-center gap-2 text-white"}>
-            <input disabled={disabled} className={sharedVariants({disabled})} id={value} onChange={handleSelectedValue}
-                   checked={selectedValue === value} type="radio"/>
+            <div className={"inline-flex items-center"}>
+                <label htmlFor={value} className="relative flex items-center">
+                    <input disabled={disabled}
+                           className={`${sharedVariants({disabled})} appearance-none size-4 rounded-full border-2 border-white checked:border-primary `}
+                           id={value}
+                           onChange={handleSelectedValue}
+                           checked={selected}
+                           type="radio"/>
+                    {
+                        selected && <span
+                            className="absolute size-2 rounded-full bg-primary left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></span>
+                    }
+                </label>
+            </div>
             {
                 label && <label className={sharedVariants({disabled})} onClick={handleSelectedValue}
                                 htmlFor={value}>{label}</label>
