@@ -6,7 +6,7 @@ import {
     useAutoCompleteInput,
     useAutoCompleteInputContext
 } from "./AutoCompleteInput.Context.ts";
-import {PropsWithChildren, useEffect} from "react";
+import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoCompleteInput.Variants.ts";
 import {textInputVariants} from "../textInput/TextInput.Variants.ts";
 
