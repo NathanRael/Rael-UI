@@ -1,17 +1,49 @@
-import useSelectInput from "./useSelectInput.ts";
-import {ChevronDownIcon} from "lucide-react";
-import {
-    SelectGroupContainerProps,
-    SelectGroupProps,
-    SelectInputDefaultProps,
-    SelectItemProps,
-} from "./SelectInput.types.ts";
 import {cn} from "../../../utils/cn.ts";
 import {selectContainerVariants, selectGroupContainerVariants, selectInputVariants} from "./SelectInput.Variants.ts";
+import {PropsWithChildren} from "react";
+import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
+
+export type SelectInputDefaultProps = Required<PropsWithChildren> & {
+    onSelect?: (selectedItem: string) => void,
+    placeholder?: string,
+
+    variant?: "outline" | "fill",
+    size?: "md" | "lg" | "xl",
+    radius?: "none" | "sm" | "md" | "lg" | "xl",
+    block?: boolean,
+    className?: string,
+
+}
+
+type SelectHeaderProps = Required<PropsWithChildren> & {
+    className?: string
+}
+
+type SelectLabelProps = {
+    className?: string,
+    placeholder: string,
+}
+
+type SelectGroupContainerProps = Required<PropsWithChildren> & {
+    className?: string,
+
+}
+
+type SelectGroupProps = Required<PropsWithChildren> & {
+    className?: string
+}
+
+type SelectGroupTitleProps = Required<PropsWithChildren> & {
+    className?: string,
+}
+
+type SelectItemProps = Required<PropsWithChildren> & {
+    className?: string,
+    value: string,
+}
 
 export const SelectInputDefault = ({
-                                       placeholder = 'Select something',
-                                       items = [],
+                                       children,
                                        onSelect = () => {
                                        },
                                        variant,
@@ -20,81 +52,79 @@ export const SelectInputDefault = ({
                                        block,
                                        className,
                                    }: SelectInputDefaultProps) => {
-    const userProps = {variant, size, radius, block};
     const {
-        selectedItem,
-        handleSelectedItem,
         selectRef,
+        setShowSelectGroup,
         showSelectGroup,
-        setShowSelectGroup
-    } = useSelectInput({onSelect});
+        selectedItem,
+        setSelectedItem,
+    } = useSelectInput();
 
-    return ( 
-          
-        <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
-            <div
-                onClick={() => setShowSelectGroup(prev => !prev)}
-                className={selectInputVariants(userProps)}>
-                <p>{selectedItem || placeholder} </p>
-                <ChevronDownIcon/>
+    return (
+        <SelectInputContext.Provider value={{
+            showSelectGroup,
+            setShowSelectGroup,
+            selectedItem,
+            setSelectedItem,
+            variant: variant,
+            size: size,
+            radius: radius,
+            block: block,
+            onSelect: onSelect,
+        }}>
+            <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
+                {children}
             </div>
-
-            <SelectGroupContainer visible={showSelectGroup}>
-                {
-                    items?.map(({title, values}) => (
-                        <SelectGroup key={title} title={title} values={values} onSelect={handleSelectedItem}/>
-                    ))
-                }
-            </SelectGroupContainer>
-        </div>)
+        </SelectInputContext.Provider>
+    )
 }
 
-const SelectGroupContainer = ({children, visible = false, variant, radius, className}: SelectGroupContainerProps) => {
+export const SelectHeader = ({children, className}: SelectHeaderProps) => {
+    const {setShowSelectGroup, variant, size, radius} = useSelectInputContext();
+    return (
+        <div
+            onClick={() => setShowSelectGroup(prev => !prev)}
+            className={cn(selectInputVariants({variant, size, radius}), className)}>
+            {children}
+        </div>
+    )
+}
 
-    return visible && (
+export const SelectLabel = ({placeholder, className}: SelectLabelProps) => {
+    const {selectedItem} = useSelectInputContext();
+    return <p className={cn("", className)}>{selectedItem || placeholder}</p>
+}
+
+export const SelectGroupContainer = ({className, children}: SelectGroupContainerProps) => {
+    const {showSelectGroup, radius, variant} = useSelectInputContext();
+    return showSelectGroup && (
         <div
             className={cn(selectGroupContainerVariants({variant, radius}), className)}>{children}</div>
     )
 }
 
-const SelectGroup = ({
-                         title,
-                         values,
-                         onSelect = () => {
-                         }
-
-                     }: SelectGroupProps) => {
+export const SelectGroup = ({children, className}: SelectGroupProps) => {
     return (
-        <div className={`w-full`}>
-            <p className={`mb-1 font-semibold  w-full py-1 px-4`}>{title}</p>
-            {
-                values?.map(v => (
-                    <SelectItem
-                        onClick={() => onSelect(v.name)}
-                        value={v.name}
-                        key={v.name}>
-                        {v.content}
-                    </SelectItem>))
-            }
+        <div className={cn(`w-full`, className)}>
+            {children}
         </div>
     )
 }
 
-/*
-const SelectTitle = ({children}: SelectTitleProps) => {
-    return <div className={`mb-1 font-semibold  w-full py-1 px-4 `}>
-        {children}
-    </div>
+export const SelectGroupTitle = ({children, className}: SelectGroupTitleProps) => {
+    return (<p className={cn(`mb-1 font-semibold  w-full py-1 px-4`, className)}>{children}</p>)
 }
-*/
 
-
-const SelectItem = ({
-                        children, onClick = () => {
-    }, value
-                    }: SelectItemProps) => {
+export const SelectItem = ({children, value, className}: SelectItemProps) => {
+    const {onSelect, setShowSelectGroup, setSelectedItem} = useSelectInputContext();
+    ;
     return (
-        <div onClick={() => onClick(value)} className={`w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer`}>
+        <div onClick={() => {
+            setSelectedItem(value);
+            onSelect(value);
+            setShowSelectGroup(false);
+        }} className={cn(`w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer`, className)}>
             {children}
-        </div>)
+        </div>
+    )
 }

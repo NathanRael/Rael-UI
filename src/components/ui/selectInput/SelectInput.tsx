@@ -1,7 +1,5 @@
-import {
-    SelectInputDefaultProps
-} from "./SelectInput.types.ts";
-import {SelectInputDefault} from "./SelectInput.Default.tsx";
+
+import {SelectInputDefault, SelectInputDefaultProps} from "./SelectInput.Default.tsx";
 
 const SelectInput = (props: SelectInputDefaultProps) => {
     return (

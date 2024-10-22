@@ -1,0 +1,50 @@
+import {createContext, useContext, useRef, useState} from "react";
+import useOutsideClicked from "../../../hooks/useOutsideClicked.ts";
+import {SelectInputDefaultProps} from "./SelectInput.Default.tsx";
+
+type SelectInputContext = {
+    showSelectGroup: boolean,
+    selectedItem: string,
+    setShowSelectGroup: React.Dispatch<React.SetStateAction<boolean>>,
+    setSelectedItem: React.Dispatch<React.SetStateAction<string>>,
+
+    onSelect: (value: string) => void,
+
+    variant: SelectInputDefaultProps['variant'],
+    size: SelectInputDefaultProps['size'],
+    radius: SelectInputDefaultProps['radius'],
+    block: SelectInputDefaultProps['block'],
+
+}
+
+
+export const SelectInputContext = createContext<SelectInputContext | undefined>(undefined);
+
+export const useSelectInputContext = () => {
+    const context = useContext(SelectInputContext);
+    if (!context) {
+        throw new Error("useSelectInputContext must be used within SelectInput");
+    }
+
+    return context;
+}
+
+export const useSelectInput = () => {
+    const [selectedItem, setSelectedItem] = useState("");
+    const [showSelectGroup, setShowSelectGroup] = useState(false);
+    const selectRef = useRef<HTMLDivElement>(null);
+
+    useOutsideClicked({
+        ref: selectRef,
+        action: () => setShowSelectGroup(false)
+    })
+
+
+    return {
+        selectedItem,
+        showSelectGroup,
+        setSelectedItem,
+        selectRef,
+        setShowSelectGroup
+    }
+}
