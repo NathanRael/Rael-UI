@@ -1,5 +1,22 @@
-import {RadioGroup} from "./components/ui/radio/Radio.tsx";
+import AutoCompleteInput from "./components/ui/autoCompleteInput/AutoCompleteInput.tsx";
 
+const DESIGNER_TOOLS = [
+    {
+        title: "Online",
+        values: [
+            {name: "Figma", content: "Figma"},
+            {name: "Penpot", content: "Penpot"},
+            {name: "Adobe XD", content: "Adobe XD"},
+        ]
+    }, {
+        title: "Offline",
+        values: [
+            {name: "Figma", content: "Figma"},
+            {name: "Penpot", content: "Penpot"},
+            {name: "Adobe XD", content: "Adobe XD"},
+        ]
+    },
+]
 
 function App() {
     return (
@@ -7,11 +24,23 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
-            <RadioGroup defaultValue="1">
-                <RadioGroup.Item value="1" label="First"/>
-                <RadioGroup.Item value="2" label="Second"/>
-                <RadioGroup.Item value="3" label="Nathan"/>
-            </RadioGroup>
+            <AutoCompleteInput>
+                <AutoCompleteInput.Header placeholder="Select a designer tool"/>
+                <AutoCompleteInput.GroupContainer>
+                    {
+                        DESIGNER_TOOLS.map(({title, values}) => (
+                            <AutoCompleteInput.Group key={title}>
+                                <AutoCompleteInput.GroupTitle>{title}</AutoCompleteInput.GroupTitle>
+                                {
+                                    values.map(v => (
+                                        <AutoCompleteInput.Item value={v.name}>{v.content}</AutoCompleteInput.Item>
+                                    ))
+                                }
+                            </AutoCompleteInput.Group>
+                        ))
+                    }
+                </AutoCompleteInput.GroupContainer>
+            </AutoCompleteInput>
         </section>
     )
 }

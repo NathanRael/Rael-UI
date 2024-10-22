@@ -1,6 +1,5 @@
 import {cva} from "class-variance-authority";
-import {useRadio} from "./useRadio.ts";
-import {RadioGroupContext, useRadioGroupContext} from "./RadioContext.ts";
+import {RadioGroupContext, useRadioGroupContext, useRadio} from "./RadioContext.ts";
 import {useMemo} from "react";
 
 type RadioGroupProps = {
@@ -13,7 +12,7 @@ type RadioGroupProps = {
 type RadioItemProps = {
     value: string,
     label?: React.ReactNode,
-    onChange?: (value: string) => void,
+    // onChange?: (value: string) => void,
 }
 
 const defaultVariant = {
@@ -21,7 +20,7 @@ const defaultVariant = {
 }
 
 
-export const RadioGroup = ({
+const RadioGroup = ({
                                children, defaultValue, onChange = () => {
     }, disabled = defaultVariant.disabled
                            }: RadioGroupProps) => {
@@ -41,6 +40,8 @@ export const RadioGroup = ({
 
     )
 }
+
+export default RadioGroup;
 
 
 const RadioItem = ({value, label}: RadioItemProps) => {

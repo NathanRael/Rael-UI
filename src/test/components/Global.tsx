@@ -1,4 +1,5 @@
 import {Button, TextInput, TextArea, Checkbox, SelectInput, PasswordInput} from "../../components"
+import RadioGroup from "../../components/ui/radio/Radio.tsx";
 
 const DESIGNER_TOOLS = [
     {
@@ -32,6 +33,11 @@ const GlobalTest = () => {
                 onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
             />
             <Checkbox checked label="I agree to the terms and conditions"/>
+            <RadioGroup defaultValue="1">
+                <RadioGroup.Item  value="1" label="First"/>
+                <RadioGroup.Item value="2" label="Second"/>
+                <RadioGroup.Item value="3" label="Nathan"/>
+            </RadioGroup>
         </>
     )
 }

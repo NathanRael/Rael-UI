@@ -1,4 +1,4 @@
-import {createContext, useContext} from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 type RadioGroupContext = {
     selectedValue : string,
     setSelectedValue: (value: string) => void,
@@ -13,3 +13,26 @@ export const useRadioGroupContext = () => {
     }
     return context;
 }
+
+type UseRadioProps = {
+    defaultValue: string,
+    onChange?: (value: string) => void,
+    disabled: boolean,
+}
+export const useRadio = ({
+                             defaultValue, onChange = () => {
+    }, disabled
+                         }: UseRadioProps) => {
+    const [selectedValue, setSelectedValue] = useState("");
+
+
+    useEffect(() => {
+        if (selectedValue === "")
+            setSelectedValue(defaultValue);
+        onChange(selectedValue)
+
+    }, [selectedValue]);
+
+    return {selectedValue, setSelectedValue, disabled};
+}
+
