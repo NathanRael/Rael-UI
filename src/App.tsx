@@ -1,4 +1,8 @@
-import AutoCompleteInput from "./components/ui/autoCompleteInput/AutoCompleteInput.tsx";
+import AutoCompleteInput, {
+    AutoCompleteGroup,
+    AutoCompleteGroupContainer, AutoCompleteGroupTitle,
+    AutoCompleteHeader, AutoCompleteItem
+} from "./components/ui/autoCompleteInput/AutoCompleteInput.tsx";
 
 const DESIGNER_TOOLS = [
     {
@@ -24,22 +28,22 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
-            <AutoCompleteInput>
-                <AutoCompleteInput.Header placeholder="Select a designer tool"/>
-                <AutoCompleteInput.GroupContainer>
+            <AutoCompleteInput variant='outline'>
+                <AutoCompleteHeader placeholder="Select a designer tool"/>
+                <AutoCompleteGroupContainer>
                     {
                         DESIGNER_TOOLS.map(({title, values}) => (
-                            <AutoCompleteInput.Group key={title}>
-                                <AutoCompleteInput.GroupTitle>{title}</AutoCompleteInput.GroupTitle>
+                            <AutoCompleteGroup key={title}>
+                                <AutoCompleteGroupTitle>{title}</AutoCompleteGroupTitle>
                                 {
                                     values.map(v => (
-                                        <AutoCompleteInput.Item value={v.name}>{v.content}</AutoCompleteInput.Item>
+                                        <AutoCompleteItem key={title + '-' + v.name} value={v.name}>{v.content}</AutoCompleteItem>
                                     ))
                                 }
-                            </AutoCompleteInput.Group>
+                            </AutoCompleteGroup>
                         ))
                     }
-                </AutoCompleteInput.GroupContainer>
+                </AutoCompleteGroupContainer>
             </AutoCompleteInput>
         </section>
     )
