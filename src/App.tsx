@@ -1,4 +1,4 @@
-import AvatarTest from "./test/components/AvatarTest.tsx";
+import BadgeTest from "./test/components/BadgeTest.tsx";
 
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
-            <AvatarTest/>
+            <BadgeTest/>
         </section>
     )
 }
