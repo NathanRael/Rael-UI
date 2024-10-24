@@ -1,8 +1,10 @@
-import AutoCompleteInput, {
+import  {
     AutoCompleteGroup,
     AutoCompleteGroupContainer, AutoCompleteGroupTitle,
     AutoCompleteHeader, AutoCompleteItem
 } from "../../components/ui/autoCompleteInput/AutoCompleteInput.tsx";
+import {SearchIcon} from "lucide-react";
+import {AutoComplete} from "../../components";
 
 const DESIGNER_TOOLS = [
     {
@@ -23,12 +25,10 @@ const DESIGNER_TOOLS = [
 ]
 const AutoCompleteTest = () => {
     return (
-        <section className="p-4 space-y-10">
-            <h1 className="text-title font-bold text-white">
-                Rael UI
-            </h1>
-            <AutoCompleteInput variant='outline'>
-                <AutoCompleteHeader placeholder="Select a designer tool"/>
+            <AutoComplete variant='outline'>
+                <AutoCompleteHeader placeholder="Select a designer tool" leftContent={
+                    <SearchIcon size={20} />
+                }/>
                 <AutoCompleteGroupContainer>
                     {
                         DESIGNER_TOOLS.map(({title, values}) => (
@@ -44,8 +44,7 @@ const AutoCompleteTest = () => {
                         ))
                     }
                 </AutoCompleteGroupContainer>
-            </AutoCompleteInput>
-        </section>
+            </AutoComplete>
     )
 }
 

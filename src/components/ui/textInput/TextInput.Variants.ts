@@ -1,14 +1,14 @@
 import {cva} from "class-variance-authority";
 
-export const textInputVariants = cva('flex items-start outline-none ', {
+export const textInputVariants = cva('flex items-center justify-center outline-none ', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-gray-200 text-white focus:ring-4 focus:ring-primary',
+            outline: 'bg-transparent border border-gray-200 text-white focus-within:ring-4 focus-within:ring-primary',
             fill: 'bg-gray-500 text-black placeholder-black',
         },
         size: {
-            md: 'px-4 py-2',
-            lg: 'px-6 py-3',
+            md: 'px-4 py-2 gap-2',
+            lg: 'px-6 py-3 gap-3',
             xl  : '',
         },
         radius: {

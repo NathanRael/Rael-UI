@@ -1,4 +1,4 @@
-import {SelectInput} from "../../components";
+import {Select} from "../../components";
 import {
     SelectGroup,
     SelectGroupContainer, SelectGroupTitle,
@@ -28,7 +28,7 @@ const DESIGNER_TOOLS = [
 
 const SelectInputTest = () => {
     return (
-        <SelectInput
+        <Select
             onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
         >
             <SelectHeader>
@@ -50,7 +50,7 @@ const SelectInputTest = () => {
                     ))
                 }
             </SelectGroupContainer>
-        </SelectInput>
+        </Select>
     )
 }
 

@@ -1,11 +1,4 @@
-import AutoCompleteInput, {
-    AutoCompleteGroup,
-    AutoCompleteGroupContainer, AutoCompleteGroupTitle,
-    AutoCompleteHeader, AutoCompleteItem
-} from "./components/ui/autoCompleteInput/AutoCompleteInput.tsx";
-import {SelectInput} from "./components";
-import SelectInputTest from "./test/components/SelectInputTest.tsx";
-
+import AvatarTest from "./test/components/AvatarTest.tsx";
 
 
 function App() {
@@ -14,7 +7,7 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
-            <SelectInputTest></SelectInputTest>
+            <AvatarTest/>
         </section>
     )
 }

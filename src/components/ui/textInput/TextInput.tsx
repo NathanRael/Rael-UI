@@ -8,14 +8,26 @@ type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
     size?: "md" | "lg" | "xl",
     radius?: "none" | "sm" | "md" | "lg" | "xl",
     block?: boolean,
+    leftContent?: React.ReactNode,
+    rightContent?: React.ReactNode,
+    
 }
-const TextInput = ({variant, size, radius, block, className, ...props}: TextInputProps) => {
+const TextInput = ({variant, size, radius, block, className, leftContent, rightContent, ...props}: TextInputProps) => {
 
     const userProps = {variant, size, radius, block};
 
     return (
-        <input className={cn(textInputVariants(userProps), className)} {...props}/>
-    )
+        <div tabIndex={-1} role="presentation"
+             className={cn(textInputVariants(userProps), className)}>
+            {leftContent}
+            <input
+                className={"bg-transparent px-0 py-0 flex-1 outline-none"}
+                {...props}
+                />
+            {rightContent}
+        </div>
+    // <input className={cn(textInputVariants(userProps), className)} {...props}/>
+)
 }
 
 

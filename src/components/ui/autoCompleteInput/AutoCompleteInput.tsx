@@ -9,6 +9,7 @@ import {
 import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoCompleteInput.Variants.ts";
 import {textInputVariants} from "../textInput/TextInput.Variants.ts";
+import {SearchIcon} from "lucide-react";
 
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
@@ -25,6 +26,8 @@ export type AutoCompleteInputProps = Required<PropsWithChildren> & {
 type AutoCompleteHeaderProps = {
     placeholder?: string,
     className?: string,
+    leftContent?: React.ReactNode,
+    rightContent?: React.ReactNode,
 }
 
 type AutoCompleteGroupContainerProps = Required<PropsWithChildren> & {
@@ -93,7 +96,7 @@ const AutoCompleteInput = ({
     );
 }
 
-export const AutoCompleteHeader = ({placeholder, className}: AutoCompleteHeaderProps) => {
+export const AutoCompleteHeader = ({placeholder, className, leftContent, rightContent}: AutoCompleteHeaderProps) => {
     const {
         setSelectGroupVisible,
         selectValue,
@@ -106,15 +109,31 @@ export const AutoCompleteHeader = ({placeholder, className}: AutoCompleteHeaderP
 
 
     return (
-        <TextInput
-            className={cn(textInputVariants({variant, size, block, radius}), className)}
-            onFocus={() => {
-                if (selectValue === "") setSelectGroupVisible(true)
-            }}
-            value={selectValue} 
-            onChange={(e) => handleSearchItems(e.target.value.toLowerCase())}
-            placeholder={placeholder}
-        />)
+        <>
+            <div tabIndex={-1} role="presentation" className={cn(textInputVariants({variant, size, block, radius}), className)}>
+                {leftContent}
+                <input
+                        className={"bg-transparent px-0 py-0 flex-1 outline-none"}    
+                       onFocus={() => {
+                           if (selectValue === "") setSelectGroupVisible(true)
+                       }}
+                       value={selectValue}
+                       onChange={(e) => handleSearchItems(e.target.value.toLowerCase())}
+                       placeholder={placeholder}/>
+                {rightContent}
+            </div>
+           {/* <TextInput
+                className={cn(textInputVariants({variant, size, block, radius}), className)}
+                onFocus={() => {
+                    if (selectValue === "") setSelectGroupVisible(true)
+                }}
+                value={selectValue}
+                onChange={(e) => handleSearchItems(e.target.value.toLowerCase())}
+                placeholder={placeholder}
+            />*/}
+        </>
+    
+)
 }
 
 export const AutoCompleteGroupContainer = ({children, className}: AutoCompleteGroupContainerProps) => {

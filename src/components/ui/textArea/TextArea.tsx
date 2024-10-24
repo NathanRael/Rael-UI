@@ -43,10 +43,11 @@ const textAreaVariants = cva('flex items-start outline-none min-h-[120px] ', {
             false: 'w-[280px]',
         }
     },
+    
     defaultVariants : {
         variant : 'outline',
         size : 'md',
         radius : 'md',
         block : false,
-    }
+    } 
 })
