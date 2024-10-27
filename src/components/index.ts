@@ -9,3 +9,5 @@ export * from "./ui/autoCompleteInput"
 export * from "./ui/progress"
 export * from "./ui/switch" 
 export * from "./ui/badge"
+export * from './ui/icon'
+export * from './form'

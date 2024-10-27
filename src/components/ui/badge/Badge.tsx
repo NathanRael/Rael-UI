@@ -7,19 +7,23 @@ type BadgeProps = PropsWithChildren & {
     size? : 'sm' | 'md' | 'lg' ,
     className?: string,
 }
+
+type DotProps = {
+    className?: string;
+}
 const Badge = ({children = null, className, variant, size} : BadgeProps) => {
     const userProps = {variant, size}
     
     if (!children)
-        return <Dot/>
+        return <Dot className={className}/>
     
     return (
         <div className={cn( badgeVariants(userProps), className)}>{children}</div>
     )
 }
 
-const Dot = () => {
-    return <div className={"w-3 h-3 bg-primary rounded-full"}/>
+const Dot = ({className} : DotProps) => {
+    return <div className={cn("w-3 h-3 bg-primary rounded-full", className)}/>
 }
 
 export default Badge

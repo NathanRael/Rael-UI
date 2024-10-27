@@ -122,15 +122,6 @@ export const AutoCompleteHeader = ({placeholder, className, leftContent, rightCo
                        placeholder={placeholder}/>
                 {rightContent}
             </div>
-           {/* <TextInput
-                className={cn(textInputVariants({variant, size, block, radius}), className)}
-                onFocus={() => {
-                    if (selectValue === "") setSelectGroupVisible(true)
-                }}
-                value={selectValue}
-                onChange={(e) => handleSearchItems(e.target.value.toLowerCase())}
-                placeholder={placeholder}
-            />*/}
         </>
     
 )

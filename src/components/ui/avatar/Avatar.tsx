@@ -1,6 +1,7 @@
 import {PropsWithChildren} from "react";
 import {cn} from "../../../utils/cn.ts";
 import AvatarContext, {useAvatar, useAvatarContext, useAvatarImage} from "./Avatar.Context.ts";
+import {avatarVariants} from "./Avatar.Variants.ts";
 export type AvatarProps = Required<PropsWithChildren> & {
     className?: string,
     size? : 'sm' | 'md' | 'lg',
