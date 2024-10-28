@@ -112,6 +112,8 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
                             return <InputClone name={name} child={child} formData={formData} handleChange={handleChange}/>
                         }
                     }
+                    
+                    return child
                 }
             )}
         </div>

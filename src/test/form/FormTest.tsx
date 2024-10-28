@@ -20,21 +20,19 @@ const FormTest = () => {
 
     return (
         <Form<FormFields> className="flex flex-col gap-5" onSubmit={handleSubmit}>
-            <p className="text-white">Name</p>
-            
             <FormControl name="name" validations={{
                 pattern: /^[a-zA-Z]+$/,
             }}
             >
+                <p className="text-white">Name</p>
                 <TextInput placeholder="Enter your name"/>
+                <FormMessage name="name" message="Name must contain blablalba"/>
             </FormControl>
-            <FormMessage name="name" message="Name must contain blablalba"/>
-            
-            <p className="text-white">Phone</p>
             <FormControl name='phone' validations={{
                 pattern: /^[a-z]+$/,
             }}
             >
+                <p className="text-white">Phone</p>
                 {/*<TextInput placeholder="Enter your phone"/>*/}
                 <Select
                     onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
@@ -59,8 +57,8 @@ const FormTest = () => {
                         }
                     </SelectGroupContainer>
                 </Select>
+                <FormMessage name='phone' message={"Incorrect Select"}/>
             </FormControl>
-            <FormMessage name='phone' message={"Incorrect Select"}/>
             <Button type="submit">Submit</Button>
         </Form>
     )
