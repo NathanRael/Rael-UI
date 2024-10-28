@@ -79,7 +79,7 @@ export const SelectInputDefault = ({
     )
 }
 
-export const SelectHeader = ({children, className}: SelectHeaderProps) => {
+export const SelectTrigger = ({children, className}: SelectHeaderProps) => {
     const {setShowSelectGroup, variant, size, radius} = useSelectInputContext();
     return (
         <div

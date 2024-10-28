@@ -2,12 +2,12 @@ import {Select} from "../../components";
 import {
     SelectGroup,
     SelectGroupContainer, SelectGroupTitle,
-    SelectHeader, SelectItem,
+    SelectTrigger, SelectItem,
     SelectLabel
 } from "../../components/ui/selectInput/SelectInput.Default.tsx";
 import {ChevronDownIcon} from "lucide-react";
 
-const DESIGNER_TOOLS = [
+export const DESIGNER_TOOLS = [
     {
         title: "Online",
         values: [
@@ -31,10 +31,10 @@ const SelectInputTest = () => {
         <Select
             onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
         >
-            <SelectHeader>
+            <SelectTrigger>
                 <SelectLabel placeholder={"Select a designer tool"}/>
                 <ChevronDownIcon/>
-            </SelectHeader>
+            </SelectTrigger>
             <SelectGroupContainer>
                 {
                     DESIGNER_TOOLS.map(({title, values}) => (

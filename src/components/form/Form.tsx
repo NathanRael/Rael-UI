@@ -1,6 +1,15 @@
-import React, {FormEvent, PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useRef, useState} from "react";
-import {FormContext, useFormContext, useForm, FormManagementContext} from "./Form.Context.ts";
+import React, {Key, PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo, useRef} from "react";
+import {
+    FormContext,
+    useFormContext,
+    FormManagementContext,
+    useFormLogic,
+    ComponentType
+} from "./Form.Context.ts";
 import {cn} from "../../utils/cn.ts";
+import {Select} from "../ui/selectInput";
+import {TextInput} from "../ui/textInput";
+import {PasswordInput} from "../ui/passwordInput";
 
 export interface Validations {
     required?: boolean | string;
@@ -26,79 +35,41 @@ type FormMessageProps<T> = {
     name: keyof T;
 }
 
-const firstRender = true;
+type Child =
+    string
+    | number
+    | boolean
+    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | Iterable<React.ReactNode>
+    | React.ReactPortal
+    | null
+    | undefined
 
+type FormData<T> = FormContext<T>['formData']
 
+type InputCloneProps <T> = {
+    child : Child;
+    formData : FormData<T>;
+    name : keyof T;
+    handleChange : (value : string) => void;
+}
+
+type SelectCloneProps <T> = {
+    child : Child;
+    handleChange : (value : string) => void;
+    name : keyof T;
+}
 
 
 const Form = <T extends Record<string, unknown>, >({children, className, onSubmit}: FormProps<T>) => {
-    const [formData, setFormData] = useState<T>({} as T);
-    const [errors, setErrors] = useState<Record<keyof T, string>>({} as Record<keyof T, string>);
-    const [validations, setValidations] = useState<Record<keyof T, Validations>>({} as Record<keyof T, Validations>);
-    
-    const setFieldValue = (name: string, value: string) => {
-        setFormData((prevData) => ({...prevData, [name]: value}));
-       
-    };
-    
+    const {formData, setFieldValue, setErrorData, errors, registerValidation, handleSubmit, submitting, setComponentType} = useFormLogic({
+        onSubmit
+    })
 
-    const setErrorData = (name: string, error: string) => {
-        setErrors((prevData) => ({...prevData, [name]: error}));
-    }
-    const registerValidation = (name: string, validation: Validations) => {
-        setValidations((prev) => ({...prev, [name]: validation}));
-    };
-
-    const validateField = (name: string, value: string) : boolean => {
-        const validation = validations[name as keyof T];
-        if (!validation) return true;
-
-        console.log("value", value)
-        
-        if (validation.required && !value) {
-            setErrorData(name, "This field is required.");
-            return false;
-        }
-        
-        if (validation.pattern && !validation.pattern.test(value)) {
-            setErrorData(name, "Invalid format.");
-            // console.log(errors[name as keyof T])
-            return false;
-        }
-        if (validation.valid && !validation.valid(value)) {
-            setErrorData(name, "Invalid value.");
-            return false;
-        }
-        setErrorData(name, "");
-        return true;
-    };
-
-    const checkValidation = () => {
-        let isValid = true;
-        if (!formData)
-            return;
-        for (const name in formData) {
-            const fieldIsValid = validateField(name, formData[name as keyof T] as string);
-            if (!fieldIsValid)
-                isValid = false;
-        }
-
-        if (!isValid)
-            return
-    }
-
-
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        checkValidation();
-        onSubmit(formData);
-    };
-    
-
-    
     return (
-        <FormContext.Provider value={{formData, setFieldValue, setErrorData, errors, registerValidation}}>
-            <FormManagementContext.Provider value={{formData, errors}}>
+        <FormContext.Provider
+            value={{formData, setFieldValue, setErrorData, errors, registerValidation, submitting, setComponentType}}>
+            <FormManagementContext.Provider value={{errors, formData, submitting}}>
                 <form className={cn('', className)} onSubmit={handleSubmit}>
                     {children}
                 </form>
@@ -111,12 +82,15 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
     const {formData, setFieldValue, setErrorData, registerValidation} = useFormContext<T>();
     const ref = useRef<HTMLElement>(null);
 
+
     const handleChange = (value: string) => {
+        // console.log('change : ', value)
         setFieldValue(name as string, value)
-        setErrorData(name as string, '');
+        setErrorData(name as string, value === "" ? `${name as string} is required` : '');
     }
-    
+
     useLayoutEffect(() => {
+        setFieldValue(name as string, '');
         setErrorData(name as string, '');
     }, [])
 
@@ -125,16 +99,20 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
             registerValidation(name as string, validations);
         }
     }, [name, validations]);
-    
+
+
     return (
         <div>
-            {React.Children.map(children, (child) =>
-                React.isValidElement(child)
-                    ? React.cloneElement(child as ReactElement<any>, {
-                        value: formData[name] || '',
-                        onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value),
-                    })
-                    : child
+            {React.Children.map(children, (child) => {
+                    if (React.isValidElement(child)) {
+                        if (child.type === Select)
+                        {
+                            return <SelectClone child={child} name={name} handleChange={handleChange} />
+                        }else if (child.type === TextInput || child.type === PasswordInput) {
+                            return <InputClone name={name} child={child} formData={formData} handleChange={handleChange}/>
+                        }
+                    }
+                }
             )}
         </div>
     )
@@ -142,10 +120,35 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
 
 export const FormMessage = <T, >({name, message, className}: FormMessageProps<T>) => {
     const {errors} = useFormContext<T>();
+
     
-    return errors[name] !== ""  && ( 
-        <p className={cn('text-white', className)}>{message}</p>
+    return errors[name] !== "" && (
+        <p className={cn('text-danger', className)}>{message}</p>
     )
+}
+
+const InputClone = <T,>({child, name, handleChange} : InputCloneProps<T>) => {
+    const {formData, setComponentType} = useFormContext<T>();
+    useMemo(() => {
+        setComponentType(name as string,ComponentType.INPUT);
+    }, [name])
+    
+    return React.cloneElement(child as ReactElement<any>, {
+        value: formData[name] || '',
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value),
+    })
+}
+
+const SelectClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => {
+    const {setComponentType} = useFormContext<T>();
+    
+    useMemo(() => {
+        setComponentType(name as string, ComponentType.SELECT)
+    }, [name])
+    
+    return React.cloneElement(child as ReactElement<any>, {
+        onSelect: (selectedItem : string) => handleChange(selectedItem),
+    })
 }
 
 
