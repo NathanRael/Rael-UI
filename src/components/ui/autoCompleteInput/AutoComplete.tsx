@@ -1,19 +1,17 @@
 import {cn} from "../../../utils/cn.ts";
 
-import {TextInput} from "../textInput";
 import {
     AutoCompleteInputContext,
     useAutoCompleteInput,
     useAutoCompleteInputContext
-} from "./AutoCompleteInput.Context.ts";
+} from "./AutoComplete.Context.ts";
 import {PropsWithChildren} from "react";
-import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoCompleteInput.Variants.ts";
+import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
 import {textInputVariants} from "../textInput/TextInput.Variants.ts";
-import {SearchIcon} from "lucide-react";
 
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
-    onSelect?: (selectedItem: string) => void,
+    onChange?: (value: string) => void,
     placeholder?: string,
 
     variant?: "outline" | "fill",
@@ -23,11 +21,11 @@ export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     className?: string,
 }
 
-type AutoCompleteHeaderProps = {
-    placeholder?: string,
+type AutoCompleteTriggerProps = {
     className?: string,
     leftContent?: React.ReactNode,
     rightContent?: React.ReactNode,
+    placeholder?: string,
 }
 
 type AutoCompleteGroupContainerProps = Required<PropsWithChildren> & {
@@ -49,8 +47,8 @@ type AutoCompleteItemProps = Required<PropsWithChildren> & {
 }
 
 
-const AutoCompleteInput = ({
-                               onSelect = () => {
+const AutoComplete = ({
+                               onChange = () => {
                                },
                                variant,
                                size,
@@ -64,8 +62,8 @@ const AutoCompleteInput = ({
         selectGroupVisible,
         setSelectGroupVisible,
         selectValue,
-        handleSelectedItem,
-        handleSearchItems,
+        handleSelectItem,
+        // handleSearchItems,
         selectRef,
         setSelectValue,
     } = useAutoCompleteInput()
@@ -80,14 +78,14 @@ const AutoCompleteInput = ({
             selectGroupVisible,
             setSelectGroupVisible,
             selectValue,
-            handleSelectedItem,
-            handleSearchItems,
+            handleSelectItem,
+            // handleSearchItems,
             setSelectValue,
             variant : variant,
             size : size,
             radius : radius,
             block : block,
-            onSelect : onSelect,
+            onChange : onChange,
         }}>
             <div ref={selectRef} className={cn(autoCompleteContainerVariants({block}), className)}>
                 {children}
@@ -96,11 +94,12 @@ const AutoCompleteInput = ({
     );
 }
 
-export const AutoCompleteHeader = ({placeholder, className, leftContent, rightContent}: AutoCompleteHeaderProps) => {
+export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightContent}: AutoCompleteTriggerProps) => {
     const {
         setSelectGroupVisible,
         selectValue,
-        handleSearchItems,
+        handleSelectItem,
+        onChange,
         variant,
         size,
         radius,
@@ -118,7 +117,11 @@ export const AutoCompleteHeader = ({placeholder, className, leftContent, rightCo
                            if (selectValue === "") setSelectGroupVisible(true)
                        }}
                        value={selectValue}
-                       onChange={(e) => handleSearchItems(e.target.value.toLowerCase())}
+                       onChange={(e) => {
+                           handleSelectItem(e.target.value.toLowerCase());
+                           setSelectGroupVisible(true);
+                           onChange(e.target.value.toLowerCase())
+                       }}
                        placeholder={placeholder}/>
                 {rightContent}
             </div>
@@ -150,14 +153,15 @@ export const AutoCompleteGroupTitle = ({children, className}: AutoCompleteGroupT
 }
 
 export const AutoCompleteItem = ({children, value, className}: AutoCompleteItemProps) => {
-    const {handleSelectedItem, selectValue, onSelect} = useAutoCompleteInputContext();
+    const {handleSelectItem, selectValue, onChange, setSelectGroupVisible} = useAutoCompleteInputContext();
     if (selectValue !== "" && !value.toLowerCase().includes(selectValue.toLowerCase()))
         return
 
     return (
         <div onClick={() => {
-            handleSelectedItem(value);
-            onSelect(value)
+            handleSelectItem(value);
+            onChange(value);
+            setSelectGroupVisible(false);
         }}
              className={cn("w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer", className)}>
             {children}
@@ -166,11 +170,11 @@ export const AutoCompleteItem = ({children, value, className}: AutoCompleteItemP
 }
 
 
-AutoCompleteInput.Header = AutoCompleteHeader;
-AutoCompleteInput.GroupContainer = AutoCompleteGroupContainer;
-AutoCompleteInput.Group = AutoCompleteGroup;
-AutoCompleteInput.GroupTitle = AutoCompleteGroupTitle;
-AutoCompleteInput.Item = AutoCompleteItem;
+AutoComplete.Trigger = AutoCompleteTrigger;
+AutoComplete.GroupContainer = AutoCompleteGroupContainer;
+AutoComplete.Group = AutoCompleteGroup;
+AutoComplete.GroupTitle = AutoCompleteGroupTitle;
+AutoComplete.Item = AutoCompleteItem;
 
 
-export default AutoCompleteInput
+export default AutoComplete

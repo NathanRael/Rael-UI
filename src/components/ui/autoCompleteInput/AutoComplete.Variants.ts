@@ -1,6 +1,6 @@
 import {cva} from "class-variance-authority";
 
-export const autoCompleteContainerVariants = cva('space-y-2', {
+export const autoCompleteContainerVariants = cva('space-y-2 relative', {
     variants : {
         block : {
             true : 'w-full',
@@ -13,7 +13,7 @@ export const autoCompleteContainerVariants = cva('space-y-2', {
     }
 })
 
-export const autoCompleteGroupContainerVariants = cva('flex flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
+export const autoCompleteGroupContainerVariants = cva('absolute z-30 flex flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
     variants : {
         variant: {
             outline: 'border border-gray-200 bg-dark text-white',

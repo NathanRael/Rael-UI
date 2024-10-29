@@ -4,17 +4,17 @@ import {InputHTMLAttributes, MouseEventHandler, useState} from "react";
 import {cn} from "../../../utils/cn.ts";
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
-    variant?: "outline" | "fill",
-    size?: "md" | "lg" | "xl",
-    radius?: "none" | "sm" | "md" | "lg" | "xl",
-    block?: boolean,
-    showIcon?: boolean,
+    variant?: "outline" | "fill";
+    size?: "md" | "lg" | "xl";
+    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    block?: boolean;
+    showIcon?: boolean;
 }
 
 type ShowPasswordIconProps = {
-    passwordShown?: boolean
-    className?: string
-    onClick? : MouseEventHandler
+    passwordShown?: boolean;
+    className?: string;
+    onClick? : MouseEventHandler;
 };
 
 const PasswordInput = ({variant, size, radius, block, className, showIcon = true, ...props}: PasswordInputProps) => {

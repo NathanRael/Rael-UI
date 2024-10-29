@@ -1,4 +1,4 @@
-import React, {Key, PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo, useRef} from "react";
+import React, {PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo, useRef} from "react";
 import {
     FormContext,
     useFormContext,
@@ -10,6 +10,7 @@ import {cn} from "../../utils/cn.ts";
 import {Select} from "../ui/selectInput";
 import {TextInput} from "../ui/textInput";
 import {PasswordInput} from "../ui/passwordInput";
+import {AutoComplete} from "../ui/autoCompleteInput";
 
 export interface Validations {
     required?: boolean | string;
@@ -105,12 +106,18 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
         <div>
             {React.Children.map(children, (child) => {
                     if (React.isValidElement(child)) {
-                        if (child.type === Select)
-                        {
-                            return <SelectClone child={child} name={name} handleChange={handleChange} />
-                        }else if (child.type === TextInput || child.type === PasswordInput) {
+                        if (child.type === Select) {
+                            return <SelectClone child={child} name={name} handleChange={handleChange}/>
+                        }
+                        
+                        if (child.type === AutoComplete){
+                            return <AutoCompleteClone child={child} name={name} handleChange={handleChange}/>
+                        }
+                        
+                        if (child.type === TextInput || child.type === PasswordInput) {
                             return <InputClone name={name} child={child} formData={formData} handleChange={handleChange}/>
                         }
+                        
                     }
                     
                     return child
@@ -141,6 +148,17 @@ const InputClone = <T,>({child, name, handleChange} : InputCloneProps<T>) => {
     })
 }
 
+const AutoCompleteClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => {
+    const {setComponentType} = useFormContext<T>();
+    useMemo(() => {
+        setComponentType(name as string,ComponentType.AUTO_COMPLETE);
+    }, [name])
+
+    return React.cloneElement(child as ReactElement<any>, {
+        onChange: (selectedItem : string) => handleChange(selectedItem),
+    })
+}
+
 const SelectClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => {
     const {setComponentType} = useFormContext<T>();
     
@@ -149,7 +167,7 @@ const SelectClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => 
     }, [name])
     
     return React.cloneElement(child as ReactElement<any>, {
-        onSelect: (selectedItem : string) => handleChange(selectedItem),
+        onChange: (selectedItem : string) => handleChange(selectedItem),
     })
 }
 

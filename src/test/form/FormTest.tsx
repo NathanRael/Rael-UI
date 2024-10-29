@@ -1,16 +1,22 @@
 import {FormControl, FormMessage} from "../../components/form/Form.tsx";
-import {Button, Form, PasswordInput, Select, TextInput} from "../../components";
-import SelectInputTest, {DESIGNER_TOOLS} from "../components/SelectInputTest.tsx";
+import {AutoComplete, Button, Form, Select, TextInput} from "../../components";
+import {DESIGNER_TOOLS} from "../components/SelectInputTest.tsx";
 import {
     SelectGroup,
     SelectGroupContainer, SelectGroupTitle, SelectItem,
     SelectLabel,
     SelectTrigger
 } from "../../components/ui/selectInput/SelectInput.Default.tsx";
-import {ChevronDownIcon} from "lucide-react";
+import {ChevronDownIcon, SearchIcon} from "lucide-react";
+import {
+    AutoCompleteGroup,
+    AutoCompleteGroupContainer, AutoCompleteGroupTitle, AutoCompleteItem,
+    AutoCompleteTrigger
+} from "../../components/ui/autoCompleteInput/AutoComplete.tsx";
 type FormFields = {
     name: string,
     phone : string,
+    city : string,
 }
 const FormTest = () => {
     const handleSubmit = (formData: FormFields) => {
@@ -35,7 +41,7 @@ const FormTest = () => {
                 <p className="text-white">Phone</p>
                 {/*<TextInput placeholder="Enter your phone"/>*/}
                 <Select
-                    onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
+                    // onChange={(selectedItem) => console.log("Selected Item : ", selectedItem)}
                 >
                     <SelectTrigger>
                         <SelectLabel placeholder={"Select a designer tool"}/>
@@ -58,6 +64,31 @@ const FormTest = () => {
                     </SelectGroupContainer>
                 </Select>
                 <FormMessage name='phone' message={"Incorrect Select"}/>
+            </FormControl>
+            <FormControl validations={{
+                pattern : /^[a-zA-Z]+$/
+            }}  name={'city'}>
+                <AutoComplete onChange={(item) => console.log("sItem", item)} variant='outline'>
+                    <AutoCompleteTrigger placeholder="Autocomplete a designer tool" leftContent={
+                        <SearchIcon size={20} />
+                    }/>
+                    <AutoCompleteGroupContainer>
+                        {
+                            DESIGNER_TOOLS.map(({title, values}) => (
+                                <AutoCompleteGroup key={title}>
+                                    <AutoCompleteGroupTitle>{title}</AutoCompleteGroupTitle>
+                                    {
+                                        values.map(v => (
+                                            <AutoCompleteItem key={title + '-' + v.name}
+                                                              value={v.name}>{v.content}</AutoCompleteItem>
+                                        ))
+                                    }
+                                </AutoCompleteGroup>
+                            ))
+                        }
+                    </AutoCompleteGroupContainer>
+                </AutoComplete>
+                <FormMessage name='city' message={"Incorrect Select"}/>
             </FormControl>
             <Button type="submit">Submit</Button>
         </Form>

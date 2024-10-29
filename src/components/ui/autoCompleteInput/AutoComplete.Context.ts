@@ -1,16 +1,15 @@
 import {createContext, useCallback, useContext, useRef, useState} from "react";
 import useOutsideClicked from "../../../hooks/useOutsideClicked.ts";
-import {AutoCompleteInputProps} from "./AutoCompleteInput.tsx";
+import {AutoCompleteInputProps} from "./AutoComplete.tsx";
 
 export type AutoCompleteInputContext = {
     selectValue : string,
     setSelectValue : (value : string) => void,
     selectGroupVisible : boolean,
     setSelectGroupVisible : (visible: boolean) => void,
-    handleSearchItems : (searchValue : string) => void,
-    handleSelectedItem : (selectedItem: string) => void,
+    handleSelectItem : (selectedItem: string) => void,
     
-    onSelect : (value : string) => void,
+    onChange : (value : string) => void,
     
     variant : AutoCompleteInputProps['variant'],
     size : AutoCompleteInputProps['size'],
@@ -40,13 +39,9 @@ export const useAutoCompleteInput = () => {
         action : () => setSelectGroupVisible(false)
     })
     
+    
 
-    const handleSearchItems = useCallback((searchValue: string) => {
-        setSelectValue(searchValue);
-        setSelectGroupVisible(true);
-    }, []);
-
-    const handleSelectedItem = useCallback((itemName: string) => {
+    const handleSelectItem = useCallback((itemName: string) => {
         setSelectValue(itemName);
         setSelectGroupVisible(false);
     }, []);
@@ -58,8 +53,7 @@ export const useAutoCompleteInput = () => {
         setSelectValue,
         selectGroupVisible,
         setSelectGroupVisible,
-        handleSearchItems,
-        handleSelectedItem,
+        handleSelectItem,
         selectRef,
     }
     

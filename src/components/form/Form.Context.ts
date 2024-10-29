@@ -29,8 +29,9 @@ interface useFormLogicProps<T> {
 }
 
 export enum ComponentType {
-    INPUT = "INPUT",
-    SELECT = "SELECT",
+    INPUT = "input",
+    SELECT = "select",
+    AUTO_COMPLETE = "autoComplete",
 }
 
 export const FormContext = React.createContext<FormContext<any> | undefined>(undefined);
@@ -79,17 +80,21 @@ export const useFormLogic = <T extends Record<keyof string, unknown>>({
                 return validateInput(name, value);
             case ComponentType.SELECT:
                 return validateSelect(name, value);
+            case ComponentType.AUTO_COMPLETE :
+                return validateInput(name, value);
         }
     };
 
     const validateInput = (name: string, value: string) :boolean => {
         const validation = validations[name as keyof T];
-        if (!validation) return true;
         
         if (value === ''){
             setErrorData(name, `${name} is required`);
             return false;
         }
+
+        if (!validation) return true;
+        
             
         if (validation.required && !value) {
             setErrorData(name, `${name} is required`);
@@ -117,6 +122,7 @@ export const useFormLogic = <T extends Record<keyof string, unknown>>({
         }
         return true;
     }
+    
 
     const checkValidation = (): boolean => {
         let isValid = true;
@@ -135,7 +141,7 @@ export const useFormLogic = <T extends Record<keyof string, unknown>>({
         event.preventDefault();
         const valid = checkValidation();
         if (!valid)
-            return console.log("Submit with error" +
+            return console.log("Check your field" +
                 "")
         onSubmit(formData);
         setSubmitting(false);
@@ -145,4 +151,6 @@ export const useFormLogic = <T extends Record<keyof string, unknown>>({
         formData, setFieldValue, setErrorData, errors, registerValidation, handleSubmit, submitting, setComponentType
     }
 }
+
+
 

@@ -4,7 +4,7 @@ import {PropsWithChildren} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
-    onSelect?: (selectedItem: string) => void,
+    onChange?: (selectedItem: string) => void,
     placeholder?: string,
 
     variant?: "outline" | "fill",
@@ -44,7 +44,7 @@ type SelectItemProps = Required<PropsWithChildren> & {
 
 export const SelectInputDefault = ({
                                        children,
-                                       onSelect = () => {
+                                       onChange = () => {
                                        },
                                        variant,
                                        size,
@@ -70,7 +70,7 @@ export const SelectInputDefault = ({
             size: size,
             radius: radius,
             block: block,
-            onSelect: onSelect,
+            onSelect: onChange,
         }}>
             <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
                 {children}

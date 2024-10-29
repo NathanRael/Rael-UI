@@ -1,1 +1,1 @@
-export {default as AutoComplete} from './AutoCompleteInput';
+export {default as AutoComplete} from './AutoComplete.tsx';
