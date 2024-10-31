@@ -1,7 +1,8 @@
-import {cn} from "../../../utils/cn.ts";
-import {selectContainerVariants, selectGroupContainerVariants, selectInputVariants} from "./SelectInput.Variants.ts";
+
 import {PropsWithChildren} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
+import {cn} from "../../../utils/cn.ts";
+import {selectContainerVariants, selectGroupContainerVariants, selectInputVariants} from "./SelectInput.Variants.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     onChange?: (selectedItem: string) => void,
@@ -42,7 +43,7 @@ type SelectItemProps = Required<PropsWithChildren> & {
     value: string,
 }
 
-export const SelectInputDefault = ({
+const Select = ({
                                        children,
                                        onChange = () => {
                                        },
@@ -117,7 +118,6 @@ export const SelectGroupTitle = ({children, className}: SelectGroupTitleProps) =
 
 export const SelectItem = ({children, value, className}: SelectItemProps) => {
     const {onSelect, setShowSelectGroup, setSelectedItem} = useSelectInputContext();
-    ;
     return (
         <div onClick={() => {
             setSelectedItem(value);
@@ -128,3 +128,6 @@ export const SelectItem = ({children, value, className}: SelectItemProps) => {
         </div>
     )
 }
+
+
+export default Select;

@@ -4,12 +4,12 @@ import {Validations} from "./Form.tsx";
 
 export interface FormContext<T> {
     formData: T;
-    setFieldValue: (name: string, value: string) => void;
+    setFieldValue: <V>(name: string, value: V) => void;
     errors: Record<keyof T, string>;
     setErrorData: (name: string, error: string) => void;
     registerValidation: (name: string, validation: Validations) => void;
     submitting: boolean;
-    setComponentType :  (name : string, componentType : ComponentType) => void;
+    setComponentType: (name: string, componentType: ComponentType) => void;
 }
 
 interface FormManagementContext<T> {
@@ -32,6 +32,7 @@ export enum ComponentType {
     INPUT = "input",
     SELECT = "select",
     AUTO_COMPLETE = "autoComplete",
+    CHECKBOX = "checkbox",
 }
 
 export const FormContext = React.createContext<FormContext<any> | undefined>(undefined);
@@ -50,31 +51,32 @@ export const useForm = <T>() => {
 }
 
 
-export const useFormLogic = <T extends Record<keyof string, unknown>>({
-                                    onSubmit
-                                }: useFormLogicProps<T>) => {
+export const useFormLogic = <T>({
+                                                                          onSubmit
+                                                                      }: useFormLogicProps<T>) => {
     const [formData, setFormData] = useState<T>({} as T);
     const [errors, setErrors] = useState<Record<keyof T, string>>({} as Record<keyof T, string>);
     const [validations, setValidations] = useState<Record<keyof T, Validations>>({} as Record<keyof T, Validations>);
-    const componentTypeRef  = useRef<Record<keyof T, ComponentType>>({} as Record<keyof T, ComponentType>);
+    const componentTypeRef = useRef<Record<keyof T, ComponentType>>({} as Record<keyof T, ComponentType>);
     const [submitting, setSubmitting] = useState(false);
 
-    const setFieldValue = useCallback((name: string, value: string) => {
+    const setFieldValue = useCallback(<V>(name: string, value: V) => {
         setFormData((prevData) => ({...prevData, [name]: value}));
     }, []);
 
     const setErrorData = useCallback((name: string, error: string) => {
         setErrors((prevData) => ({...prevData, [name]: error}));
     }, [])
+    
     const registerValidation = useCallback((name: string, validation: Validations) => {
         setValidations((prev) => ({...prev, [name]: validation}));
     }, []);
-    
-    const setComponentType = useCallback((name : string, componentType : ComponentType) => {
-        componentTypeRef.current = {...componentTypeRef.current, [name] : componentType};
+
+    const setComponentType = useCallback((name: string, componentType: ComponentType) => {
+        componentTypeRef.current = {...componentTypeRef.current, [name]: componentType};
     }, [])
 
-    const validateField = (name: string, value: string, componentType: ComponentType): boolean => {
+    const validateField = <V>(name: string, value: V, componentType: ComponentType): boolean => {
         switch (componentType) {
             case ComponentType.INPUT:
                 return validateInput(name, value);
@@ -82,51 +84,73 @@ export const useFormLogic = <T extends Record<keyof string, unknown>>({
                 return validateSelect(name, value);
             case ComponentType.AUTO_COMPLETE :
                 return validateInput(name, value);
+            case ComponentType.CHECKBOX:
+                return validateCheckbox(name, value as boolean);
         }
     };
 
-    const validateInput = (name: string, value: string) :boolean => {
+    const validateInput = <V>(name: string, value: V): boolean => {
         const validation = validations[name as keyof T];
-        
-        if (value === ''){
+
+        if (value === '') {
             setErrorData(name, `${name} is required`);
             return false;
         }
 
         if (!validation) return true;
-        
-            
+
+
         if (validation.required && !value) {
             setErrorData(name, `${name} is required`);
             return false;
         }
 
-        if (validation.pattern && !validation.pattern.test(value)) {
+        if (validation.pattern && !validation.pattern.test(value as string)) {
             setErrorData(name, `${name} field is invalid !`);
             return false;
         }
-        if (validation.valid && !validation.valid(value)) {
+
+        if (validation.valid && !validation.valid()) {
             setErrorData(name, `${name} field is invalid !`);
             return false;
         }
         setErrorData(name, "");
-        
+
         return true;
     }
-    
 
-    const validateSelect = (name: string, value: string) : boolean => {
-        if (value === ''){
+    const validateSelect = <V>(name: string, value: V): boolean => {
+        if (value === '') {
             setErrorData(name, `${name} field is invalid`)
             return false;
         }
         return true;
     }
-    
+    const validateCheckbox = (name: string, checked: boolean): boolean => {
+        const validation = validations[name as keyof T];
+
+        if (validation.valid)
+            console.log("validation : ", validation.valid())
+        
+        if (validation.valid  && !validation.valid()) {
+            console.log('invalid stuff')
+            setErrorData(name, `${name} field is invalid`);
+            return false;
+        }
+
+        // console.log("test", )
+        
+        if (validation.valid === undefined && !checked) {
+            setErrorData(name, `${name} is required`);
+            return false;
+        }
+        return true;
+    }
+
 
     const checkValidation = (): boolean => {
         let isValid = true;
-        
+
         for (const name in formData) {
             const fieldIsValid = validateField(name, formData[name as keyof T] as string, componentTypeRef.current[name]);
             if (!fieldIsValid)

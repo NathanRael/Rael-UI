@@ -1,7 +1,7 @@
 import {ChangeEventHandler,} from "react";
 import * as React from "react";
-import {cva} from "class-variance-authority";
 import {cn} from "../../../utils/cn.ts";
+import {checkboxVariants, sharedVariants} from "./Checkbox.Variants.ts";
 
 type CheckboxProps = {
     checked?: boolean,
@@ -17,8 +17,7 @@ const Checkbox = ({
                       label = '',
                       id,
                       className,
-                      onChange = () => {
-                      },
+                      onChange = () => {},
                   }: CheckboxProps) => {
     const userProps = {checked, disabled};
 
@@ -26,7 +25,9 @@ const Checkbox = ({
         <div className={'flex gap-2 select-none group'}>
             <div className={`inline-flex items-center ${sharedVariants({disabled})}`}>
                 <label className="flex items-center relative">
-                    <input disabled={disabled} onChange={onChange} type="checkbox" defaultChecked={checked}
+                    <input disabled={disabled} onChange={(e) => {
+                        onChange(e)
+                    }} type="checkbox" defaultChecked={checked}
                            className={cn(checkboxVariants(userProps), className)}
                            id={id ? id : "check"}/>
                     <CheckBoxIcon/>
@@ -52,37 +53,8 @@ const CheckBoxIcon = () => {
     )
 }
 
-const defaultVariants = {
-    disabled: false,
-    checked: false,
-}
 
-const checkboxVariants = cva('peer size-4  transition-all appearance-none border rounded shadow  hover:shadow-md ', {
-    variants: {
-        disabled: {
-            true: 'disabled:bg-gray-600 disabled:border-gray-600',
-            false: ''
-        },
-        checked: {
-            true: 'checked:bg-primary checked:border-primary',
-            false: 'border-white',
-        }
-    },
-    defaultVariants: {...defaultVariants}
-})
 
-const sharedVariants = cva(' ', {
-    variants: {
-        disabled: {
-            true: 'cursor-not-allowed',
-            false: 'cursor-pointer'
-            ,
-        }
-    },
-    defaultVariants: {
-        disabled : defaultVariants.disabled
-    }
-})
 
 
 export default Checkbox

@@ -1,6 +1,6 @@
-import {cva} from "class-variance-authority";
 import {RadioGroupContext, useRadioGroupContext, useRadio} from "./RadioContext.ts";
 import {useMemo} from "react";
+import {defaultVariant, sharedVariants} from "./Radio.Variants.ts";
 
 type RadioGroupProps = {
     children: React.ReactNode,
@@ -15,9 +15,7 @@ type RadioItemProps = {
     // onChange?: (value: string) => void,
 }
 
-const defaultVariant = {
-    disabled: false
-}
+
 
 
 const RadioGroup = ({
@@ -44,7 +42,7 @@ const RadioGroup = ({
 export default RadioGroup;
 
 
-const RadioItem = ({value, label}: RadioItemProps) => {
+export const RadioItem = ({value, label}: RadioItemProps) => {
     const {selectedValue, setSelectedValue, disabled} = useRadioGroupContext();
     const selected = useMemo(() => selectedValue == value, [selectedValue, value]);
 
@@ -81,14 +79,3 @@ const RadioItem = ({value, label}: RadioItemProps) => {
 RadioGroup.Item = RadioItem
 
 
-const sharedVariants = cva('', {
-    variants: {
-        disabled: {
-            true: 'cursor-not-allowed',
-            false: 'cursor-pointer'
-        }
-    },
-    defaultVariants: {
-        disabled: defaultVariant.disabled
-    }
-})

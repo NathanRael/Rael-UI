@@ -1,7 +1,7 @@
-import {cva} from "class-variance-authority";
 import {LoaderCircle} from "lucide-react";
 import {ButtonHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
+import {buttonVariants, LoaderVariants} from "./Button.Variants.ts";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "ghost" | "outline",
@@ -12,12 +12,12 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     disabled?: boolean,
 }
 
-const Button = ({variant, size, radius, loading, disabled, className, children, ...props}: ButtonProps) => {
+const Button = ({variant, size, radius, loading, disabled, className, children, onClick, ...props}: ButtonProps) => {
 
     const userProps = {variant, size, radius, loading, disabled};
 
     return (
-        <button disabled={disabled} className={cn(buttonVariants(userProps), className)} {...props}>
+        <button disabled={disabled} onClick={onClick} className={cn(buttonVariants(userProps), className)} {...props}>
             {loading && <LoaderCircle className={LoaderVariants({size})}/>}
             {children}
         </button>)
@@ -25,56 +25,3 @@ const Button = ({variant, size, radius, loading, disabled, className, children, 
 
 export default Button
 
-const buttonVariants = cva('flex items-center  antialiased font-semibold hover:opacity-50',
-    {
-        variants: {
-            variant: {
-                primary: 'bg-primary text-white',
-                secondary: '',
-                ghost: '',
-                outline : ''
-            },
-            size: {
-                md: 'px-4 py-2 gap-2',
-                lg: 'px-6 py-3 gap-3',
-                xl: 'px-8 py-4 gap-4 font-bold',
-            },
-            radius: {
-                none: 'rounded-none',
-                sm: "rounded-sm",
-                md: "rounded-md",
-                lg: "rounded-lg",
-                xl: "rounded-xl",
-                "2xl": "rounded-2xl",
-                full: "rounded-full",
-            },
-            block: {
-                true: 'w-full',
-                false: 'w-fit'
-            },
-            disabled: {
-                true: 'opacity-50  cursor-not-allowed',
-                false: 'cursor-pointer',
-            }
-        },
-        defaultVariants: {
-            variant: 'primary',
-            size: 'md',
-            radius: 'xl',
-            block: false,
-            disabled: false,
-        },
-    });
-
-const LoaderVariants = cva('animate-spin', {
-    variants: {
-        size: {
-            md: 'size-4',
-            lg: 'size-6',
-            xl: 'size-6',
-        }
-    },
-    defaultVariants: {
-        size: 'md'
-    }
-})

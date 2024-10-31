@@ -1,21 +1,16 @@
 import React, {PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo, useRef} from "react";
-import {
-    FormContext,
-    useFormContext,
-    FormManagementContext,
-    useFormLogic,
-    ComponentType
-} from "./Form.Context.ts";
+import {ComponentType, FormContext, FormManagementContext, useFormContext, useFormLogic} from "./Form.Context.ts";
 import {cn} from "../../utils/cn.ts";
 import {Select} from "../ui/selectInput";
 import {TextInput} from "../ui/textInput";
 import {PasswordInput} from "../ui/passwordInput";
-import {AutoComplete} from "../ui/autoCompleteInput";
+import {AutoComplete} from "../ui/autoComplete";
+import {Checkbox} from "../ui/checkbox";
 
 export interface Validations {
     required?: boolean | string;
     pattern?: RegExp;
-    valid?: (value: unknown) => boolean;
+    valid?: () => boolean;
 }
 
 type FormProps<T> = Required<PropsWithChildren> & {
@@ -36,34 +31,52 @@ type FormMessageProps<T> = {
     name: keyof T;
 }
 
-type Child =
+/*type Child =
     string
     | number
     | boolean
-    | React.ReactElement<any, string | React.JSXElementConstructor<any>>
+    | React.ReactElement<unknown, string | React.JSXElementConstructor<unknown>>
     | Iterable<React.ReactNode>
     | React.ReactPortal
     | null
-    | undefined
+    | undefined*/
 
-type FormData<T> = FormContext<T>['formData']
+type Child = any
 
-type InputCloneProps <T> = {
-    child : Child;
-    formData : FormData<T>;
-    name : keyof T;
-    handleChange : (value : string) => void;
+type FormData<T> = FormContext<T>['formData'];
+type ComponentCloneChangeEvent = <V>(value: V) => void;
+
+type InputCloneProps<T> = {
+    child: Child;
+    formData: FormData<T>;
+    name: keyof T;
+    handleChange: ComponentCloneChangeEvent;
 }
 
-type SelectCloneProps <T> = {
-    child : Child;
-    handleChange : (value : string) => void;
-    name : keyof T;
+type SelectCloneProps<T> = {
+    child: Child;
+    handleChange: ComponentCloneChangeEvent;
+    name: keyof T;
+}
+
+type CheckboxCloneProps<T> = {
+    child: Child;
+    handleChange: ComponentCloneChangeEvent;
+    name: keyof T;
 }
 
 
 const Form = <T extends Record<string, unknown>, >({children, className, onSubmit}: FormProps<T>) => {
-    const {formData, setFieldValue, setErrorData, errors, registerValidation, handleSubmit, submitting, setComponentType} = useFormLogic({
+    const {
+        formData,
+        setFieldValue,
+        setErrorData,
+        errors,
+        registerValidation,
+        handleSubmit,
+        submitting,
+        setComponentType
+    } = useFormLogic({
         onSubmit
     })
 
@@ -84,7 +97,7 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
     const ref = useRef<HTMLElement>(null);
 
 
-    const handleChange = (value: string) => {
+    const handleChange = <V, >(value: V) => {
         // console.log('change : ', value)
         setFieldValue(name as string, value)
         setErrorData(name as string, value === "" ? `${name as string} is required` : '');
@@ -98,28 +111,35 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
     useEffect(() => {
         if (validations) {
             registerValidation(name as string, validations);
+            // console.log("register validation", validations.valid && validations?.valid())
         }
     }, [name, validations]);
 
+    const defaultClonedComponentProps = {
+        name: name,
+        handleChange: handleChange
+    }
 
     return (
         <div>
             {React.Children.map(children, (child) => {
                     if (React.isValidElement(child)) {
                         if (child.type === Select) {
-                            return <SelectClone child={child} name={name} handleChange={handleChange}/>
+                            return <SelectClone child={child} {...defaultClonedComponentProps}/>
                         }
-                        
-                        if (child.type === AutoComplete){
-                            return <AutoCompleteClone child={child} name={name} handleChange={handleChange}/>
+
+                        if (child.type === AutoComplete) {
+                            return <AutoCompleteClone child={child} {...defaultClonedComponentProps}/>
                         }
-                        
+
                         if (child.type === TextInput || child.type === PasswordInput) {
-                            return <InputClone name={name} child={child} formData={formData} handleChange={handleChange}/>
+                            return <InputClone child={child} formData={formData} {...defaultClonedComponentProps}/>
                         }
-                        
+
+                        if (child.type === Checkbox)
+                            return <CheckboxClone child={child} {...defaultClonedComponentProps}/>
+
                     }
-                    
                     return child
                 }
             )}
@@ -130,44 +150,75 @@ export const FormControl = <T, >({children, validations, name}: FormControlProps
 export const FormMessage = <T, >({name, message, className}: FormMessageProps<T>) => {
     const {errors} = useFormContext<T>();
 
-    
+
     return errors[name] !== "" && (
         <p className={cn('text-danger', className)}>{message}</p>
     )
 }
 
-const InputClone = <T,>({child, name, handleChange} : InputCloneProps<T>) => {
+const InputClone = <T, >({child, name, handleChange}: InputCloneProps<T>) => {
     const {formData, setComponentType} = useFormContext<T>();
     useMemo(() => {
-        setComponentType(name as string,ComponentType.INPUT);
+        setComponentType(name as string, ComponentType.INPUT);
     }, [name])
-    
-    return React.cloneElement(child as ReactElement<any>, {
+
+    return React.cloneElement(child as ReactElement, {
         value: formData[name] || '',
-        onChange: (e: React.ChangeEvent<HTMLInputElement>) => handleChange(e.target.value),
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            handleChange(e.target.value);
+            if (child.props.onChange)
+                child.props.onChange(e.target.value)
+        },
     })
 }
 
-const AutoCompleteClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => {
+const AutoCompleteClone = <T, >({child, handleChange, name}: SelectCloneProps<T>) => {
     const {setComponentType} = useFormContext<T>();
     useMemo(() => {
-        setComponentType(name as string,ComponentType.AUTO_COMPLETE);
+        setComponentType(name as string, ComponentType.AUTO_COMPLETE);
     }, [name])
 
-    return React.cloneElement(child as ReactElement<any>, {
-        onChange: (selectedItem : string) => handleChange(selectedItem),
+    return React.cloneElement(child as ReactElement, {
+        onChange: (selectedItem: string) => {
+            handleChange(selectedItem)
+            if (child.props.onChange) {
+                child.props.onChange(selectedItem);
+            }
+        },
     })
 }
 
-const SelectClone = <T,>({ child, handleChange, name} : SelectCloneProps<T>) => {
+const SelectClone = <T, >({child, handleChange, name}: SelectCloneProps<T>) => {
     const {setComponentType} = useFormContext<T>();
-    
+
     useMemo(() => {
         setComponentType(name as string, ComponentType.SELECT)
     }, [name])
-    
-    return React.cloneElement(child as ReactElement<any>, {
-        onChange: (selectedItem : string) => handleChange(selectedItem),
+
+    return React.cloneElement(child as ReactElement, {
+        onChange: (selectedItem: string) => {
+            handleChange(selectedItem);
+            if (child.props.onChange) {
+                child.props.onChange(selectedItem);
+            }
+        },
+    })
+}
+
+const CheckboxClone = <T, >({handleChange, name, child}: CheckboxCloneProps<T>) => {
+    const {setComponentType} = useFormContext<T>();
+
+    useMemo(() => {
+        setComponentType(name as string, ComponentType.CHECKBOX);
+    }, [name])
+
+    return React.cloneElement(child as ReactElement, {
+        onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
+            if (child.props.onChange) {
+                child.props.onChange(e.target.value);
+            }
+            handleChange(e.target.checked)
+        },
     })
 }
 

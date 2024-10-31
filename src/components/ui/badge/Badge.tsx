@@ -1,6 +1,6 @@
 import {PropsWithChildren} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {cva} from "class-variance-authority";
+import {badgeVariants} from "./Badge.Variants.ts";
 
 type BadgeProps = PropsWithChildren & {
     variant?: 'outline' |'fill' ,
@@ -28,20 +28,3 @@ const Dot = ({className} : DotProps) => {
 
 export default Badge
 
-const badgeVariants = cva('rounded-full  w-fit min-w-3 min-h-3', {
-    variants : {
-        variant : {
-            fill : 'bg-primary text-white hover:opacity-75',
-            outline : ''
-        },
-        size : {
-            sm : '',
-            md : 'py-1 px-3 text-[12px]',
-            lg : '',
-        }
-    },
-    defaultVariants: {
-        variant : 'fill',
-        size : 'md',
-    }
-})

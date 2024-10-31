@@ -9,6 +9,8 @@ import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
 import {textInputVariants} from "../textInput/TextInput.Variants.ts";
 
+const firstRender = false;
+
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     onChange?: (value: string) => void,
@@ -114,7 +116,7 @@ export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightC
                 <input
                         className={"bg-transparent px-0 py-0 flex-1 outline-none"}    
                        onFocus={() => {
-                           if (selectValue === "") setSelectGroupVisible(true)
+                           if (selectValue === "")setSelectGroupVisible(true)
                        }}
                        value={selectValue}
                        onChange={(e) => {

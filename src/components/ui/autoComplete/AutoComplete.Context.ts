@@ -32,7 +32,7 @@ export const useAutoCompleteInputContext = () => {
 export const useAutoCompleteInput = () => {
     const [selectValue, setSelectValue] = useState("");
     const selectRef = useRef<HTMLDivElement>(null);
-    const [selectGroupVisible, setSelectGroupVisible] = useState(true);
+    const [selectGroupVisible, setSelectGroupVisible] = useState(false);
 
     useOutsideClicked({
         ref : selectRef,
