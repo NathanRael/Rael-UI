@@ -1,10 +1,9 @@
-import {Select} from "../../components";
 import {
-    SelectGroup,
+    Select, SelectGroup,
     SelectGroupContainer, SelectGroupTitle,
     SelectTrigger, SelectItem,
     SelectLabel
-} from "../../components/ui/selectInput/SelectInput.Default.tsx";
+} from "../../components";
 import {ChevronDownIcon} from "lucide-react";
 
 export const DESIGNER_TOOLS = [

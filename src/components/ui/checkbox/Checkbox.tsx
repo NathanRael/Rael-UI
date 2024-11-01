@@ -1,15 +1,15 @@
-import {ChangeEventHandler,} from "react";
 import * as React from "react";
 import {cn} from "../../../utils/cn.ts";
 import {checkboxVariants, sharedVariants} from "./Checkbox.Variants.ts";
+import {ChangeEventHandler, useMemo} from "react";
 
 type CheckboxProps = {
-    checked?: boolean,
-    disabled?: boolean,
-    label?: React.ReactNode,
-    id?: string,
-    onChange?: ChangeEventHandler<HTMLInputElement>,
-    className?: string,
+    checked?: boolean;
+    disabled?: boolean;
+    label?: React.ReactNode;
+    id?: string;
+    onChange?: ChangeEventHandler<HTMLInputElement>;
+    className?: string;
 }
 const Checkbox = ({
                       checked = false,
@@ -17,23 +17,26 @@ const Checkbox = ({
                       label = '',
                       id,
                       className,
-                      onChange = () => {},
+                      onChange = () => {
+                      },
                   }: CheckboxProps) => {
     const userProps = {checked, disabled};
+    const checkboxId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
 
     return (
         <div className={'flex gap-2 select-none group'}>
             <div className={`inline-flex items-center ${sharedVariants({disabled})}`}>
                 <label className="flex items-center relative">
-                    <input disabled={disabled} onChange={(e) => {
-                        onChange(e)
-                    }} type="checkbox" defaultChecked={checked}
+                    <input name={"test"} disabled={disabled} onChange={
+                        onChange
+                    } type="checkbox" defaultChecked={checked}
                            className={cn(checkboxVariants(userProps), className)}
-                           id={id ? id : "check"}/>
+                           id={checkboxId}/>
                     <CheckBoxIcon/>
                 </label>
             </div>
-            {label && <label htmlFor="check" className={`text-white ${sharedVariants({disabled})}`}>{label}</label>}
+            {label &&
+                <label htmlFor={checkboxId} className={`text-white ${sharedVariants({disabled})}`}>{label}</label>}
         </div>
     )
 }
@@ -52,9 +55,6 @@ const CheckBoxIcon = () => {
         </span>
     )
 }
-
-
-
 
 
 export default Checkbox

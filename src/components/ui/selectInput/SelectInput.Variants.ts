@@ -1,6 +1,6 @@
 import {cva} from "class-variance-authority";
 
-export const selectContainerVariants = cva('relative space-y-2', {
+export const selectContainerVariants = cva(' outline-none relative space-y-2', {
     variants : {
         block : {
             true : 'w-full',
@@ -12,7 +12,7 @@ export const selectContainerVariants = cva('relative space-y-2', {
         block : false,
     }
 })
-export const selectInputVariants = cva('flex w-full items-center justify-between cursor-pointer ', {
+export const SelectTriggerVariants = cva('flex w-full items-center justify-between cursor-pointer ', {
     variants: {
         variant: {
             outline: 'border border-gray-200 text-white focus-within:ring focus-within:ring-primary',
@@ -32,12 +32,17 @@ export const selectInputVariants = cva('flex w-full items-center justify-between
             "2xl": 'rounded-2xl',
             full: 'rounded-full',
         },
+        focused : {
+            true : 'ring-4 ring-primary',
+            false : ''
+        }
 
     },
     defaultVariants: {
         variant: 'outline',
         size: 'md',
         radius : 'md',
+        focused : false,
     }
 })
 

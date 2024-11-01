@@ -1,6 +1,6 @@
 import {cva} from "class-variance-authority";
 
-export const buttonVariants = cva('flex items-center  antialiased font-semibold hover:opacity-50',
+export const buttonVariants = cva('flex items-center justify-center  antialiased font-semibold hover:opacity-50',
     {
         variants: {
             variant: {
@@ -34,7 +34,7 @@ export const buttonVariants = cva('flex items-center  antialiased font-semibold 
         },
         defaultVariants: {
             variant: 'primary',
-            size: 'md',
+            size: 'lg',
             radius: 'xl',
             block: false,
             disabled: false,

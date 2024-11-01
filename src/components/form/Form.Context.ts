@@ -12,11 +12,6 @@ export interface FormContext<T> {
     setComponentType: (name: string, componentType: ComponentType) => void;
 }
 
-interface FormManagementContext<T> {
-    errors: FormContext<T>['errors'];
-    formData: FormContext<T>['formData'];
-    submitting: FormContext<T>['submitting'];
-}
 
 export interface Errors {
     message?: string;
@@ -25,7 +20,7 @@ export interface Errors {
 }
 
 interface useFormLogicProps<T> {
-    onSubmit: (formData: T) => void;
+    onSubmit: (formData: T) => Promise<void>;
 }
 
 export enum ComponentType {
@@ -36,7 +31,6 @@ export enum ComponentType {
 }
 
 export const FormContext = React.createContext<FormContext<any> | undefined>(undefined);
-export const FormManagementContext = React.createContext<FormManagementContext<any> | undefined>(undefined);
 export const useFormContext = <T>() => {
     const context = useContext(FormContext);
     if (!context) {
@@ -45,15 +39,9 @@ export const useFormContext = <T>() => {
     return context as FormContext<T>
 }
 
-export const useForm = <T>() => {
-    const context = useContext(FormManagementContext)
-    return context as FormManagementContext<T>;
-}
-
-
 export const useFormLogic = <T>({
-                                                                          onSubmit
-                                                                      }: useFormLogicProps<T>) => {
+                                    onSubmit
+                                }: useFormLogicProps<T>) => {
     const [formData, setFormData] = useState<T>({} as T);
     const [errors, setErrors] = useState<Record<keyof T, string>>({} as Record<keyof T, string>);
     const [validations, setValidations] = useState<Record<keyof T, Validations>>({} as Record<keyof T, Validations>);
@@ -67,7 +55,7 @@ export const useFormLogic = <T>({
     const setErrorData = useCallback((name: string, error: string) => {
         setErrors((prevData) => ({...prevData, [name]: error}));
     }, [])
-    
+
     const registerValidation = useCallback((name: string, validation: Validations) => {
         setValidations((prev) => ({...prev, [name]: validation}));
     }, []);
@@ -110,7 +98,7 @@ export const useFormLogic = <T>({
             return false;
         }
 
-        if (validation.valid && !validation.valid()) {
+        if (validation.valid && !validation.valid(value)) {
             setErrorData(name, `${name} field is invalid !`);
             return false;
         }
@@ -128,22 +116,18 @@ export const useFormLogic = <T>({
     }
     const validateCheckbox = (name: string, checked: boolean): boolean => {
         const validation = validations[name as keyof T];
-
-        if (validation.valid)
-            console.log("validation : ", validation.valid())
-        
-        if (validation.valid  && !validation.valid()) {
-            console.log('invalid stuff')
-            setErrorData(name, `${name} field is invalid`);
-            return false;
+        if (validation) {
+            if (validation.valid && !validation.valid(checked)) {
+                setErrorData(name, `${name} field is invalid`);
+                return false;
+            }
+        } else {
+            if (!checked) {
+                setErrorData(name, `${name} is required`);
+                return false;
+            }
         }
 
-        // console.log("test", )
-        
-        if (validation.valid === undefined && !checked) {
-            setErrorData(name, `${name} is required`);
-            return false;
-        }
         return true;
     }
 
@@ -159,15 +143,13 @@ export const useFormLogic = <T>({
         return isValid;
     }
 
-
     const handleSubmit = async (event: FormEvent) => {
-        setSubmitting(true);
+
         event.preventDefault();
         const valid = checkValidation();
-        if (!valid)
-            return console.log("Check your field" +
-                "")
-        onSubmit(formData);
+        if (!valid) return
+        setSubmitting(true);
+        await onSubmit(formData);
         setSubmitting(false);
     };
 

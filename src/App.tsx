@@ -1,5 +1,6 @@
 
 import FormTest from "./test/form/FormTest.tsx";
+import {TextInput} from "./components";
 
 
 
@@ -12,6 +13,7 @@ function App() {
             <h1 className="text-title font-bold text-white">
                 Rael UI
             </h1>
+            
             <FormTest/>
         </section>
     )

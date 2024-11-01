@@ -1,5 +1,5 @@
-import React, {PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo, useRef} from "react";
-import {ComponentType, FormContext, FormManagementContext, useFormContext, useFormLogic} from "./Form.Context.ts";
+import React, {PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo} from "react";
+import {ComponentType, FormContext, useFormContext, useFormLogic} from "./Form.Context.ts";
 import {cn} from "../../utils/cn.ts";
 import {Select} from "../ui/selectInput";
 import {TextInput} from "../ui/textInput";
@@ -10,12 +10,18 @@ import {Checkbox} from "../ui/checkbox";
 export interface Validations {
     required?: boolean | string;
     pattern?: RegExp;
-    valid?: () => boolean;
+    valid?: (value : unknown) => boolean;
 }
+
 
 type FormProps<T> = Required<PropsWithChildren> & {
     className?: string;
-    onSubmit: (formData: T) => void;
+    onSubmit: (formData: T) => Promise<void>;
+}
+
+
+type  FormProviderProps<T>  = {
+    render: (props: { isSubmitting: boolean, errors : Record<keyof T, string> }) => React.ReactNode;
 }
 
 type FormControlProps<T> = Required<PropsWithChildren> & {
@@ -29,6 +35,18 @@ type FormMessageProps<T> = {
     className?: string;
     message?: string;
     name: keyof T;
+}
+
+type FormItemProps = Required<PropsWithChildren> & {
+    className?: string;
+}
+
+type FormDescriptionProps= Required<PropsWithChildren> & {
+    className?: string;
+}
+
+type FormLabelProps = Required<PropsWithChildren> & {
+    className?: string;
 }
 
 /*type Child =
@@ -83,18 +101,15 @@ const Form = <T extends Record<string, unknown>, >({children, className, onSubmi
     return (
         <FormContext.Provider
             value={{formData, setFieldValue, setErrorData, errors, registerValidation, submitting, setComponentType}}>
-            <FormManagementContext.Provider value={{errors, formData, submitting}}>
-                <form className={cn('', className)} onSubmit={handleSubmit}>
+                <form className={cn('w-fit', className)} onSubmit={handleSubmit}>
                     {children}
                 </form>
-            </FormManagementContext.Provider>
         </FormContext.Provider>
     )
 }
 
-export const FormControl = <T, >({children, validations, name}: FormControlProps<T>) => {
+export const FormControl = <T,>({children, validations, name}: FormControlProps<T>) => {
     const {formData, setFieldValue, setErrorData, registerValidation} = useFormContext<T>();
-    const ref = useRef<HTMLElement>(null);
 
 
     const handleChange = <V, >(value: V) => {
@@ -156,6 +171,35 @@ export const FormMessage = <T, >({name, message, className}: FormMessageProps<T>
     )
 }
 
+export const FormItem = ({className, children} : FormItemProps) => {
+    return (
+        <div className={cn('flex flex-col items-start justify-start gap-2', className)}>
+            {children}
+        </div>
+    )
+}
+
+export const FormLabel = ({className, children}: FormLabelProps) => {
+    return (
+        <p className={cn('text-white', className)}>{children}</p>
+    )
+}
+
+export const FormDescription = ({className, children}: FormDescriptionProps) => {
+    return (
+        <p className={cn('text-white', className)}>{children}</p>
+    )
+}
+
+export const FormProvider = <T, >({render} : FormProviderProps<T>) => {
+    const {submitting, errors} = useFormContext<T>();
+    return <>
+        {
+            render({isSubmitting : submitting, errors})
+        }
+    </>
+}
+
 const InputClone = <T, >({child, name, handleChange}: InputCloneProps<T>) => {
     const {formData, setComponentType} = useFormContext<T>();
     useMemo(() => {
@@ -215,7 +259,7 @@ const CheckboxClone = <T, >({handleChange, name, child}: CheckboxCloneProps<T>) 
     return React.cloneElement(child as ReactElement, {
         onChange: (e: React.ChangeEvent<HTMLInputElement>) => {
             if (child.props.onChange) {
-                child.props.onChange(e.target.value);
+                child.props.onChange(e);
             }
             handleChange(e.target.checked)
         },

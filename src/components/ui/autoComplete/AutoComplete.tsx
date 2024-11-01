@@ -9,7 +9,6 @@ import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
 import {textInputVariants} from "../textInput/TextInput.Variants.ts";
 
-const firstRender = false;
 
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
@@ -34,7 +33,7 @@ type AutoCompleteGroupContainerProps = Required<PropsWithChildren> & {
     className?: string,
 }
 
-type AutoCompleteGroupProps = Required<PropsWithChildren>  &{
+type AutoCompleteGroupProps = Required<PropsWithChildren> & {
     className?: string,
 }
 
@@ -50,16 +49,16 @@ type AutoCompleteItemProps = Required<PropsWithChildren> & {
 
 
 const AutoComplete = ({
-                               onChange = () => {
-                               },
-                               variant,
-                               size,
-                               radius,
-                               block,
-                               className,
-                               children
-                           }: AutoCompleteInputProps) => {
-    
+                          onChange = () => {
+                          },
+                          variant,
+                          size,
+                          radius,
+                          block,
+                          className,
+                          children
+                      }: AutoCompleteInputProps) => {
+
     const {
         selectGroupVisible,
         setSelectGroupVisible,
@@ -83,11 +82,11 @@ const AutoComplete = ({
             handleSelectItem,
             // handleSearchItems,
             setSelectValue,
-            variant : variant,
-            size : size,
-            radius : radius,
-            block : block,
-            onChange : onChange,
+            variant: variant,
+            size: size,
+            radius: radius,
+            block: block,
+            onChange: onChange,
         }}>
             <div ref={selectRef} className={cn(autoCompleteContainerVariants({block}), className)}>
                 {children}
@@ -111,25 +110,27 @@ export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightC
 
     return (
         <>
-            <div tabIndex={-1} role="presentation" className={cn(textInputVariants({variant, size, block, radius}), className)}>
+            <div tabIndex={-1} role="presentation"
+                 className={cn(textInputVariants({variant, size, block, radius}), className)}>
                 {leftContent}
                 <input
-                        className={"bg-transparent px-0 py-0 flex-1 outline-none"}    
-                       onFocus={() => {
-                           if (selectValue === "")setSelectGroupVisible(true)
-                       }}
-                       value={selectValue}
-                       onChange={(e) => {
-                           handleSelectItem(e.target.value.toLowerCase());
-                           setSelectGroupVisible(true);
-                           onChange(e.target.value.toLowerCase())
-                       }}
-                       placeholder={placeholder}/>
+                    className={"bg-transparent px-0 py-0 flex-1 outline-none"}
+                    onFocus={() => {
+                        if (selectValue === "") setSelectGroupVisible(true)
+                    }}
+                    onBlur={() => setSelectGroupVisible(false)}
+                    value={selectValue}
+                    onChange={(e) => {
+                        handleSelectItem(e.target.value.toLowerCase());
+                        setSelectGroupVisible(true);
+                        onChange(e.target.value.toLowerCase())
+                    }}
+                    placeholder={placeholder}/>
                 {rightContent}
             </div>
         </>
-    
-)
+
+    )
 }
 
 export const AutoCompleteGroupContainer = ({children, className}: AutoCompleteGroupContainerProps) => {

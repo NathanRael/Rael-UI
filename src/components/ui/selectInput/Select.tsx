@@ -1,8 +1,7 @@
-
 import {PropsWithChildren} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
 import {cn} from "../../../utils/cn.ts";
-import {selectContainerVariants, selectGroupContainerVariants, selectInputVariants} from "./SelectInput.Variants.ts";
+import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.Variants.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     onChange?: (selectedItem: string) => void,
@@ -44,22 +43,25 @@ type SelectItemProps = Required<PropsWithChildren> & {
 }
 
 const Select = ({
-                                       children,
-                                       onChange = () => {
-                                       },
-                                       variant,
-                                       size,
-                                       radius,
-                                       block,
-                                       className,
-                                   }: SelectInputDefaultProps) => {
+                    children,
+                    onChange = () => {
+                    },
+                    variant,
+                    size,
+                    radius,
+                    block,
+                    className,
+                }: SelectInputDefaultProps) => {
     const {
         selectRef,
         setShowSelectGroup,
         showSelectGroup,
         selectedItem,
         setSelectedItem,
+        focused,
+        setFocused
     } = useSelectInput();
+
 
     return (
         <SelectInputContext.Provider value={{
@@ -72,8 +74,20 @@ const Select = ({
             radius: radius,
             block: block,
             onSelect: onChange,
+            focused,
+            setFocused,
         }}>
-            <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
+
+            <div tabIndex={0} role={'textbox'} onBlur={() => {
+                setFocused(false);
+                setShowSelectGroup(false)
+            }} onFocusCapture={() => {
+                setFocused(true);
+                setShowSelectGroup(true)
+            }} onClick={() => {
+                if (!focused)
+                    setFocused(true)
+            }} ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
                 {children}
             </div>
         </SelectInputContext.Provider>
@@ -81,11 +95,11 @@ const Select = ({
 }
 
 export const SelectTrigger = ({children, className}: SelectHeaderProps) => {
-    const {setShowSelectGroup, variant, size, radius} = useSelectInputContext();
+    const {setShowSelectGroup, variant, size, radius, focused} = useSelectInputContext();
     return (
         <div
             onClick={() => setShowSelectGroup(prev => !prev)}
-            className={cn(selectInputVariants({variant, size, radius}), className)}>
+            className={cn(SelectTriggerVariants({variant, size, radius, focused}), className)}>
             {children}
         </div>
     )

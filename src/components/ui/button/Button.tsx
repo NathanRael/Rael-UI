@@ -12,9 +12,9 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     disabled?: boolean,
 }
 
-const Button = ({variant, size, radius, loading, disabled, className, children, onClick, ...props}: ButtonProps) => {
+const Button = ({variant, size, radius, loading, disabled, className,block, children, onClick, ...props}: ButtonProps) => {
 
-    const userProps = {variant, size, radius, loading, disabled};
+    const userProps = {variant, size, radius, loading, disabled, block};
 
     return (
         <button disabled={disabled} onClick={onClick} className={cn(buttonVariants(userProps), className)} {...props}>

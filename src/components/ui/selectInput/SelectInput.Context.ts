@@ -1,19 +1,21 @@
 import {createContext, useContext, useRef, useState} from "react";
 import useOutsideClicked from "../../../hooks/useOutsideClicked.ts";
-import {SelectInputDefaultProps} from "./SelectInput.Default.tsx";
+import {SelectInputDefaultProps} from "./Select.tsx";
 
 type SelectInputContext = {
-    showSelectGroup: boolean,
-    selectedItem: string,
-    setShowSelectGroup: React.Dispatch<React.SetStateAction<boolean>>,
-    setSelectedItem: React.Dispatch<React.SetStateAction<string>>,
+    showSelectGroup: boolean;
+    selectedItem: string;
+    setShowSelectGroup: React.Dispatch<React.SetStateAction<boolean>>;
+    setSelectedItem: React.Dispatch<React.SetStateAction<string>>;
+    focused : boolean;
+    setFocused : React.Dispatch<React.SetStateAction<boolean>>;
 
-    onSelect: (value: string) => void,
+    onSelect: (value: string) => void;
 
-    variant: SelectInputDefaultProps['variant'],
-    size: SelectInputDefaultProps['size'],
-    radius: SelectInputDefaultProps['radius'],
-    block: SelectInputDefaultProps['block'],
+    variant: SelectInputDefaultProps['variant'];
+    size: SelectInputDefaultProps['size'];
+    radius: SelectInputDefaultProps['radius'];
+    block: SelectInputDefaultProps['block'];
 
 }
 
@@ -33,18 +35,25 @@ export const useSelectInput = () => {
     const [selectedItem, setSelectedItem] = useState("");
     const [showSelectGroup, setShowSelectGroup] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
+    const [focused, setFocused] = useState(false);
 
     useOutsideClicked({
         ref: selectRef,
-        action: () => setShowSelectGroup(false)
+        action: () => {
+            setShowSelectGroup(false);
+            if (focused)
+                setFocused(false)
+        }
     })
-
-
+    
+    
     return {
         selectedItem,
         showSelectGroup,
         setSelectedItem,
         selectRef,
-        setShowSelectGroup
+        setShowSelectGroup,
+        focused,
+        setFocused,
     }
 }
