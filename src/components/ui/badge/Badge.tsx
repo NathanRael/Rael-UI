@@ -3,9 +3,10 @@ import {cn} from "../../../utils/cn.ts";
 import {badgeVariants} from "./Badge.Variants.ts";
 
 type BadgeProps = PropsWithChildren & {
-    variant?: 'outline' |'fill' ,
-    size? : 'sm' | 'md' | 'lg' ,
-    className?: string,
+    variant?: 'outline' |'fill' ;
+    size? : 'sm' | 'md';
+    radius? : 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' ;
+    className?: string;
 }
 
 type DotProps = {

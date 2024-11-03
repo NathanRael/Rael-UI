@@ -41,10 +41,11 @@ export const useSelectInput = () => {
         ref: selectRef,
         action: () => {
             setShowSelectGroup(false);
-            if (focused)
-                setFocused(false)
+           /* if (focused)
+                setFocused(false)*/
         }
     })
+    
     
     
     return {

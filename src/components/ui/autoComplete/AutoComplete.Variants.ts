@@ -7,7 +7,6 @@ export const autoCompleteContainerVariants = cva('space-y-2 relative', {
             false: 'w-[280px]',
         },
     },
-
     defaultVariants : {
         block : false,
     }
@@ -16,8 +15,8 @@ export const autoCompleteContainerVariants = cva('space-y-2 relative', {
 export const autoCompleteGroupContainerVariants = cva('absolute z-30 flex flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
     variants : {
         variant: {
-            outline: 'border border-gray-200 bg-dark text-white',
-            fill: '',
+            outline: 'bg-transparent border border-gray-200 text-white focus-within:ring-4 focus-within:ring-primary',
+            fill: 'bg-neutral-300  text-black placeholder:text-neutral-500 focus-within:ring-4 focus-within:ring-primary',
         },
         radius : {
             none: 'rounded-none',

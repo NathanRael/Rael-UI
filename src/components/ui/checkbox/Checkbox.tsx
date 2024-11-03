@@ -10,6 +10,10 @@ type CheckboxProps = {
     id?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     className?: string;
+    radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
+    variant?: "fill" | "outline";
+    size? : 'sm' | 'md';
+
 }
 const Checkbox = ({
                       checked = false,
@@ -19,8 +23,11 @@ const Checkbox = ({
                       className,
                       onChange = () => {
                       },
+                      radius,
+    size,
+    variant,
                   }: CheckboxProps) => {
-    const userProps = {checked, disabled};
+    const userProps = { disabled, radius, variant, size};
     const checkboxId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
 
     return (

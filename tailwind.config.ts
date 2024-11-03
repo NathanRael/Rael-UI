@@ -18,9 +18,8 @@ export default {
                 "button" : "17px"
             },
             fontFamily: {
-                sans : ["Helvetica", "Arial", "sans-serif"],
-            }
-            
+                sans : ['Roboto', 'sans-serif'],
+            },
         },
     },
     plugins: [],

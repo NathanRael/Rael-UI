@@ -4,14 +4,14 @@ import {cn} from "../../../utils/cn.ts";
 import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.Variants.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
-    onChange?: (selectedItem: string) => void,
-    placeholder?: string,
+    onChange?: (selectedItem: string) => void;
+    placeholder?: string;
 
-    variant?: "outline" | "fill",
-    size?: "md" | "lg" | "xl",
-    radius?: "none" | "sm" | "md" | "lg" | "xl",
-    block?: boolean,
-    className?: string,
+    variant?: "outline" | "fill";
+    size?: "sm" | "md" | "lg" ;
+    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    block?: boolean;
+    className?: string;
 
 }
 
@@ -78,16 +78,7 @@ const Select = ({
             setFocused,
         }}>
 
-            <div tabIndex={0} role={'textbox'} onBlur={() => {
-                setFocused(false);
-                setShowSelectGroup(false)
-            }} onFocusCapture={() => {
-                setFocused(true);
-                setShowSelectGroup(true)
-            }} onClick={() => {
-                if (!focused)
-                    setFocused(true)
-            }} ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
+            <div  ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
                 {children}
             </div>
         </SelectInputContext.Provider>
@@ -95,10 +86,19 @@ const Select = ({
 }
 
 export const SelectTrigger = ({children, className}: SelectHeaderProps) => {
-    const {setShowSelectGroup, variant, size, radius, focused} = useSelectInputContext();
+    const {setShowSelectGroup, setFocused, variant, size, radius, focused} = useSelectInputContext();
     return (
         <div
-            onClick={() => setShowSelectGroup(prev => !prev)}
+            tabIndex={0} role={'textbox'} onBlur={() => {
+            setFocused(false);
+            // setShowSelectGroup(false)
+        }} onFocus={() => {
+            setFocused(true);
+            setShowSelectGroup(true);
+        }} onClick={() => {
+            setFocused(prev => !prev);
+            setShowSelectGroup(true);
+        }}
             className={cn(SelectTriggerVariants({variant, size, radius, focused}), className)}>
             {children}
         </div>

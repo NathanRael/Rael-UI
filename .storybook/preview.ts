@@ -9,6 +9,17 @@ const preview: Preview = {
         date: /Date$/i,
       },
     },
+    backgrounds: {
+      values: [
+        // 👇 Default values
+        { name: 'Dark', value: '#12161C' },
+        { name: 'Light', value: '#F7F9F2' },
+        // 👇 Add your own
+        { name: 'Maroon', value: '#400' },
+      ],
+      // 👇 Specify which background is shown by default
+      default: 'Dark',
+    },
   },
   globalTypes : {
     theme : {

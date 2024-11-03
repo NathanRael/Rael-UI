@@ -1,10 +1,10 @@
 import {cva} from "class-variance-authority";
 
-export const textAreaVariants = cva('flex items-start outline-none min-h-[120px] ', {
+export const textareaVariants = cva('flex items-start outline-none min-h-[120px] ', {
     variants: {
-        variant : {
-            outline: 'bg-transparent border border-gray-200 text-white focus:ring-4 focus:ring-primary',
-            fill : '',
+        variant: {
+            outline: 'bg-transparent border border-gray-200 text-white focus-within:ring-4 focus-within:ring-primary',
+            fill: 'bg-neutral-300  text-black placeholder:text-neutral-500 focus-within:ring-4 focus-within:ring-primary',
         },
         size : {
             md: 'px-4 py-2',

@@ -5,7 +5,7 @@ import {buttonVariants, LoaderVariants} from "./Button.Variants.ts";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "ghost" | "outline",
-    size?: "md" | "lg" | "xl",
+    size?: "sm" | "md" | "lg",
     radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full",
     block?: boolean,
     loading?: boolean,

@@ -1,9 +1,9 @@
 import {cva} from "class-variance-authority";
 
-export const avatarVariants = cva('overflow-hidden flex bg-white font-bold items-center justify-center', {
+export const avatarVariants = cva('overflow-hidden object-cover flex bg-white font-bold items-center justify-center', {
     variants : {
         size : {
-            sm : 'size-4 text-base',
+            sm : 'size-7 text-base',
             md : 'size-10 text-xl',
             lg : 'size-[54px] text-2xl',
         },
@@ -18,7 +18,7 @@ export const avatarVariants = cva('overflow-hidden flex bg-white font-bold items
         },
     },
     defaultVariants : {
-        size : 'lg',
+        size : 'md',
         radius : 'full'
     }
 })

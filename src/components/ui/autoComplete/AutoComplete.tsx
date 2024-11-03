@@ -7,44 +7,44 @@ import {
 } from "./AutoComplete.Context.ts";
 import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
-import {textInputVariants} from "../textInput/TextInput.Variants.ts";
+import {realInputVariants, textInputVariants} from "../textInput/TextInput.Variants.ts";
 
 
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
-    onChange?: (value: string) => void,
-    placeholder?: string,
+    onChange?: (value: string) => void;
+    placeholder?: string;
 
-    variant?: "outline" | "fill",
-    size?: "md" | "lg" | "xl",
-    radius?: "none" | "sm" | "md" | "lg" | "xl",
-    block?: boolean,
-    className?: string,
+    variant?: "outline" | "fill";
+    size?: "sm" | "md" | "lg" ;
+    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    block?: boolean;
+    className?: string;
 }
 
 type AutoCompleteTriggerProps = {
-    className?: string,
-    leftContent?: React.ReactNode,
-    rightContent?: React.ReactNode,
-    placeholder?: string,
+    className?: string;
+    leftContent?: React.ReactNode;
+    rightContent?: React.ReactNode;
+    placeholder?: string;
 }
 
 type AutoCompleteGroupContainerProps = Required<PropsWithChildren> & {
-    className?: string,
+    className?: string;
 }
 
 type AutoCompleteGroupProps = Required<PropsWithChildren> & {
-    className?: string,
+    className?: string;
 }
 
 type AutoCompleteGroupTitleProps = Required<PropsWithChildren> & {
-    className?: string,
+    className?: string;
 }
 
 type AutoCompleteItemProps = Required<PropsWithChildren> & {
-    value: string,
-    onClick?: (value: string) => void,
-    className?: string,
+    value: string;
+    onClick?: (value: string) => void;
+    className?: string;
 }
 
 
@@ -72,6 +72,7 @@ const AutoComplete = ({
     /*useEffect(() => {
         onSelect(selectValue)
     }, [selectValue])*/
+
 
 
     return (
@@ -114,11 +115,11 @@ export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightC
                  className={cn(textInputVariants({variant, size, block, radius}), className)}>
                 {leftContent}
                 <input
-                    className={"bg-transparent px-0 py-0 flex-1 outline-none"}
+                    className={realInputVariants({variant})}
                     onFocus={() => {
-                        if (selectValue === "") setSelectGroupVisible(true)
+                        setSelectGroupVisible(true)
                     }}
-                    onBlur={() => setSelectGroupVisible(false)}
+                    // onBlur={() => setSelectGroupVisible(false)}
                     value={selectValue}
                     onChange={(e) => {
                         handleSelectItem(e.target.value.toLowerCase());

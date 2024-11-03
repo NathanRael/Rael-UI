@@ -30,8 +30,10 @@ const Avatar = ({children, className, size, radius}: AvatarProps) => {
             size : size,
             radius : radius,
         }}>
-            <div className={cn('', className)}>
+            <div className={cn('size-fit', className)}>
                 {children}
+                
+                {/*<p className={"text-white"}>{isLoading ? 'loading ...' : 'done'}</p>*/}
             </div>
         </AvatarContext.Provider>
 
@@ -44,13 +46,13 @@ export const AvatarImage = ({alt, src, className}: AvatarImageProps) => {
     useAvatarImage({src : src})
 
     return !isLoading && !error && (
-        <img className={cn( avatarVariants({size, radius}), className)} alt={alt} src={imgSrc}/>
+        <img className={cn(avatarVariants({size, radius}), className)} alt={alt} src={imgSrc}/>
     )
 }
 
 export const AvatarFallback = ({children, className}: AvatarFallbackProps) => {
     const {isLoading, error, size, radius} = useAvatarContext();
-    return isLoading || error && (
+    return (isLoading || error) && (
         <div className={cn( avatarVariants({size, radius}), className)}>{children}</div>
     )
 }

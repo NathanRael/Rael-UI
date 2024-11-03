@@ -28,7 +28,7 @@ export const DESIGNER_TOOLS = [
 const SelectInputTest = () => {
     return (
         <Select
-            onSelect={(selectedItem) => console.log("Selected Item : ", selectedItem)}
+            onChange={(selectedItem) => console.log("Selected Item : ", selectedItem)}
         >
             <SelectTrigger>
                 <SelectLabel placeholder={"Select a designer tool"}/>

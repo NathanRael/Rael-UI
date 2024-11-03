@@ -1,21 +1,22 @@
 import {cva} from "class-variance-authority";
 
-export const buttonVariants = cva('flex items-center justify-center  antialiased font-semibold hover:opacity-50',
+export const buttonVariants = cva(
+    "flex items-center justify-center antialiased font-medium transition-all duration-200 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2",
     {
         variants: {
             variant: {
-                primary: 'bg-primary text-white',
-                secondary: '',
-                ghost: '',
-                outline : ''
+                primary: "bg-primary text-white focus:ring-primary/50",
+                secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500/50",
+                ghost: "hover:bg-gray-100 hover:text-black text-white hover:opacity-100 ",
+                outline: "border border-primary text-primary hover:bg-primary hover:text-white "
             },
             size: {
-                md: 'px-4 py-2 gap-2',
-                lg: 'px-6 py-3 gap-3',
-                xl: 'px-8 py-4 gap-4 font-bold',
+                sm: "text-[14px] px-3 py-2 gap-2",
+                md: "text-base px-4 py-2 gap-2",
+                lg: "text-lg px-8 py-4 gap-4 font-bold",
             },
             radius: {
-                none: 'rounded-none',
+                none: "rounded-none",
                 sm: "rounded-sm",
                 md: "rounded-md",
                 lg: "rounded-lg",
@@ -24,22 +25,24 @@ export const buttonVariants = cva('flex items-center justify-center  antialiased
                 full: "rounded-full",
             },
             block: {
-                true: 'w-full',
-                false: 'w-fit'
+                true: "w-full",
+                false: "w-fit"
             },
             disabled: {
-                true: 'opacity-50  cursor-not-allowed',
-                false: 'cursor-pointer',
+                true: "opacity-60 hover:opacity-60 cursor-not-allowed",
+                false: "cursor-pointer",
             }
         },
         defaultVariants: {
-            variant: 'primary',
-            size: 'lg',
-            radius: 'xl',
+            variant: "primary",
+            size: "md",
+            radius: "xl",
             block: false,
             disabled: false,
         },
-    });
+    }
+);
+
 
 export const LoaderVariants = cva('animate-spin', {
     variants: {

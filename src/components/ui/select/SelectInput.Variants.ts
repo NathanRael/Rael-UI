@@ -16,12 +16,12 @@ export const SelectTriggerVariants = cva('flex w-full items-center justify-betwe
     variants: {
         variant: {
             outline: 'border border-gray-200 text-white focus-within:ring focus-within:ring-primary',
-            fill: '',
+            fill: 'bg-neutral-300  text-black placeholder:text-neutral-500 focus-within:ring-4 focus-within:ring-primary',
         },
         size: {
-            md: 'px-4 py-2',
-            lg: 'px-6 py-3',
-            xl: '',
+            sm : 'px-2 py-1 gap-2 text-[14px]',
+            md: 'px-4 py-2 gap-2',
+            lg: 'px-6 py-3 gap-3',
         },
         radius : {
             none: 'rounded-none',
@@ -51,7 +51,7 @@ export const selectGroupContainerVariants = cva('absolute z-30 flex flex-col  w-
     variants : {
         variant: {
             outline: 'border border-gray-200 bg-dark text-white ',
-            fill: '',
+            fill: 'bg-neutral-300  text-black',
         },
         radius : {
             none: 'rounded-none',

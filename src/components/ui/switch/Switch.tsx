@@ -1,6 +1,6 @@
 import {cn} from "../../../utils/cn.ts";
 import * as React from "react";
-import {ChangeEventHandler} from "react";
+import {ChangeEventHandler, useMemo} from "react";
 import {sharedVariants, switchVariants} from "./Switch.Variants.ts";
 
 type SwitchProps = {
@@ -25,6 +25,8 @@ const Switch = ({
                     variant,
                 }: SwitchProps) => {
     const userProps = {checked, disabled, variant};
+    const swichId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
+    
 
     return (
         <div className={'flex gap-2 select-none group'}>
@@ -32,12 +34,12 @@ const Switch = ({
                 <label className="flex items-center relative">
                     <input disabled={disabled} onChange={onChange} type="checkbox" defaultChecked={checked}
                            className={"sr-only peer"}
-                           id={id ? id : "check"}/>
+                           id={swichId}/>
                     {/*<SwitchIcon/>*/}
                     <div className={cn(switchVariants(userProps), className)}></div>
                 </label>
             </div>
-            {label && <label htmlFor="check" className={`text-white ${sharedVariants({disabled})}`}>{label}</label>}
+            {label && <label htmlFor={swichId} className={`text-white ${sharedVariants({disabled})}`}>{label}</label>}
         </div>
     )
 }

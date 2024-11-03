@@ -1,11 +1,11 @@
 import {InputHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {textInputVariants} from "./TextInput.Variants.ts";
+import {realInputVariants, textInputVariants} from "./TextInput.Variants.ts";
 
 
 type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
     variant?: "outline" | "fill",
-    size?: "md" | "lg" | "xl",
+    size?: "sm" | "md" | "lg",
     radius?: "none" | "sm" | "md" | "lg" | "xl",
     block?: boolean,
     leftContent?: React.ReactNode,
@@ -21,7 +21,7 @@ const TextInput = ({variant, size, radius, block, className, leftContent, rightC
              className={cn(textInputVariants(userProps), className)}>
             {leftContent}
             <input
-                className={"bg-transparent px-0 py-0 flex-1 outline-none"}
+                className={cn(realInputVariants({variant}), className)}
                 {...props}
                 />
             {rightContent}
