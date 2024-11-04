@@ -10,6 +10,8 @@ type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & 
     block?: boolean;
     showIcon?: boolean;
     className? : string;
+    leftContent?: React.ReactNode,
+    rightContent?: React.ReactNode,
 }
 
 type ShowPasswordIconProps = {
@@ -18,7 +20,7 @@ type ShowPasswordIconProps = {
     onClick? : MouseEventHandler;
 };
 
-const PasswordInput = ({variant, size, radius, block, className, showIcon = true, ...props}: PasswordInputProps) => {
+const PasswordInput = ({variant, size, radius, block, className, showIcon = true, leftContent, rightContent, ...props}: PasswordInputProps) => {
     const userProps = {variant, size, radius, block};
     const [showPassword, setShowPassword] = useState(false)
     
@@ -28,8 +30,10 @@ const PasswordInput = ({variant, size, radius, block, className, showIcon = true
     
     return (
         <div tabIndex={-1} role="presentation" className={cn(passwordInputVariants(userProps), className)}>
+            {leftContent}
             <input type={showPassword ? "text" : "password"}  {...props} className={cn(realInputVariants({variant}, className))}/>
             {showIcon && <ShowPasswordIcon onClick={handlePasswordIconClicked}  passwordShown={showPassword} className="cursor-pointer"/>}
+            {rightContent}
         </div>
     )
 }

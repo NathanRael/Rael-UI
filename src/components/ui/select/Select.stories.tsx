@@ -11,27 +11,31 @@ import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {ChevronDownIcon} from "lucide-react";
 
-const SelectDemo = (props) => {
-    const DESIGNER_TOOLS = [
-        {
-            title: "Online",
-            values: [
-                {name: "Figma", content: "Figma"},
-                {name: "Penpot", content: "Penpot"},
-                {name: "Adobe XD", content: "Adobe XD"},
-            ]
-        }, {
-            title: "Offline",
-            values: [
-                {name: "Figma", content: "Figma"},
-                {name: "Penpot", content: "Penpot"},
-                {name: "Adobe XD", content: "Adobe XD"},
-            ]
-        },
-    ]
-    return (
+const DESIGNER_TOOLS = [
+    {
+        title: "Online",
+        values: [
+            {name: "Figma", content: "Figma"},
+            {name: "Penpot", content: "Penpot"},
+            {name: "Adobe XD", content: "Adobe XD"},
+        ]
+    }, {
+        title: "Offline",
+        values: [
+            {name: "Figma", content: "Figma"},
+            {name: "Penpot", content: "Penpot"},
+            {name: "Adobe XD", content: "Adobe XD"},
+        ]
+    },
+]
+
+type StoryProps = ComponentProps<typeof Select>
+const meta: Meta<StoryProps> = {
+    component: Select,
+    tags: ['autodocs'],
+    render : (args) => (
         <Select
-            {...props}
+            {...args}
             onChange={(selectedItem) => console.log("Selected Item : ", selectedItem)}
         >
             <SelectTrigger>
@@ -57,13 +61,6 @@ const SelectDemo = (props) => {
     )
 }
 
-type StoryProps = ComponentProps<typeof Select>
-const meta: Meta<StoryProps> = {
-    component: Select,
-    tags: ['autodocs'],
-
-}
-
 export default meta;
 
 type Story = StoryObj<StoryProps>;
@@ -74,7 +71,6 @@ export const Outline: Story = {
         radius : 'md',
         variant: 'outline',
     },
-    render: ({...args}) => <SelectDemo {...args}/>
 }
 
 export const Fill: Story = {
@@ -82,5 +78,4 @@ export const Fill: Story = {
         ...Outline.args,
         variant: 'fill',
     },
-    render: ({...args}) => <SelectDemo {...args}/>
 }

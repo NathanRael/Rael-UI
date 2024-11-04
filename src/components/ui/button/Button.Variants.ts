@@ -12,7 +12,7 @@ export const buttonVariants = cva(
             },
             size: {
                 sm: "text-[14px] px-3 py-2 gap-2",
-                md: "text-base px-4 py-2 gap-2",
+                md: "text-base px-6 py-2 gap-2",
                 lg: "text-lg px-8 py-4 gap-4 font-bold",
             },
             radius: {

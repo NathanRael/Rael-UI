@@ -1,7 +1,7 @@
 import React, {PropsWithChildren, ReactElement, useEffect, useLayoutEffect, useMemo} from "react";
 import {ComponentType, FormContext, useFormContext, useFormLogic} from "./Form.Context.ts";
 import {cn} from "../../utils/cn.ts";
-import {Select} from "../ui/selectInput";
+import {Select} from "../ui/select";
 import {TextInput} from "../ui/textInput";
 import {PasswordInput} from "../ui/passwordInput";
 import {AutoComplete} from "../ui/autoComplete";
@@ -167,7 +167,7 @@ export const FormMessage = <T, >({name, message, className}: FormMessageProps<T>
 
 
     return errors[name] !== "" && (
-        <p className={cn('text-danger', className)}>{message}</p>
+        <p className={cn('text-danger text-[14px]', className)}>{message}</p>
     )
 }
 
@@ -181,13 +181,13 @@ export const FormItem = ({className, children} : FormItemProps) => {
 
 export const FormLabel = ({className, children}: FormLabelProps) => {
     return (
-        <p className={cn('text-white', className)}>{children}</p>
+        <p className={cn('text-base text-white', className)}>{children}</p>
     )
 }
 
 export const FormDescription = ({className, children}: FormDescriptionProps) => {
     return (
-        <p className={cn('text-white', className)}>{children}</p>
+        <p className={cn('text-gray-400 text-[14px]', className)}>{children}</p>
     )
 }
 
