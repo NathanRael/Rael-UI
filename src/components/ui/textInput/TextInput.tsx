@@ -1,6 +1,7 @@
 import {InputHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
 import {realInputVariants, textInputVariants} from "./TextInput.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 
 type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
@@ -13,8 +14,8 @@ type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
     
 }
 const TextInput = ({variant, size, radius, block, className, leftContent, rightContent, ...props}: TextInputProps) => {
-
-    const userProps = {variant, size, radius, block};
+    const {cVariant} = useComponentStyle();
+    const userProps = { variant : variant || cVariant, size, radius, block};
 
     return (
         <div tabIndex={-1} role="presentation"

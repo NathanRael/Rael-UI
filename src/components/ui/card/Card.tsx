@@ -1,6 +1,7 @@
 import {PropsWithChildren} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {cardSectionVariants, cardVariants} from "./Card.variants.ts";
+import {cardDescriptionVariants, cardSectionVariants, cardTitleVariants, cardVariants} from "./Card.variants.ts";
+import ComponentStyleContext, {useComponentStyle, useComponentStyleContext} from "../ComponentStyle.Context.ts";
 
 type CardProps = Required<PropsWithChildren> & {
     variant?: "outline" | "fill";
@@ -17,11 +18,15 @@ type CardSectionProps = ClassNameAndChildren & {
     
 }
 const Card = ({children, className, variant, radius } : CardProps) => {
+    const {cVariant} = useComponentStyleContext({variant : variant})
     return (
-        <div className={cn(cardVariants({variant, radius}), className)}>
-            {children}
-        </div>
-    )   
+        <ComponentStyleContext.Provider value={{cVariant}}>
+            <div className={cn(cardVariants({variant, radius}), className)}>
+                {children}
+            </div>
+        </ComponentStyleContext.Provider>
+
+    )
 }
 
 export const CardSection = ({children, className, rFor}: CardSectionProps) => {
@@ -34,14 +39,17 @@ export const CardSection = ({children, className, rFor}: CardSectionProps) => {
 }
 
 export const CardTitle = ({children, className}: ClassNameAndChildren) => {
+    const {cVariant} = useComponentStyle();
     return (
-        <h1 className={cn('text-3xl text-white', className)}>{children}</h1>
+        <h1 className={cn(cardTitleVariants({variant: cVariant}), className)}>{children}</h1>
     )   
 }
 
 export const CardDescription = ({children, className}: ClassNameAndChildren) => {
+    const {cVariant} = useComponentStyle();
+    
     return (
-        <p className={cn('text-base text-gray-400', className)}>{children}</p>
+        <p className={cn(cardDescriptionVariants({variant: cVariant}), className)}>{children}</p>
     )
 }
 

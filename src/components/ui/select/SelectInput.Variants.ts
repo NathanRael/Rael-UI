@@ -47,7 +47,7 @@ export const SelectTriggerVariants = cva('flex w-full items-center justify-betwe
 })
 
 
-export const selectGroupContainerVariants = cva('absolute z-30 flex flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
+export const selectGroupContainerVariants = cva('absolute z-30 flex overflow-y-scroll max-h-[240px] flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
     variants : {
         variant: {
             outline: 'border border-gray-200 bg-dark text-white ',

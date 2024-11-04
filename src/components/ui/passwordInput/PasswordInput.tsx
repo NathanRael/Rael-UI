@@ -2,6 +2,7 @@ import {Eye, EyeOff} from "lucide-react";
 import {InputHTMLAttributes, MouseEventHandler, useState} from "react";
 import {cn} from "../../../utils/cn.ts";
 import {passwordInputVariants, realInputVariants} from "./PasswordInput.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
     variant?: "outline" | "fill";
@@ -21,7 +22,8 @@ type ShowPasswordIconProps = {
 };
 
 const PasswordInput = ({variant, size, radius, block, className, showIcon = true, leftContent, rightContent, ...props}: PasswordInputProps) => {
-    const userProps = {variant, size, radius, block};
+    const {cVariant} = useComponentStyle();
+    const userProps = {variant : variant || cVariant, size, radius, block};
     const [showPassword, setShowPassword] = useState(false)
     
     const handlePasswordIconClicked = () => {

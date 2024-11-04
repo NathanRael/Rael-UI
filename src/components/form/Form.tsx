@@ -6,6 +6,8 @@ import {TextInput} from "../ui/textInput";
 import {PasswordInput} from "../ui/passwordInput";
 import {AutoComplete} from "../ui/autoComplete";
 import {Checkbox} from "../ui/checkbox";
+import {formDescriptionVariants, formLabelVariants} from "./Form.variant.ts";
+import {useComponentStyle} from "../ui/ComponentStyle.Context.ts";
 
 export interface Validations {
     required?: boolean | string;
@@ -21,7 +23,7 @@ type FormProps<T> = Required<PropsWithChildren> & {
 
 
 type  FormProviderProps<T>  = {
-    render: (props: { isSubmitting: boolean, errors : Record<keyof T, string> }) => React.ReactNode;
+    render: (props: { isSubmitting: boolean, errors : Record<keyof T, string> , formData : T}) => React.ReactNode;
 }
 
 type FormControlProps<T> = Required<PropsWithChildren> & {
@@ -33,7 +35,7 @@ type FormControlProps<T> = Required<PropsWithChildren> & {
 
 type FormMessageProps<T> = {
     className?: string;
-    message?: string;
+    message: string;
     name: keyof T;
 }
 
@@ -136,7 +138,7 @@ export const FormControl = <T,>({children, validations, name}: FormControlProps<
     }
 
     return (
-        <div>
+        <>
             {React.Children.map(children, (child) => {
                     if (React.isValidElement(child)) {
                         if (child.type === Select) {
@@ -158,7 +160,7 @@ export const FormControl = <T,>({children, validations, name}: FormControlProps<
                     return child
                 }
             )}
-        </div>
+        </>
     )
 }
 
@@ -180,22 +182,24 @@ export const FormItem = ({className, children} : FormItemProps) => {
 }
 
 export const FormLabel = ({className, children}: FormLabelProps) => {
+    const {cVariant} = useComponentStyle();
     return (
-        <p className={cn('text-base text-white', className)}>{children}</p>
+        <p className={cn(formLabelVariants({variant : cVariant}), className)}>{children}</p>
     )
 }
 
 export const FormDescription = ({className, children}: FormDescriptionProps) => {
+    const {cVariant} = useComponentStyle();
     return (
-        <p className={cn('text-gray-400 text-[14px]', className)}>{children}</p>
+        <p className={cn(formDescriptionVariants({variant: cVariant}), className)}>{children}</p>
     )
 }
 
 export const FormProvider = <T, >({render} : FormProviderProps<T>) => {
-    const {submitting, errors} = useFormContext<T>();
+    const {submitting, errors, formData} = useFormContext<T>();
     return <>
         {
-            render({isSubmitting : submitting, errors})
+            render({isSubmitting : submitting, errors, formData})
         }
     </>
 }
