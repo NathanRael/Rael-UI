@@ -7,15 +7,21 @@ type SelectInputContext = {
     selectedItem: string;
     setShowSelectGroup: React.Dispatch<React.SetStateAction<boolean>>;
     setSelectedItem: React.Dispatch<React.SetStateAction<string>>;
-    focused : boolean;
-    setFocused : React.Dispatch<React.SetStateAction<boolean>>;
+    focused: boolean;
+    setFocused: React.Dispatch<React.SetStateAction<boolean>>;
 
-    onSelect: (value: string) => void;
+    onSelect: ({target: {name, value}}: {
+        target: {
+            name: string,
+            value: string,
+        }
+    }) => void;
 
     variant: SelectInputDefaultProps['variant'];
     size: SelectInputDefaultProps['size'];
     radius: SelectInputDefaultProps['radius'];
     block: SelectInputDefaultProps['block'];
+    name: string;
 
 }
 
@@ -41,13 +47,12 @@ export const useSelectInput = () => {
         ref: selectRef,
         action: () => {
             setShowSelectGroup(false);
-           /* if (focused)
-                setFocused(false)*/
+            /* if (focused)
+                 setFocused(false)*/
         }
     })
-    
-    
-    
+
+
     return {
         selectedItem,
         showSelectGroup,

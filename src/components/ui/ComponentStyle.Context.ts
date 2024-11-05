@@ -16,15 +16,15 @@ const ComponentStyleContext = createContext<ComponentStyleContext |undefined>(un
 export const useComponentStyle = () => {
     const context = useContext(ComponentStyleContext);
     if (!context)
-        throw new Error("useComponentStyle must be used within ComponentStyle");
-    
+        return {}
+        // throw new Error("useComponentStyle must be used within ComponentStyle");
     return context as ComponentStyleContext;
 }
 
 export const useComponentStyleContext = ({variant, size} : useComponentStyleContextProps) => {
     return {
-        cVariant: variant,
-        cSize: size,
+        cVariant: variant || 'fill',
+        cSize: size || 'md',
     }
 }
 

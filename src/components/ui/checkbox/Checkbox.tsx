@@ -1,6 +1,6 @@
 import * as React from "react";
 import {cn} from "../../../utils/cn.ts";
-import {checkboxVariants, sharedVariants} from "./Checkbox.Variants.ts";
+import {checkboxVariants, sharedVariants} from "./Checkbox.variants.ts";
 import {ChangeEventHandler, useMemo} from "react";
 
 type CheckboxProps = {
@@ -8,11 +8,12 @@ type CheckboxProps = {
     disabled?: boolean;
     label?: React.ReactNode;
     id?: string;
+    name: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     className?: string;
     radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
     variant?: "fill" | "outline";
-    size? : 'sm' | 'md';
+    size?: 'sm' | 'md';
 
 }
 const Checkbox = ({
@@ -20,21 +21,22 @@ const Checkbox = ({
                       disabled = false,
                       label = '',
                       id,
+                      name,
                       className,
                       onChange = () => {
                       },
                       radius,
-    size,
-    variant,
+                      size,
+                      variant,
                   }: CheckboxProps) => {
-    const userProps = { disabled, radius, variant, size};
+    const userProps = {disabled, radius, variant, size};
     const checkboxId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
 
     return (
         <div className={'flex gap-2 select-none group'}>
             <div className={`inline-flex items-center ${sharedVariants({disabled})}`}>
                 <label className="flex items-center relative">
-                    <input name={"test"} disabled={disabled} onChange={
+                    <input name={name} disabled={disabled} onChange={
                         onChange
                     } type="checkbox" defaultChecked={checked}
                            className={cn(checkboxVariants(userProps), className)}

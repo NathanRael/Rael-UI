@@ -1,17 +1,23 @@
-import {PropsWithChildren} from "react";
+import {PropsWithChildren, useEffect} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
 import {cn} from "../../../utils/cn.ts";
 import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.Variants.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
-    onChange?: (selectedItem: string) => void;
+    onChange?: ({target: {name, value}}: {
+        target: {
+            name: string,
+            value: string,
+        }
+    }) => void;
     placeholder?: string;
 
     variant?: "outline" | "fill";
-    size?: "sm" | "md" | "lg" ;
+    size?: "sm" | "md" | "lg";
     radius?: "none" | "sm" | "md" | "lg" | "xl";
     block?: boolean;
     className?: string;
+    name: string;
 
 }
 
@@ -38,8 +44,9 @@ type SelectGroupTitleProps = Required<PropsWithChildren> & {
 }
 
 type SelectItemProps = Required<PropsWithChildren> & {
-    className?: string,
-    value: string,
+    className?: string;
+    value: string;
+    selected?: boolean;
 }
 
 const Select = ({
@@ -51,6 +58,7 @@ const Select = ({
                     radius,
                     block,
                     className,
+                    name,
                 }: SelectInputDefaultProps) => {
     const {
         selectRef,
@@ -76,9 +84,10 @@ const Select = ({
             onSelect: onChange,
             focused,
             setFocused,
+            name: name,
         }}>
 
-            <div  ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
+            <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
                 {children}
             </div>
         </SelectInputContext.Provider>
@@ -130,12 +139,23 @@ export const SelectGroupTitle = ({children, className}: SelectGroupTitleProps) =
     return (<p className={cn(`mb-1 font-semibold  w-full py-1 px-4`, className)}>{children}</p>)
 }
 
-export const SelectItem = ({children, value, className}: SelectItemProps) => {
-    const {onSelect, setShowSelectGroup, setSelectedItem} = useSelectInputContext();
+export const SelectItem = ({children, value, className, selected}: SelectItemProps) => {
+    const {onSelect, setShowSelectGroup, setSelectedItem, name} = useSelectInputContext();
+    const handleChange = () => {
+        setSelectedItem(value);
+        onSelect({target: {name: name, value: value}});
+        setShowSelectGroup(false);
+    }
+    useEffect(() => {
+        if (selected){
+            handleChange()
+        }
+    }, [selected]);
+    
     return (
         <div onClick={() => {
             setSelectedItem(value);
-            onSelect(value);
+            onSelect({target: {name: name, value: value}});
             setShowSelectGroup(false);
         }} className={cn(`w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer`, className)}>
             {children}

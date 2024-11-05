@@ -5,8 +5,9 @@ import {defaultVariant, sharedVariants} from "./Radio.Variants.ts";
 type RadioGroupProps = {
     children: React.ReactNode,
     defaultValue: string,
-    onChange?: (value: string) => void,
-    disabled?: boolean,
+    onChange?: ({target: {name, value}}: { target: { name: string, value: string } }) => void,
+    disabled?: boolean;
+    name: string;
 }
 
 type RadioItemProps = {
@@ -16,16 +17,22 @@ type RadioItemProps = {
 }
 
 
+const RadioGroup = (props: RadioGroupProps) => {
 
-
-const RadioGroup = ({
-                               children, defaultValue, onChange = () => {
-    }, disabled = defaultVariant.disabled
-                           }: RadioGroupProps) => {
+    const {
+        children,
+        defaultValue,
+        onChange = () => {
+        },
+        disabled = defaultVariant.disabled,
+        name
+    } = props;
+    
     const {selectedValue, setSelectedValue} = useRadio({
         defaultValue,
         onChange,
         disabled,
+        name,
     });
 
 

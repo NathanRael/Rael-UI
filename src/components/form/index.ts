@@ -1,1 +1,1 @@
-export {default as Form, FormControl, FormMessage, FormProvider, FormDescription, FormItem, FormLabel} from './Form';
+export {default as Form, FormControl, FormMessage, FormDescription, FormItem, FormLabel} from './Form';

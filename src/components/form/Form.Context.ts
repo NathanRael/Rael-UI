@@ -1,162 +1,125 @@
-import React, {FormEvent, useCallback, useContext, useRef, useState} from "react";
-import {Validations} from "./Form.tsx";
+import React, {FormEvent, useContext, useLayoutEffect, useState} from "react";
 
 
-export interface FormContext<T> {
-    formData: T;
-    setFieldValue: <V>(name: string, value: V) => void;
-    errors: Record<keyof T, string>;
-    setErrorData: (name: string, error: string) => void;
-    registerValidation: (name: string, validation: Validations) => void;
-    submitting: boolean;
-    setComponentType: (name: string, componentType: ComponentType) => void;
+export interface FormContext {
+    form : UseFormReturnType; 
 }
 
-
-export interface Errors {
+export interface ValidationRules<T> {
+    name?: Partial<keyof T>;
+    pattern?: RegExp;
+    valid?: (value: Partial<T>) => boolean;
     message?: string;
     required?: boolean;
-    valid?: boolean;
 }
 
-interface useFormLogicProps<T> {
-    onSubmit: (formData: T) => Promise<void>;
+interface FormProps<T> {
+    defaultValue?: T,
+    validations?: ValidationRules<T>[]
 }
 
-export enum ComponentType {
-    INPUT = "input",
-    SELECT = "select",
-    AUTO_COMPLETE = "autoComplete",
-    CHECKBOX = "checkbox",
-}
 
-export const FormContext = React.createContext<FormContext<any> | undefined>(undefined);
-export const useFormContext = <T>() => {
+export const FormContext = React.createContext<FormContext | undefined>(undefined);
+export const useFormContext = () => {
     const context = useContext(FormContext);
     if (!context) {
         throw new Error("useFormContext must be used within a FormProvider");
     }
-    return context as FormContext<T>
+    return context as FormContext
 }
 
-export const useFormLogic = <T>({
-                                    onSubmit
-                                }: useFormLogicProps<T>) => {
-    const [formData, setFormData] = useState<T>({} as T);
-    const [errors, setErrors] = useState<Record<keyof T, string>>({} as Record<keyof T, string>);
-    const [validations, setValidations] = useState<Record<keyof T, Validations>>({} as Record<keyof T, Validations>);
-    const componentTypeRef = useRef<Record<keyof T, ComponentType>>({} as Record<keyof T, ComponentType>);
-    const [submitting, setSubmitting] = useState(false);
-
-    const setFieldValue = useCallback(<V>(name: string, value: V) => {
-        setFormData((prevData) => ({...prevData, [name]: value}));
-    }, []);
-
-    const setErrorData = useCallback((name: string, error: string) => {
-        setErrors((prevData) => ({...prevData, [name]: error}));
-    }, [])
-
-    const registerValidation = useCallback((name: string, validation: Validations) => {
-        setValidations((prev) => ({...prev, [name]: validation}));
-    }, []);
-
-    const setComponentType = useCallback((name: string, componentType: ComponentType) => {
-        componentTypeRef.current = {...componentTypeRef.current, [name]: componentType};
-    }, [])
-
-    const validateField = <V>(name: string, value: V, componentType: ComponentType): boolean => {
-        switch (componentType) {
-            case ComponentType.INPUT:
-                return validateInput(name, value);
-            case ComponentType.SELECT:
-                return validateSelect(name, value);
-            case ComponentType.AUTO_COMPLETE :
-                return validateInput(name, value);
-            case ComponentType.CHECKBOX:
-                return validateCheckbox(name, value as boolean);
-        }
-    };
-
-    const validateInput = <V>(name: string, value: V): boolean => {
-        const validation = validations[name as keyof T];
-
-        if (value === '') {
-            setErrorData(name, `${name} is required`);
-            return false;
-        }
-
-        if (!validation) return true;
-
-
-        if (validation.required && !value) {
-            setErrorData(name, `${name} is required`);
-            return false;
-        }
-
-        if (validation.pattern && !validation.pattern.test(value as string)) {
-            setErrorData(name, `${name} field is invalid !`);
-            return false;
-        }
-
-        if (validation.valid && !validation.valid(value)) {
-            setErrorData(name, `${name} field is invalid !`);
-            return false;
-        }
-        setErrorData(name, "");
-
-        return true;
+export const useForm = <T extends Record<string, any>>({defaultValue, validations}: FormProps<T>) => {
+    const [formData, setFormData] = useState<T>(defaultValue || {} as T);
+    const [errors, setErrors] = useState<T>({} as T);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    
+    
+    const setValue = <V, >(name: keyof T, value: V) => {
+        setFormData(prev => ({...prev, [name]: value}))
     }
 
-    const validateSelect = <V>(name: string, value: V): boolean => {
-        if (value === '') {
-            setErrorData(name, `${name} field is invalid`)
-            return false;
-        }
-        return true;
-    }
-    const validateCheckbox = (name: string, checked: boolean): boolean => {
-        const validation = validations[name as keyof T];
-        if (validation) {
-            if (validation.valid && !validation.valid(checked)) {
-                setErrorData(name, `${name} field is invalid`);
-                return false;
-            }
-        } else {
-            if (!checked) {
-                setErrorData(name, `${name} is required`);
-                return false;
-            }
-        }
-
-        return true;
+    const setError = <V, >(name: keyof T, value: V) => {
+        setErrors(prev => ({...prev, [name]: value}))
     }
 
+    const handleChange = <V, >(name: string, value: V) => {
+        setValue(name, value);
+        const validation = validations?.find(v => v.name === name);
+        if (validation)
+            setError(name, value === '' && validation.required ? `${name} is required` : '');
+    }
 
-    const checkValidation = (): boolean => {
-        let isValid = true;
+    const handleSubmit = async (onSubmit: () => Promise<void>, e: FormEvent) => {
+        e.preventDefault();
+        setIsSubmitting(true)
+        try {
+            const valid = validateForm();
+            if (!valid)
+               return
 
-        for (const name in formData) {
-            const fieldIsValid = validateField(name, formData[name as keyof T] as string, componentTypeRef.current[name]);
-            if (!fieldIsValid)
+            await onSubmit();
+        } catch (error) {
+            console.error("error while submitting : ", error)
+        } finally {
+            setIsSubmitting(false);
+        }
+    }
+
+    const validateForm = (): boolean => {
+        let isValid = true
+
+        for (const key in formData) {
+            const value = formData[key];
+            if (!checkValidation(key, value))
                 isValid = false;
         }
-        return isValid;
+        return isValid
     }
 
-    const handleSubmit = async (event: FormEvent) => {
+    const checkValidation = <V>(name: string, value: V): boolean => {
+        let isValid = true;
+        validations?.forEach(validation => {
+            if (validation.name === name) {
+                
+                if (validation.required && value === '') {
+                    setError(name, `${name} is required`);
+                    return isValid = false;
+                }
+                
+                if (value !== ''){
+                    if (validation.valid !== undefined && !validation.valid(formData)) {
+                        setError(name, validation.message || `${name} is invalid`);
+                        return isValid = false;
 
-        event.preventDefault();
-        const valid = checkValidation();
-        if (!valid) return
-        setSubmitting(true);
-        await onSubmit(formData);
-        setSubmitting(false);
-    };
+                    }
+
+                    if (validation.pattern && !validation.pattern.test(value as string)) {
+                        setError(name, validation.message || `${name} is invalid`);
+                        return isValid = false;
+                    }
+                }
+                
+
+            }
+        })
+        
+        return isValid
+    }
+
+    useLayoutEffect(() => {
+        for (const name in formData) {
+            setError(name, '');
+        }
+    }, [])
+
 
     return {
-        formData, setFieldValue, setErrorData, errors, registerValidation, handleSubmit, submitting, setComponentType
+        handleSubmit,
+        handleChange,
+        formData,
+        errors,
+        isSubmitting,
     }
 }
 
-
-
+export type UseFormReturnType = ReturnType<typeof useForm>;
