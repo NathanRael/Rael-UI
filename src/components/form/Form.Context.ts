@@ -15,7 +15,7 @@ export interface ValidationRules<T> {
 
 interface FormProps<T> {
     defaultValue?: T,
-    validations?: ValidationRules<T>[]
+    validations: ValidationRules<T>[]
 }
 
 
@@ -67,7 +67,6 @@ export const useForm = <T extends Record<string, any>>({defaultValue, validation
 
     const validateForm = (): boolean => {
         let isValid = true
-
         for (const key in formData) {
             const value = formData[key];
             if (!checkValidation(key, value))
@@ -80,7 +79,6 @@ export const useForm = <T extends Record<string, any>>({defaultValue, validation
         let isValid = true;
         validations?.forEach(validation => {
             if (validation.name === name) {
-                
                 if (validation.required && value === '') {
                     setError(name, `${name} is required`);
                     return isValid = false;
