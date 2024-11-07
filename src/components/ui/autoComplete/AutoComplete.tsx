@@ -8,11 +8,18 @@ import {
 import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
 import {realInputVariants, textInputVariants} from "../textInput/TextInput.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
-    onChange?: (value: string) => void;
+    onChange?: ({target: {name, value}}: {
+        target: {
+            name: string;
+            value?: unknown;
+            checked?: boolean;
+        }
+    }) => void;
     placeholder?: string;
 
     variant?: "outline" | "fill";
@@ -20,6 +27,7 @@ export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     radius?: "none" | "sm" | "md" | "lg" | "xl";
     block?: boolean;
     className?: string;
+    name : string;
 }
 
 type AutoCompleteTriggerProps = {
@@ -56,7 +64,8 @@ const AutoComplete = ({
                           radius,
                           block,
                           className,
-                          children
+                          children,
+                      name,
                       }: AutoCompleteInputProps) => {
 
     const {
@@ -88,6 +97,7 @@ const AutoComplete = ({
             radius: radius,
             block: block,
             onChange: onChange,
+            name : name,
         }}>
             <div ref={selectRef} className={cn(autoCompleteContainerVariants({block}), className)}>
                 {children}
@@ -105,26 +115,29 @@ export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightC
         variant,
         size,
         radius,
-        block
+        block,
+        name,
     } = useAutoCompleteInputContext();
 
+    const  {cVariant} = useComponentStyle();
 
     return (
         <>
             <div tabIndex={-1} role="presentation"
-                 className={cn(textInputVariants({variant, size, block, radius}), className)}>
+                 className={cn(textInputVariants({variant : variant ||cVariant, size, block, radius}), className)}>
                 {leftContent}
                 <input
                     className={realInputVariants({variant})}
                     onFocus={() => {
                         setSelectGroupVisible(true)
                     }}
+                    name={name}
                     // onBlur={() => setSelectGroupVisible(false)}
                     value={selectValue}
                     onChange={(e) => {
                         handleSelectItem(e.target.value.toLowerCase());
                         setSelectGroupVisible(true);
-                        onChange(e.target.value.toLowerCase())
+                        onChange({target: {name: name, value: e.target.value}})
                     }}
                     placeholder={placeholder}/>
                 {rightContent}
@@ -136,9 +149,10 @@ export const AutoCompleteTrigger = ({placeholder, className, leftContent, rightC
 
 export const AutoCompleteGroupContainer = ({children, className}: AutoCompleteGroupContainerProps) => {
     const {selectGroupVisible, variant, radius} = useAutoCompleteInputContext();
+    const  {cVariant} = useComponentStyle();
     return selectGroupVisible && (
         <div
-            className={cn(autoCompleteGroupContainerVariants({variant, radius}), className)}>{children}</div>
+            className={cn(autoCompleteGroupContainerVariants({variant : variant ||cVariant, radius}), className)}>{children}</div>
     )
 }
 
@@ -157,14 +171,14 @@ export const AutoCompleteGroupTitle = ({children, className}: AutoCompleteGroupT
 }
 
 export const AutoCompleteItem = ({children, value, className}: AutoCompleteItemProps) => {
-    const {handleSelectItem, selectValue, onChange, setSelectGroupVisible} = useAutoCompleteInputContext();
+    const {handleSelectItem, selectValue, onChange, setSelectGroupVisible, name} = useAutoCompleteInputContext();
     if (selectValue !== "" && !value.toLowerCase().includes(selectValue.toLowerCase()))
         return
 
     return (
         <div onClick={() => {
             handleSelectItem(value);
-            onChange(value);
+            onChange({target : {name : name, value: value}});
             setSelectGroupVisible(false);
         }}
              className={cn("w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer", className)}>

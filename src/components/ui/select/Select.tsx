@@ -2,12 +2,14 @@ import {PropsWithChildren, useEffect} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
 import {cn} from "../../../utils/cn.ts";
 import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     onChange?: ({target: {name, value}}: {
         target: {
-            name: string,
-            value: string,
+            name: string;
+            value?: unknown;
+            checked?: boolean;
         }
     }) => void;
     placeholder?: string;
@@ -32,7 +34,6 @@ type SelectLabelProps = {
 
 type SelectGroupContainerProps = Required<PropsWithChildren> & {
     className?: string,
-
 }
 
 type SelectGroupProps = Required<PropsWithChildren> & {
@@ -96,11 +97,11 @@ const Select = ({
 
 export const SelectTrigger = ({children, className}: SelectHeaderProps) => {
     const {setShowSelectGroup, setFocused, variant, size, radius, focused} = useSelectInputContext();
+    const  {cVariant} = useComponentStyle();
     return (
         <div
             tabIndex={0} role={'textbox'} onBlur={() => {
             setFocused(false);
-            // setShowSelectGroup(false)
         }} onFocus={() => {
             setFocused(true);
             setShowSelectGroup(true);
@@ -108,7 +109,7 @@ export const SelectTrigger = ({children, className}: SelectHeaderProps) => {
             setFocused(prev => !prev);
             setShowSelectGroup(true);
         }}
-            className={cn(SelectTriggerVariants({variant, size, radius, focused}), className)}>
+            className={cn(SelectTriggerVariants({variant : variant || cVariant, size, radius, focused}), className)}>
             {children}
         </div>
     )
@@ -120,10 +121,11 @@ export const SelectLabel = ({placeholder, className}: SelectLabelProps) => {
 }
 
 export const SelectGroupContainer = ({className, children}: SelectGroupContainerProps) => {
+    const  {cVariant} = useComponentStyle();
     const {showSelectGroup, radius, variant} = useSelectInputContext();
     return showSelectGroup && (
         <div
-            className={cn(selectGroupContainerVariants({variant, radius}), className)}>{children}</div>
+            className={cn(selectGroupContainerVariants({variant : variant || cVariant, radius}), className)}>{children}</div>
     )
 }
 

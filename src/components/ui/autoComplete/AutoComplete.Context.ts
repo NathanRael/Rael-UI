@@ -9,12 +9,19 @@ export type AutoCompleteInputContext = {
     setSelectGroupVisible : (visible: boolean) => void,
     handleSelectItem : (selectedItem: string) => void,
     
-    onChange : (value : string) => void,
+    onChange : ({target: {name, value}}: {
+        target: {
+            name: string;
+            value?: unknown;
+            checked?: boolean;
+        }
+    }) => void;
     
     variant : AutoCompleteInputProps['variant'],
     size : AutoCompleteInputProps['size'],
     radius : AutoCompleteInputProps['radius'],
     block : AutoCompleteInputProps['block'],
+    name : string;
 }
 
 export const AutoCompleteInputContext = createContext<AutoCompleteInputContext | undefined>(undefined);

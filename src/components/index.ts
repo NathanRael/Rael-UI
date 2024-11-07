@@ -11,3 +11,4 @@ export * from "./ui/switch"
 export * from "./ui/badge"
 export * from './ui/icon'
 export * from './form'
+export * from './ui/toast'

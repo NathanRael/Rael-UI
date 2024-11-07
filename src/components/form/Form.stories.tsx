@@ -13,7 +13,7 @@ import {
 } from "../ui/select";
 import {ChevronDown} from "lucide-react";
 import {useForm, ValidationRules} from "./Form.Context.ts";
-import {Card, CardSection, CardTitle} from "../ui/card";
+import {Card, CardDescription, CardSection, CardTitle} from "../ui/card";
 import {PasswordInput} from "../ui/passwordInput";
 import {Button} from "../ui/button";
 import {Checkbox} from "../ui/checkbox";
@@ -83,7 +83,8 @@ const FormExample = () => {
         <Form form={form} onSubmit={onSubmit} className={"flex flex-col gap-4"}>
             <Card variant={'outline'} className={'w-[360px]'}>
                 <CardSection rFor={'meta'}>
-                    <CardTitle>Login</CardTitle>
+                    <CardTitle>Create your account</CardTitle>
+                    <CardDescription>Delve into the world of ...</CardDescription>
                 </CardSection>
                 <CardSection>
                     <FormItem>
@@ -151,7 +152,7 @@ type StoryProps = ComponentProps<typeof Form>;
 const meta: Meta<StoryProps> = {
     component: Form,
     tags: ['autodocs'],
-    render: (args) => <FormExample/>
+    render: () => <FormExample/>
 }
 
 export default meta;

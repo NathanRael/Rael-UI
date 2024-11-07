@@ -2,6 +2,7 @@ import {cn} from "../../../utils/cn.ts";
 import * as React from "react";
 import {ChangeEventHandler, useMemo} from "react";
 import {sharedVariants, switchVariants} from "./Switch.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 type SwitchProps = {
     checked?: boolean,
@@ -24,7 +25,8 @@ const Switch = ({
                     },
                     variant,
                 }: SwitchProps) => {
-    const userProps = {checked, disabled, variant};
+    const  {cVariant} = useComponentStyle();
+    const userProps = {checked, disabled, variant : variant ||cVariant};
     const swichId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
     
 

@@ -21,8 +21,8 @@ type ControlType = 'input' | 'select' | 'checkbox' | 'radio';
 type FormChangeEvent = ({target: {name, value}}: {
     target: {
         name: string;
-        value: unknown;
-        checked : boolean;
+        value?: unknown;
+        checked?: boolean;
     }
 }) => void;
 

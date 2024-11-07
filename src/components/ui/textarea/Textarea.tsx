@@ -1,6 +1,7 @@
 import {TextareaHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
 import {textareaVariants} from "./Textarea.Variants.ts";
+import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 
 type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
@@ -10,7 +11,9 @@ type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
 }
 
 const Textarea = ({variant, radius, block, className, ...props} : TextAreaProps) => {
-    const userProps = {variant, radius, block};
+    const  {cVariant} = useComponentStyle();
+    
+    const userProps = {variant : variant || cVariant , radius, block};
     return (
         <textarea className={cn(textareaVariants(userProps), className)} {...props}/>
     )

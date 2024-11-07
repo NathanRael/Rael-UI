@@ -33,7 +33,7 @@ const PasswordInput = ({variant, size, radius, block, className, showIcon = true
     return (
         <div tabIndex={-1} role="presentation" className={cn(passwordInputVariants(userProps), className)}>
             {leftContent}
-            <input type={showPassword ? "text" : "password"}  {...props} className={cn(realInputVariants({variant}, className))}/>
+            <input type={showPassword ? "text" : "password"}  {...props} className={cn(realInputVariants({variant}), className)}/>
             {showIcon && <ShowPasswordIcon onClick={handlePasswordIconClicked}  passwordShown={showPassword} className="cursor-pointer"/>}
             {rightContent}
         </div>

@@ -12,8 +12,9 @@ type SelectInputContext = {
 
     onSelect: ({target: {name, value}}: {
         target: {
-            name: string,
-            value: string,
+            name: string;
+            value?: unknown;
+            checked?: boolean;
         }
     }) => void;
 
