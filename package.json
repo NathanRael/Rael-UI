@@ -1,28 +1,32 @@
 {
   "name": "rael-ui",
-  "private": true,
-  "version": "0.0.0",
+  "private": false,
+  "version": "0.1.0",
   "type": "module",
-  
-  "files" : [
+  "files": [
     "dist"
   ],
-  "main" : "./dist/rael-ui.umd.cjs",
-  "module" : "./dist/rael-ui.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/rael-ui.umd.cjs",
+  "module": "./dist/rael-ui.js",
+  "types": "./dist/index.d.ts",
   "exports": {
-    "." : {
+    ".": {
       "import": "./dist/rael-ui.js",
-      "require": "./dist/rael-ui.umd.cjs"
+      "require": "./dist/rael-ui.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
-  
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_02dcbd5fe3d9b4b"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.0",
@@ -48,6 +52,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.20",
+    "chromatic": "^11.16.5",
     "eslint": "^9.9.0",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.9",
@@ -60,6 +65,7 @@
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
     "vite-plugin-dts": "^4.3.0",
+    "vite-tsconfig-paths": "^5.1.0",
     "vitest": "^2.1.0"
   },
   "eslintConfig": {

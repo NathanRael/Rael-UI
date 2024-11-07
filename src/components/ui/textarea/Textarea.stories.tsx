@@ -22,7 +22,6 @@ type Story = StoryObj<StoryProps>;
 export const Outline : Story = {
     args : {
         variant : 'outline',
-        size : 'md',
         placeholder : 'Your message ...'
     },
     render : ({...args}) => <Textarea {...args} />

@@ -22,7 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+*.env
 
 # Project directories
 TODO.md
 *storybook.log
+
+# Storybook
+storybook-static

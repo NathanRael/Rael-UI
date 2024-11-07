@@ -3,7 +3,6 @@ import {cn} from "../../../utils/cn.ts";
 
 type ProgressProps = {
     value: number,
-    max?: number,
     variant?: 'fill' | 'outline',
     size?: 'md' | 'lg' | 'xl',
     radius?: 'none' | 'sm' | 'md' | 'lg' | 'xl',
@@ -13,7 +12,6 @@ type ProgressProps = {
 }
 const Progress = ({
                       value = 10,
-                      max = 100,
                       className,
                   }: ProgressProps) => {
 

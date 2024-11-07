@@ -2,7 +2,6 @@ import {Button} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
-
 type StoryProps = ComponentProps<typeof Button> & {
     buttonText : React.ReactNode;
 }

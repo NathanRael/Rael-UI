@@ -10,8 +10,6 @@ import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from 
 import {realInputVariants, textInputVariants} from "../textInput/TextInput.Variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
-
-
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     onChange?: ({target: {name, value}}: {
         target: {

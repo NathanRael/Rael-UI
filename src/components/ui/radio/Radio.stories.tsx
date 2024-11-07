@@ -4,7 +4,7 @@ import {Meta, StoryObj} from "@storybook/react";
 
 const RadioDemo = () => {
     return (
-        <RadioGroup defaultValue={"figma"}>
+        <RadioGroup name={"radio"} defaultValue={"figma"}>
             <RadioItem value={"figma"} label={"Figma"}/>
             <RadioItem value={"adobe Illustrator"} label={"Adobe Illustrator"}/>
             <RadioItem value={"penpot"} label={"Penpot"}/>

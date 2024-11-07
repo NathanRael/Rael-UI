@@ -1,8 +1,4 @@
 import {cva} from "class-variance-authority";
-const defaultVariants = {
-    disabled: false,
-    checked: false,
-}
 
 export const iconVariants = cva('flex items-center  antialiased font-semibold hover:opacity-50', {
     variants: {

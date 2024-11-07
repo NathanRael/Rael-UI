@@ -6,8 +6,8 @@ type ComponentStyleContext = {
 }
 
 type useComponentStyleContextProps = {
-    variant?: string;
-    size?: string;
+    variant?: 'fill' |'outline';
+    size?: 'sm' |'md' |'lg' |'xl';
     radius?: string;
 }
 
