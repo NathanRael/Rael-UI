@@ -1,7 +1,7 @@
 {
   "name": "rael-ui",
   "private": false,
-  "version": "0.1.6",
+  "version": "0.1.7",
   "type": "module",
   "files": [
     "dist"
@@ -11,10 +11,12 @@
   },
   "main": "./dist/rael-ui.umd.cjs",
   "module": "./dist/rael-ui.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/rael-ui.js",
-      "require": "./dist/rael-ui.umd.cjs"
+      "require": "./dist/rael-ui.umd.cjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
