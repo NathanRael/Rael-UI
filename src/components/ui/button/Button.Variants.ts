@@ -47,12 +47,12 @@ export const buttonVariants = cva(
 export const LoaderVariants = cva('animate-spin', {
     variants: {
         size: {
-            md: 'size-4',
+            sm: 'size-4',
+            md: 'size-6',
             lg: 'size-6',
-            xl: 'size-6',
         }
     },
     defaultVariants: {
-        size: 'md'
+        size: 'sm'
     }
 })

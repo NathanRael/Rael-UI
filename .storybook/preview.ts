@@ -19,6 +19,7 @@ const preview: Preview = {
       // 👇 Specify which background is shown by default
       default: 'Dark',
     },
+    layout: 'centered'
   },
   globalTypes : {
     theme : {

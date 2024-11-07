@@ -3,6 +3,19 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  
+  "files" : [
+    "dist"
+  ],
+  "main" : "./dist/rael-ui.umd.cjs",
+  "module" : "./dist/rael-ui.js",
+  "exports": {
+    "." : {
+      "import": "./dist/rael-ui.js",
+      "require": "./dist/rael-ui.umd.cjs"
+    }
+  },
+  
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
@@ -46,6 +59,7 @@
     "typescript": "^5.5.3",
     "typescript-eslint": "^8.0.1",
     "vite": "^5.4.1",
+    "vite-plugin-dts": "^4.3.0",
     "vitest": "^2.1.0"
   },
   "eslintConfig": {
