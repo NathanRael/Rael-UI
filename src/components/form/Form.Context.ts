@@ -1,7 +1,7 @@
 import React, {FormEvent, useContext, useLayoutEffect, useState} from "react";
 
 
-export interface FormContext {
+interface FormContext {
     form : UseFormReturnType; 
 }
 

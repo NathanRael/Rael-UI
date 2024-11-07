@@ -1,4 +1,4 @@
-import {RadioGroupContext, useRadioGroupContext, useRadio} from "./RadioContext.ts";
+import {RadioGroupContext, useRadioGroupContext, useRadio} from "./Radio.Context.ts";
 import {useMemo} from "react";
 import {defaultVariant, sharedVariants} from "./Radio.Variants.ts";
 
