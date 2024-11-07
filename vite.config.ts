@@ -18,9 +18,8 @@ export default defineConfig({
         lib: {
             entry: path.resolve(__dirname, './src/index.ts'),
             name: 'RaelUI',
-            // formats: ['es', 'umd'],
-            fileName: `rael-ui.js`
-            // fileName: (format) => `rael-ui.${format}.js`
+            formats: ['es', 'umd'],
+            fileName: (format) => `rael-ui.${format}.js`
         },
         rollupOptions: {
             external: ['react', 'react-dom'],
