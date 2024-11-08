@@ -1,6 +1,6 @@
 import {TextareaHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {textareaVariants} from "./Textarea.Variants.ts";
+import {textareaVariants} from "./Textarea.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 

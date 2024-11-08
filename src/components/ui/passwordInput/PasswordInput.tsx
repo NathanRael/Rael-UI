@@ -1,7 +1,7 @@
 import {Eye, EyeOff} from "lucide-react";
 import {InputHTMLAttributes, MouseEventHandler, useState} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {passwordInputVariants, realInputVariants} from "./PasswordInput.Variants.ts";
+import {passwordInputVariants, realInputVariants} from "./PasswordInput.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
@@ -33,7 +33,7 @@ const PasswordInput = ({variant, size, radius, block, className, showIcon = true
     return (
         <div tabIndex={-1} role="presentation" className={cn(passwordInputVariants(userProps), className)}>
             {leftContent}
-            <input type={showPassword ? "text" : "password"}  {...props} className={cn(realInputVariants({variant}), className)}/>
+            <input  type={showPassword ? "text" : "password"}  {...props} className={cn(` secure ${realInputVariants({variant})}`, className)}/>
             {showIcon && <ShowPasswordIcon onClick={handlePasswordIconClicked}  passwordShown={showPassword} className="cursor-pointer"/>}
             {rightContent}
         </div>

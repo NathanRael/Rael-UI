@@ -7,7 +7,7 @@ import {
 } from "./AutoComplete.Context.ts";
 import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
-import {realInputVariants, textInputVariants} from "../textInput/TextInput.Variants.ts";
+import {realInputVariants, textInputVariants} from "../textInput/TextInput.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {

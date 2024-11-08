@@ -3,10 +3,10 @@ import {cva} from "class-variance-authority";
 export const iconVariants = cva('flex items-center  antialiased font-semibold hover:opacity-50', {
     variants: {
         variant: {
-            primary: "bg-primary text-white focus:ring-primary/50",
-            secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500/50",
-            ghost: "hover:bg-gray-100 hover:text-black text-white hover:opacity-100",
-            outline: "border border-primary text-primary hover:bg-primary hover:text-white"
+            primary: "bg-primary text-white",
+            secondary: "bg-secondary text-white",
+            ghost: " dark:text-white text-black hover:opacity-100 hover:bg-gray-300 dark:hover:bg-gray-200 hover:text-black dark:hover:text-black",
+            outline: "border border-primary text-primary hover:bg-primary hover:text-white "
         },
         size: {
             sm: 'p-2 size-8 gap-2',

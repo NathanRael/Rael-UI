@@ -1,4 +1,4 @@
-import {Switch} from "./index.ts";
+import {Switch, SwitchLabel} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 
@@ -8,6 +8,11 @@ type StoryProps = ComponentProps<typeof Switch> & {
 const meta : Meta<StoryProps> = {
     component : Switch,
     tags : ['autodocs'],
+    render : (args) => (
+        <Switch {...args}>
+            <SwitchLabel>I accept terms and conditions</SwitchLabel>
+        </Switch>
+    )
 }
 
 export default meta;
@@ -18,7 +23,6 @@ export const Fill : Story = {
     args : {
         variant : 'fill',
     },
-    render : ({...args}) => <Switch  {...args} label={'I accept terms and conditions'}/>
 }
 
 export const Outline : Story = {
@@ -26,6 +30,5 @@ export const Outline : Story = {
         ...Fill.args,
         variant : 'outline',
     },
-    render : ({...args}) => <Switch  {...args} label={'I accept terms and conditions'}/>
 }
 

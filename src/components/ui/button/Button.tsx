@@ -1,7 +1,7 @@
 import {LoaderCircle} from "lucide-react";
 import {ButtonHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {buttonVariants, LoaderVariants} from "./Button.Variants.ts";
+import {buttonVariants, LoaderVariants} from "./Button.variants.ts";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?: "primary" | "secondary" | "ghost" | "outline",
@@ -18,7 +18,7 @@ const Button = ({variant, size, radius, loading, disabled, className,block, chil
 
     return (
         <button disabled={disabled} onClick={onClick} className={cn(buttonVariants(userProps), className)} {...props}>
-            {loading && <LoaderCircle className={LoaderVariants({size})}/>}
+            {loading && <LoaderCircle  className={LoaderVariants({size})}/>}
             {children}
         </button>)
 }

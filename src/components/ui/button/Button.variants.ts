@@ -1,13 +1,13 @@
 import {cva} from "class-variance-authority";
 
 export const buttonVariants = cva(
-    "flex items-center justify-center antialiased font-medium transition-all duration-200 hover:opacity-80 focus:outline-none focus:ring-2 focus:ring-offset-2",
+    "flex items-center justify-center transition-color duration-200  antialiased font-medium  hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-white",
     {
         variants: {
             variant: {
-                primary: "bg-primary text-white focus:ring-primary/50",
-                secondary: "bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500/50",
-                ghost: "hover:bg-gray-100 hover:text-black text-white hover:opacity-100 ",
+                primary: "bg-primary text-white",
+                secondary: "bg-secondary text-white",
+                ghost: " dark:text-white text-black hover:opacity-100 hover:bg-gray-300 dark:hover:bg-gray-200 hover:text-black dark:hover:text-black",
                 outline: "border border-primary text-primary hover:bg-primary hover:text-white "
             },
             size: {
@@ -47,8 +47,8 @@ export const buttonVariants = cva(
 export const LoaderVariants = cva('animate-spin', {
     variants: {
         size: {
-            sm: 'size-4',
-            md: 'size-6',
+            sm: 'size-[14px]',
+            md: 'size-4',
             lg: 'size-6',
         }
     },

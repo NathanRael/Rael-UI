@@ -1,5 +1,6 @@
 import type { Preview } from "@storybook/react";
 import "../src/index.css";
+import {withThemeByDataAttribute} from "@storybook/addon-themes";
 
 const preview: Preview = {
   parameters: {
@@ -32,12 +33,33 @@ const preview: Preview = {
         items: ['light', 'dark'],
         // Change title based on selected value
         dynamicTitle: true,
-      }
-    }
+      },
+    },
   },
   initialGlobals : {
-    theme : 'light'
+    theme : 'light',
   }
 };
+
+/* snipped for brevity */
+
+export const decorators = [
+/*  withThemeByClassName({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'light',
+  }),*/
+  withThemeByDataAttribute({
+    themes: {
+      light: 'light',
+      dark: 'dark',
+    },
+    defaultTheme: 'dark',
+    attributeName: 'data-mode',
+  }),
+];
+
 
 export default preview;

@@ -1,6 +1,6 @@
 import {ButtonHTMLAttributes, PropsWithChildren} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {iconVariants} from "./Icon.Variants.ts";
+import {iconVariants} from "./Icon.variants.ts";
 
 type IconProps = ButtonHTMLAttributes<HTMLButtonElement> & Required<PropsWithChildren> & {
     variant?: "primary" | "secondary" | "ghost" | "outline",

@@ -1,6 +1,6 @@
 import {InputHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
-import {realInputVariants, textInputVariants} from "./TextInput.Variants.ts";
+import {realInputVariants, textInputVariants} from "./TextInput.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 
@@ -22,7 +22,7 @@ const TextInput = ({variant, size, radius, block, className, leftContent, rightC
              className={cn(textInputVariants(userProps), className)}>
             {leftContent}
             <input
-                className={cn(realInputVariants({variant}), className)}
+                className={cn(realInputVariants({variant}))}
                 {...props}
                 />
             {rightContent}

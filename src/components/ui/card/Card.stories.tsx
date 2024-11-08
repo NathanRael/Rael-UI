@@ -6,7 +6,7 @@ import {FormDescription, FormItem, FormLabel} from "../../form";
 import {TextInput} from "../textInput";
 import {Button} from "../button";
 import {PasswordInput} from "../passwordInput";
-import {AtSign, Lock} from "lucide-react";
+import {AtSign, ChevronDown, Lock} from "lucide-react";
 import {Select, SelectGroup, SelectGroupContainer, SelectItem, SelectLabel, SelectTrigger} from "../select";
 
 type StoryProps = ComponentProps<typeof Card>
@@ -30,9 +30,10 @@ const meta: Meta<StoryProps> = {
                     <PasswordInput leftContent={<Lock size={16}/>} block placeholder={''}/>
                     <FormDescription>Your email will be blocked after 5 wrong attempts</FormDescription>
                 </FormItem>
-                <Select name={''}>
+                <Select block>
                     <SelectTrigger>
                         <SelectLabel placeholder={'test'}/>
+                        <ChevronDown/>
                     </SelectTrigger>
                     <SelectGroupContainer>
                         <SelectGroup>

@@ -3,8 +3,8 @@ import {cva} from "class-variance-authority";
 export const textareaVariants = cva('flex items-start outline-none min-h-[120px] ', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-gray-200 text-white focus-within:ring-4 focus-within:ring-primary',
-            fill: 'bg-neutral-300  text-black placeholder:text-neutral-500 focus-within:ring-4 focus-within:ring-primary',
+            outline: 'bg-transparent border border-neutral-400 text-black  dark:border-neutral-300 dark:text-white focus-within:ring-[3px] focus-within:ring-primary',
+            fill: 'bg-neutral-200 text-black dark:text-white dark:bg-zinc-800 focus-within:ring-[3px] focus-within:ring-primary',
         },
         size : {
             md: 'px-4 py-2',

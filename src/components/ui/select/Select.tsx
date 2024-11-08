@@ -1,7 +1,7 @@
 import {PropsWithChildren, useEffect} from "react";
-import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.Context.ts";
+import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.context.ts";
 import {cn} from "../../../utils/cn.ts";
-import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.Variants.ts";
+import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
@@ -19,7 +19,7 @@ export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     radius?: "none" | "sm" | "md" | "lg" | "xl";
     block?: boolean;
     className?: string;
-    name: string;
+    name?: string;
 
 }
 

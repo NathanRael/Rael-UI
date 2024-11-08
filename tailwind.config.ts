@@ -1,11 +1,12 @@
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    darkMode: "selector",
+    darkMode: ['class', '[data-mode="dark"]'],
     theme: {
         extend: {
             colors: {
-                'primary': '#186DFF',
+                'primary': '#421BDD',
+                'secondary' : '#423A5E',
                 'danger': '#e74c3c',
                 'black': '#09090b',
                 'white': '#fafafa',
@@ -22,7 +23,9 @@ export default {
                 'slide-in': 'slide-in 0.3s ease-out forwards',
                 'slide-out': 'slide-out 0.3s ease-out forwards',
             },
+            
         },
     },
-    plugins: [],
+    plugins: [
+    ],
 };

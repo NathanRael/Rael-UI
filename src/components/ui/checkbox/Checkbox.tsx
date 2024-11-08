@@ -1,14 +1,13 @@
-import * as React from "react";
 import {cn} from "../../../utils/cn.ts";
-import {checkboxVariants, sharedVariants} from "./Checkbox.variants.ts";
-import {ChangeEventHandler, useMemo} from "react";
+import {checkboxIconVariants, checkboxVariants, sharedVariants} from "./Checkbox.variants.ts";
+import {ChangeEventHandler, PropsWithChildren, useMemo} from "react";
+import CheckboxContext, {useCheckboxContext} from "@/components/ui/checkbox/Checkbox.context.ts";
 
-type CheckboxProps = {
+type CheckboxProps = PropsWithChildren & {
     checked?: boolean;
     disabled?: boolean;
-    label?: React.ReactNode;
     id?: string;
-    name: string;
+    name?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     className?: string;
     radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
@@ -16,10 +15,16 @@ type CheckboxProps = {
     size?: 'sm' | 'md';
 
 }
+
+type CheckboxLabelProps = Required<PropsWithChildren> & {
+    checkboxId?: string;
+    disabled?: boolean;
+    className?: string;
+}
 const Checkbox = ({
+                      children,
                       checked = false,
                       disabled = false,
-                      label = '',
                       id,
                       name,
                       className,
@@ -31,29 +36,38 @@ const Checkbox = ({
                   }: CheckboxProps) => {
     const userProps = {disabled, radius, variant, size};
     const checkboxId = useMemo(() => id || `checkbox-${Math.random().toString(36).slice(2, 9)}`, [id]);
-
     return (
-        <div className={'flex gap-2 select-none group'}>
-            <div className={`inline-flex items-center ${sharedVariants({disabled})}`}>
-                <label className="flex items-center relative">
-                    <input name={name} disabled={disabled} onChange={
-                        onChange
-                    } type="checkbox" defaultChecked={checked}
-                           className={cn(checkboxVariants(userProps), className)}
-                           id={checkboxId}/>
-                    <CheckBoxIcon/>
-                </label>
+        <CheckboxContext.Provider value={{checkboxId, disabled : disabled}}>
+            <div className={'flex gap-2 select-none group'}>
+                <div className={`inline-flex items-center ${sharedVariants({disabled})}`}>
+                    <label className="flex items-center relative">
+                        <input name={name} disabled={disabled} onChange={
+                            onChange
+                        } type="checkbox" defaultChecked={checked}
+                               className={cn(checkboxVariants(userProps), className)}
+                               id={checkboxId}/>
+                        <CheckBoxIcon variant={variant}/>
+                    </label>
+                </div>
+                {children}
             </div>
-            {label &&
-                <label htmlFor={checkboxId} className={`text-white ${sharedVariants({disabled})}`}>{label}</label>}
-        </div>
+        </CheckboxContext.Provider>
+
     )
 }
 
-const CheckBoxIcon = () => {
+export const CheckboxLabel = ({children, className}: CheckboxLabelProps) => {
+    const {checkboxId, disabled} = useCheckboxContext();
+    return (
+        <label htmlFor={checkboxId}
+               className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
+    )
+}
+
+const CheckBoxIcon = ({variant} : Pick<CheckboxProps, 'variant'>) => {
     return (
         <span
-            className="absolute text-white  opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+            className={checkboxIconVariants({variant})}>
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20"
                            fill="currentColor"
                            stroke="currentColor" strokeWidth="1">
@@ -65,5 +79,7 @@ const CheckBoxIcon = () => {
     )
 }
 
+
+Checkbox.Label = CheckboxLabel;
 
 export default Checkbox

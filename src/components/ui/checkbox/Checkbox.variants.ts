@@ -1,19 +1,19 @@
 import {cva} from "class-variance-authority";
 import {defaultVariants} from "../../default.ts";
 
-export const checkboxVariants = cva('peer   transition-all appearance-none border rounded shadow  hover:shadow-md ', {
+export const checkboxVariants = cva('peer   transition-all appearance-none border border-gray-500 rounded shadow  hover:shadow-md ', {
     variants: {
-        variant : {
-          fill : 'checked:bg-primary checked:border-primary',
-          outline : '',  
+        variant: {
+            fill: 'checked:bg-primary checked:border-primary',
+            outline: 'text-black',
         },
         disabled: {
             true: 'disabled:bg-gray-600 disabled:border-gray-600',
             false: ''
         },
-        size : {
-            sm : 'size-4',
-            md : 'size-[18px]'
+        size: {
+            sm: 'size-4',
+            md: 'size-[18px]'
         },
         radius: {
             none: "rounded-none",
@@ -25,7 +25,7 @@ export const checkboxVariants = cva('peer   transition-all appearance-none borde
             full: "rounded-full",
         },
     },
-    defaultVariants: {...defaultVariants, radius : 'md', variant : 'fill', size : 'md'}
+    defaultVariants: {...defaultVariants, radius: 'md', variant: 'fill', size: 'md'}
 })
 
 export const sharedVariants = cva(' ', {
@@ -37,6 +37,15 @@ export const sharedVariants = cva(' ', {
         }
     },
     defaultVariants: {
-        disabled : defaultVariants.disabled
+        disabled: defaultVariants.disabled
+    }
+})
+
+export const checkboxIconVariants = cva('absolute  opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none ', {
+    variants : {
+        variant : {
+            outline : 'text-black dark:text-white',
+            fill : 'text-white',
+        }
     }
 })

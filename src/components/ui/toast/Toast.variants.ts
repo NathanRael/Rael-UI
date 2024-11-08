@@ -3,7 +3,7 @@ import {cva} from "class-variance-authority";
 export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:w-full', {
     variants: {
         variant: {
-            fill: 'bg-white border border-gray-300 shadow-sm',
+            fill: 'bg-white border border-gray-300 shadow-sm dark:bg-black dark:border-none',
             outline: 'border border-gray-500 bg-black',
         },
         radius : {
@@ -25,7 +25,7 @@ export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:
 export const toastTitleVariants = cva('text-lg', {
     variants: {
         variant: {
-            fill: 'text-black',
+            fill: 'text-black dark:text-white',
             outline: 'text-white'
         },
     },
@@ -37,7 +37,7 @@ export const toastTitleVariants = cva('text-lg', {
 export const toastMessageVariants = cva('text-[14px]', {
     variants: {
         variant: {
-            fill: 'text-black',
+            fill: 'text-black dark:text-white',
             outline: 'text-white'
         },
     },

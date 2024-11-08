@@ -1,10 +1,10 @@
 import {cva} from "class-variance-authority";
 
-export const cardVariants = cva('flex flex-col p-6 gap-7 w-fit', {
+export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
-            fill : 'bg-white border border-gray-300 shadow-sm',
-            outline : 'border border-gray-300',
+            fill : 'bg-white border border-gray-300 shadow-md dark:bg-zinc-900 dark:border-neutral-800',
+            outline : 'border border-neutral-400 dark:border-neutral-300',
         },
         radius : {
             none: "rounded-none",
@@ -26,7 +26,7 @@ export const cardSectionVariants = cva('flex flex-col', {
     variants : {
         rFor : {
             meta : 'gap-1',
-            content : 'gap-4',
+            content : 'gap-6',
         }
     },
     defaultVariants : {
@@ -37,7 +37,7 @@ export const cardSectionVariants = cva('flex flex-col', {
 export const cardTitleVariants = cva('text-3xl font-semibold', {
     variants : {
         variant : {
-            fill : 'text-black',
+            fill : 'text-black dark:text-white',
             outline : 'text-white',
         }
     },
@@ -49,7 +49,7 @@ export const cardTitleVariants = cva('text-3xl font-semibold', {
 export const cardDescriptionVariants = cva('text-base', {
     variants : {
         variant : {
-            fill : 'text-gray-600',
+            fill : 'text-gray-500 dark:text-gray-400',
             outline : 'text-gray-400',
         }
     },
