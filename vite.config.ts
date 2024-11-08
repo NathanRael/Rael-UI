@@ -2,7 +2,7 @@ import {defineConfig} from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 import dts from 'vite-plugin-dts'
-
+import tailwindcss from 'tailwindcss'
 // https://vitejs.dev/config/
 export default defineConfig({
     plugins: [react(), dts({
@@ -29,6 +29,11 @@ export default defineConfig({
                     'react-dom': 'ReactDOM',
                 }
             }
+        }
+    },
+    css: {
+        postcss: {
+            plugins: [tailwindcss],
         }
     }
 })

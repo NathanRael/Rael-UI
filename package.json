@@ -9,13 +9,13 @@
   "publishConfig": {
     "access": "public"
   },
-  "main": "./dist/rael-ui.umd.cjs",
-  "module": "./dist/rael-ui.js",
+  "main": "./dist/rael-ui.umd.js",
+  "module": "./dist/rael-ui.es.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/rael-ui.js",
-      "require": "./dist/rael-ui.umd.cjs",
+      "import": "./dist/rael-ui.es.js",
+      "require": "./dist/rael-ui.umd.js",
       "types": "./dist/index.d.ts"
     }
   },
