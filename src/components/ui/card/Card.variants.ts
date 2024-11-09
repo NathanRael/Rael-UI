@@ -3,8 +3,8 @@ import {cva} from "class-variance-authority";
 export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
-            fill : 'bg-white border border-gray-300 shadow-md dark:bg-zinc-900 dark:border-neutral-800',
-            outline : 'border border-neutral-400 dark:border-neutral-300',
+            fill : 'bg-white  border border-gray-300 shadow-md dark:bg-zinc-900 dark:border-neutral-800',
+            outline : 'border bg-white dark:bg-black border-neutral-400 dark:border-neutral-300',
         },
         radius : {
             none: "rounded-none",
@@ -38,7 +38,7 @@ export const cardTitleVariants = cva('text-3xl font-semibold', {
     variants : {
         variant : {
             fill : 'text-black dark:text-white',
-            outline : 'text-white',
+            outline : 'text-black dark:text-white',
         }
     },
     defaultVariants : {
