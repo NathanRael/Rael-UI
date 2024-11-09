@@ -1,6 +1,6 @@
 import {cva} from "class-variance-authority";
 
-export const textInputVariants = cva('flex text-base  items-center justify-center outline-none', {
+export const textInputVariants = cva('flex text-base items-center justify-center outline-none', {
     variants: {
         variant: {
             outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',

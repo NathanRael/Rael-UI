@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/react";
 import "../src/index.css";
 import {withThemeByDataAttribute} from "@storybook/addon-themes";
+import {colors} from '../src/constants/index'
 
 const preview: Preview = {
   parameters: {
@@ -13,7 +14,7 @@ const preview: Preview = {
     backgrounds: {
       values: [
         // 👇 Default values
-        { name: 'Dark', value: '#12161C' },
+        { name: 'Dark', value: colors.black },
         // { name: 'Light', value: '#F7F9F2' },
         { name: 'Light', value: '#FFFF' },
       ],

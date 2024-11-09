@@ -3,8 +3,8 @@ import {cva} from "class-variance-authority";
 export const formLabelVariants = cva('text-base', {
     variants : {
         variant : {
-            fill :'text-black dark:text-white',
-            outline : 'text-white'
+            fill : 'text-meta-fill-l-text dark:text-meta-fill-d-text',
+            outline : 'text-meta-outline-l-text dark:text-meta-outline-d-text',
         }
     },
     defaultVariants : {
@@ -15,8 +15,8 @@ export const formLabelVariants = cva('text-base', {
 export const formDescriptionVariants = cva('text-[14px]', {
     variants : {
         variant : {
-            fill : 'text-gray-600 dark:text-gray-400',
-            outline : 'text-gray-400'
+            fill : 'text-meta-fill-l-text-sec dark:text-meta-fill-d-text-sec',
+            outline : 'text-meta-outline-l-text-sec dark:text-meta-outline-d-text-sec',
         }
     }
 })

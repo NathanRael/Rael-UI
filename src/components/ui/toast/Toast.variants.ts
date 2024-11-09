@@ -3,8 +3,8 @@ import {cva} from "class-variance-authority";
 export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:w-full', {
     variants: {
         variant: {
-            fill: 'bg-white border border-gray-300 shadow-sm dark:bg-black dark:border-none',
-            outline: 'border border-gray-500 bg-black',
+            fill: 'bg-meta-fill-l-bg border border-meta-fill-l-border shadow-sm dark:bg-meta-fill-d-bg dark:border-meta-fill-d-border',
+            outline: 'border border-meta-outline-l-border bg-meta-outline-l-bg dark:border-meta-outline-d-border dark:bg-meta-outline-d-bg',
         },
         radius : {
             none: "rounded-none",
@@ -25,8 +25,8 @@ export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:
 export const toastTitleVariants = cva('text-lg', {
     variants: {
         variant: {
-            fill: 'text-black dark:text-white',
-            outline: 'text-white'
+            fill: 'text-meta-fill-l-text dark:text-meta-fill-d-text',
+            outline: 'text-meta-outline-l-text dark:text-meta-outline-d-text'
         },
     },
     defaultVariants: {
@@ -37,8 +37,8 @@ export const toastTitleVariants = cva('text-lg', {
 export const toastMessageVariants = cva('text-[14px]', {
     variants: {
         variant: {
-            fill: 'text-black dark:text-white',
-            outline: 'text-white'
+            fill: 'text-meta-fill-l-text-sec  dark:text-meta-fill-d-text-sec',
+            outline: 'text-meta-outline-l-text-sec dark:text-meta-outline-d-text-sec'
         },
     },
     defaultVariants: {

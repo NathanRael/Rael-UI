@@ -30,7 +30,7 @@ const meta: Meta<StoryProps> = {
                     <PasswordInput leftContent={<Lock size={16}/>} block placeholder={''}/>
                     <FormDescription>Your email will be blocked after 5 wrong attempts</FormDescription>
                 </FormItem>
-                <Select block>
+                {/*<Select block>
                     <SelectTrigger>
                         <SelectLabel placeholder={'test'}/>
                         <ChevronDown/>
@@ -42,7 +42,7 @@ const meta: Meta<StoryProps> = {
                             <SelectItem value={'1'}> 1</SelectItem>
                         </SelectGroup>
                     </SelectGroupContainer>
-                </Select>
+                </Select>*/}
             </CardSection>
             <CardSection rFor={'meta'}>
                 <Button type="submit">Login</Button>

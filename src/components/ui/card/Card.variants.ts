@@ -3,8 +3,8 @@ import {cva} from "class-variance-authority";
 export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
-            fill : 'bg-white  border border-gray-300 shadow-md dark:bg-zinc-900 dark:border-neutral-800',
-            outline : 'border bg-white dark:bg-black border-neutral-400 dark:border-neutral-300',
+            fill : 'bg-meta-fill-l-bg  border border-meta-fill-l-border shadow-md dark:bg-meta-fill-d-bg dark:border-meta-fill-d-border',
+            outline : 'border bg-meta-outline-l-bg dark:bg-meta-outline-d-bg border-meta-outline-l-border dark:border-meta-outline-d-border',
         },
         radius : {
             none: "rounded-none",
@@ -37,8 +37,8 @@ export const cardSectionVariants = cva('flex flex-col', {
 export const cardTitleVariants = cva('text-3xl font-semibold', {
     variants : {
         variant : {
-            fill : 'text-black dark:text-white',
-            outline : 'text-black dark:text-white',
+            fill : 'text-meta-fill-l-text dark:text-meta-fill-d-text',
+            outline : 'text-meta-outline-l-text dark:text-meta-outline-d-text',
         }
     },
     defaultVariants : {
@@ -49,8 +49,8 @@ export const cardTitleVariants = cva('text-3xl font-semibold', {
 export const cardDescriptionVariants = cva('text-base', {
     variants : {
         variant : {
-            fill : 'text-gray-500 dark:text-gray-400',
-            outline : 'text-gray-400',
+            fill : 'text-meta-fill-l-text-sec dark:text-meta-fill-d-text-sec',
+            outline : 'text-meta-outline-l-text-sec dark:text-meta-outline-d-text-sec',
         }
     },
     defaultVariants : {

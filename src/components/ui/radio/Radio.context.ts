@@ -3,7 +3,8 @@ import {createContext, useContext, useEffect, useState} from "react";
 type RadioGroupContext = {
     selectedValue: string,
     setSelectedValue: (value: string) => void,
-    disabled: boolean,
+    disabled: boolean;
+    variant?: 'fill' | 'outline';
 }
 export const RadioGroupContext = createContext<RadioGroupContext | undefined>(undefined)
 
@@ -19,7 +20,7 @@ type UseRadioProps = {
     defaultValue: string,
     onChange?: ({target: {name, value}}: { target: { name: string, value: string } }) => void,
     disabled: boolean;
-    name: string;
+    name?: string;
 }
 export const useRadio = ({
                              defaultValue,
@@ -37,6 +38,7 @@ export const useRadio = ({
         onChange({target: {name, value: selectedValue}})
 
     }, [selectedValue]);
+    
 
     return {selectedValue, setSelectedValue, disabled};
 }

@@ -15,8 +15,8 @@ export const selectContainerVariants = cva(' outline-none relative space-y-2', {
 export const SelectTriggerVariants = cva('flex w-full items-center justify-between cursor-pointer ', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-neutral-400 text-black  dark:border-neutral-300 dark:text-white focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-neutral-200 text-black dark:text-white dark:bg-zinc-800 focus-within:ring-[3px] focus-within:ring-primary',
+            outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
+            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
         },
         size: {
             sm : 'px-2 py-1 gap-2 text-[14px]',

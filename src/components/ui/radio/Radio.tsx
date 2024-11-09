@@ -1,21 +1,25 @@
-import {RadioGroupContext, useRadioGroupContext, useRadio} from "./Radio.Context.ts";
+import {RadioGroupContext, useRadioGroupContext, useRadio} from "./Radio.context.ts";
 import {useMemo} from "react";
-import {defaultVariant, sharedVariants} from "./Radio.Variants.ts";
+import {defaultVariant, radioIconVariants, radioVariants, sharedVariants} from "./Radio.variants.ts";
+import {cn} from "@/utils/cn.ts";
+import {useComponentStyle} from "@/components";
 
 type RadioGroupProps = {
     children: React.ReactNode,
     defaultValue: string,
     onChange?: ({target: {name, value}}: { target: { name: string, value: string } }) => void,
     disabled?: boolean;
-    name: string;
+    name?: string;
+    className?: string;
+    variant?: 'fill' | 'outline';
 }
 
-type RadioItemProps = {
-    value: string,
-    label?: React.ReactNode,
+type RadioItemProps =  {
+    value: string;
+    label?: React.ReactNode;
+    className?: string;
     // onChange?: (value: string) => void,
 }
-
 
 const RadioGroup = (props: RadioGroupProps) => {
 
@@ -25,7 +29,9 @@ const RadioGroup = (props: RadioGroupProps) => {
         onChange = () => {
         },
         disabled = defaultVariant.disabled,
-        name
+        name,
+        className,
+        variant,
     } = props;
     
     const {selectedValue, setSelectedValue} = useRadio({
@@ -37,8 +43,8 @@ const RadioGroup = (props: RadioGroupProps) => {
 
 
     return (
-        <RadioGroupContext.Provider value={{selectedValue, setSelectedValue, disabled}}>
-            <div className={"flex flex-col gap-2"}>
+        <RadioGroupContext.Provider value={{selectedValue, setSelectedValue, disabled, variant : variant}}>
+            <div className={cn("flex flex-col gap-2", className)}>
                 {children}
             </div>
         </RadioGroupContext.Provider>
@@ -49,8 +55,9 @@ const RadioGroup = (props: RadioGroupProps) => {
 export default RadioGroup;
 
 
-export const RadioItem = ({value, label}: RadioItemProps) => {
-    const {selectedValue, setSelectedValue, disabled} = useRadioGroupContext();
+export const RadioItem = ({value, label, className}: RadioItemProps) => {
+    const {selectedValue, setSelectedValue, disabled, variant} = useRadioGroupContext();
+    const {cVariant} = useComponentStyle();
     const selected = useMemo(() => selectedValue == value, [selectedValue, value]);
 
     const handleSelectedValue = () => {
@@ -64,24 +71,32 @@ export const RadioItem = ({value, label}: RadioItemProps) => {
             <div className={"inline-flex items-center"}>
                 <label htmlFor={value} className="relative flex items-center">
                     <input disabled={disabled}
-                           className={`${sharedVariants({disabled})} appearance-none size-4 rounded-full border-2 border-white checked:border-primary `}
+                           className={`${sharedVariants({disabled})} ${radioVariants({variant : variant || cVariant})} `}
                            id={value}
                            onChange={handleSelectedValue}
                            checked={selected}
                            type="radio"/>
                     {
                         selected && <span
-                            className="absolute size-2 rounded-full bg-primary left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"></span>
+                            className={radioIconVariants({variant: variant || cVariant })}></span>
                     }
                 </label>
             </div>
             {
-                label && <label className={sharedVariants({disabled})} onClick={handleSelectedValue}
+                label && <label className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)} onClick={handleSelectedValue}
                                 htmlFor={value}>{label}</label>
             }
         </div>
     )
 }
+
+/*export const RadioLabel = ({children, className}: Pick<RadioGroupProps, 'className' | 'children'>) => {
+    const {disabled, value, handleSelectedValue} = useRadioGroupContext();
+    return (
+        <label onClick={handleSelectedValue} htmlFor={value}
+               className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
+    )
+}*/
 
 RadioGroup.Item = RadioItem
 

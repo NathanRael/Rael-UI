@@ -19,7 +19,7 @@ export default {
                 'dark': colors.dark,
                 
                 
-                // Components colors 
+                // Component colors 
                 
                 input: {
                     fill: {
@@ -27,11 +27,14 @@ export default {
                             'bg': '#27272a',
                             'placeholder' : '#737373',
                             'text' : colors.white,
+                            'border' : colors.black,
                         },
                         l: {
                             'bg': '#e5e5e5',
                             'placeholder' : '#737373',
                             'text' : colors.black,
+                            'border' : colors.white,
+                            
                         }
                     },
                     outline: {
@@ -53,14 +56,14 @@ export default {
                     fill : {
                         d: {
                             'bg': '#18181b',
-                            'border': '#a3a3a3',
-                            'text' : colors.black,
+                            'border': '#262626',
+                            'text' : colors.white,
                             'text-sec' : '#9ca3af',
                         },
                         l: {
-                            'bg': '#e5e5e5',
-                            'border': '#a3a3a3',
-                            'text' : colors.white,
+                            'bg': '#fff',
+                            'border': '#e4e4e7',
+                            'text' : colors.black,
                             'text-sec' : '#4b5563',
                         },
                     },

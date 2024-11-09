@@ -1,6 +1,6 @@
 import {cn} from "../../../utils/cn.ts";
 import {ChangeEventHandler, PropsWithChildren, useMemo} from "react";
-import {sharedVariants, switchVariants} from "./Switch.Variants.ts";
+import {sharedVariants, switchVariants} from "./Switch.variants.ts";
 import {useComponentStyle} from "../ComponentStyle.Context.ts";
 import SwitchContext, {useSwitchContext} from "@/components/ui/switch/Switch.context.ts";
 
