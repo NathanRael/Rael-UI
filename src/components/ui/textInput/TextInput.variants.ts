@@ -1,10 +1,10 @@
 import {cva} from "class-variance-authority";
 
-export const textInputVariants = cva('flex text-base  items-center justify-center outline-none ', {
+export const textInputVariants = cva('flex text-base  items-center justify-center outline-none', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-neutral-400 text-black  dark:border-neutral-300 dark:text-white focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-neutral-200 text-black dark:text-white dark:bg-zinc-800 focus-within:ring-[3px] focus-within:ring-primary',
+            outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
+            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
         },
         size: {
             sm : 'px-2 py-1 gap-2 text-[14px]',
@@ -36,8 +36,8 @@ export const textInputVariants = cva('flex text-base  items-center justify-cente
 export const realInputVariants = cva('bg-transparent px-0 py-0 flex-1 outline-none placeholder:text-gray-500', {
     variants: {
         variant: {
-            'outline' : 'placeholder:text-neutral-500 dark:placeholder:text-neutral-400',
-            'fill' : 'placeholder:text-neutral-500',
+            'outline' : 'placeholder:text-input-outline-l-placeholder dark:placeholder:text-input-outline-d-placeholder',
+            'fill' : 'placeholder:text-input-fill-l-placeholder dark:placeholder:text-input-fill-d-placeholder',
         },
     }
 })

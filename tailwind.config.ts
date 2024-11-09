@@ -39,11 +39,13 @@ export default {
                             'bg': colors.black,
                             'border': '#a3a3a3',
                             'placeholder' : '#a3a3a3',
+                            'text' : colors.white,
                         },
                         l: {
                             'bg': colors.white,
                             'border': '#a3a3a3',
                             'placeholder' : '#737373',
+                            'text' : colors.black,
                         }
                     }
                 },
