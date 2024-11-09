@@ -1,0 +1,1 @@
+export const generateRandomName  = () : string => 'randomName-' + Math.floor(Math.random() * new Date().getTime());

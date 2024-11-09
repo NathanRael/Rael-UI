@@ -15,4 +15,4 @@ export * from './ui/toast'
 export * from "./ui/card";
 
 // export * from './default.ts'
-export * from './ui/ComponentStyle.Context.ts'
+export {useComponentStyle, ComponentStyleContext} from './ui/ComponentStyle.Context.ts'

@@ -11,7 +11,7 @@ type useComponentStyleContextProps = {
     radius?: string;
 }
 
-const ComponentStyleContext = createContext<ComponentStyleContext |undefined>(undefined);
+export const ComponentStyleContext = createContext<ComponentStyleContext |undefined>(undefined);
 
 export const useComponentStyle = () => {
     const context = useContext(ComponentStyleContext);

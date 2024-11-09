@@ -144,9 +144,11 @@ export const SelectGroupTitle = ({children, className}: SelectGroupTitleProps) =
 
 export const SelectItem = ({children, value, className, selected}: SelectItemProps) => {
     const {onSelect, setShowSelectGroup, setSelectedItem, name} = useSelectInputContext();
+    const randomName = 'no-name-provided';
+    
     const handleChange = () => {
         setSelectedItem(value);
-        onSelect({target: {name: name, value: value}});
+        onSelect({target: {name: name || randomName, value: value}});
         setShowSelectGroup(false);
     }
     useEffect(() => {
@@ -158,7 +160,7 @@ export const SelectItem = ({children, value, className, selected}: SelectItemPro
     return (
         <div onClick={() => {
             setSelectedItem(value);
-            onSelect({target: {name: name, value: value}});
+            onSelect({target: {name: name || randomName, value: value}});
             setShowSelectGroup(false);
         }} className={cn(`w-full  hover:bg-primary rounded-md py-1 px-4 cursor-pointer`, className)}>
             {children}

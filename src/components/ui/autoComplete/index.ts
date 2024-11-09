@@ -1,2 +1,2 @@
 export {default as AutoComplete, AutoCompleteTrigger, AutoCompleteGroup, AutoCompleteGroupContainer, AutoCompleteGroupTitle, AutoCompleteItem} from './AutoComplete.tsx';
-export * from './AutoComplete.Context.ts'
+// export {} from './AutoComplete.context.ts'

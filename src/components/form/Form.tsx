@@ -88,7 +88,7 @@ const Form = ({children, className, onSubmit, form}: FormProps) => {
 
 export const FormControl = <T extends ControlType>({name, render, type}: FormControlProps<T>) => {
     const {form} = useFormContext();
-    const formData = useMemo(() => form.formData, [form.formData, form.handleChange]);
+    const formData = useMemo(() => form.formData, [form.formData, form.handleChange, form.reset]);
 
     const commonProps = {
         name: name as string,

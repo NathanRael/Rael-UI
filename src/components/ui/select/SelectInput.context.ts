@@ -22,7 +22,7 @@ type SelectInputContext = {
     size: SelectInputDefaultProps['size'];
     radius: SelectInputDefaultProps['radius'];
     block: SelectInputDefaultProps['block'];
-    name: string;
+    name?: string;
 
 }
 

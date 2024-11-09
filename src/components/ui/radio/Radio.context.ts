@@ -30,12 +30,12 @@ export const useRadio = ({
                              name,
                          }: UseRadioProps) => {
     const [selectedValue, setSelectedValue] = useState("");
-
+    const randomName = 'no-name-provided';
 
     useEffect(() => {
         if (selectedValue === "")
             setSelectedValue(defaultValue);
-        onChange({target: {name, value: selectedValue}})
+        onChange({target: {name : name || randomName, value: selectedValue}})
 
     }, [selectedValue]);
     

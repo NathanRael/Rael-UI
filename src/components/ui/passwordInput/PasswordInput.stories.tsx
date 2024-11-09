@@ -28,7 +28,6 @@ export const Outline : Story = {
     args : {
         placeholder : 'Enter your password',
         variant : 'outline',
-        size : 'md',
     },
 }
 

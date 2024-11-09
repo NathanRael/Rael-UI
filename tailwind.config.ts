@@ -4,7 +4,7 @@ import {colors} from './src/constants/index.ts'
 /** @type {import('tailwindcss').Config} */
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    darkMode: ['class', '[data-mode="dark"]'],
+    darkMode: ['class', '[data-mode="dark"]', 'selector'],
     theme: {
         extend: {
             colors: {

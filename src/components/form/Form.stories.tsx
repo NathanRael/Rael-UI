@@ -141,8 +141,9 @@ const FormExample = () => {
                         <FormMessage name={'condition'}/>
                     </FormItem>
                 </CardSection>
-                <CardSection>
-                    <Button type={'submit'} loading={form.isSubmitting} block>Login</Button>
+                <CardSection className="flex flex-row justify-between">
+                    <Button type={'reset'} block variant={'secondary'} onClick={form.reset}>Cancel</Button>
+                    <Button type={'submit'} block loading={form.isSubmitting} >Login</Button>
                 </CardSection>
             </Card>
         </Form>

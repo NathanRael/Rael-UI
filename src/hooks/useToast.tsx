@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
-import { cn } from '../utils/cn.ts';
+import { cn } from '@/utils/cn.ts';
 import { Toast } from '../components';
 
 type ToastPosition = 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' |'top-center' | 'bottom-center';

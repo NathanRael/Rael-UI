@@ -1,1 +1,3 @@
-export * from '../hooks'
+import useToast from "@/hooks/useToast.tsx";
+
+export {useToast}
