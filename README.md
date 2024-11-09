@@ -197,3 +197,161 @@ input[type="password"]::-ms-clear {
 
 Coming soon ...
 
+## Form Management Example
+````tsx
+import {Button, Card,
+  CardDescription,
+  CardSection,
+  CardTitle, Checkbox,
+  Form,
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  PasswordInput,
+  Select, SelectGroup,
+  SelectGroupContainer, SelectGroupTitle, SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  TextInput,
+  useForm,
+  ValidationRules, useToast,
+  CheckboxLabel,
+} from "rael-ui"
+const FormTest = () => {
+    const validations: ValidationRules<FormField>[] = [
+        {
+            name : 'email',
+            pattern : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            required: true,
+            message : 'Please enter a valid email address'
+        },
+        {
+            name : 'password',
+            valid : ({password}) => password!.length >= 5,
+            required: true,
+            message : 'Password must be at least 5 characters',
+        },
+        {
+            name : 'confirm',
+            valid : ({confirm, password}) => confirm === password,
+            required : true,
+            message : "The password doesn't match"
+        },
+        {
+            name : 'country',
+            required : true,
+        },
+        {
+            name : 'condition',
+            required : true,
+            valid : ({condition}) => condition!,
+            message : 'We cannot create your account unless you accept the terms and conditions'
+        }
+    ]
+
+    const form = useForm<FormField>({
+        defaultValue : {
+            password : '',
+            country : '',
+            confirm: '',
+            email : '',
+            condition : false,
+        },
+        validations
+    });
+    
+    const {renderToastContainer, toast} = useToast();
+
+    const {formData} = form;
+
+    const onSubmit = async () => {
+        await new Promise<void>((resolve) => {
+            setTimeout(() => resolve(), 2000)
+        })
+        console.log(formData);
+        toast({
+            title : 'Login success',
+            message : 'Login successfully done',
+        })
+    }
+    return (
+        <Form form={form} onSubmit={onSubmit} className={"flex flex-col w-full justify-center items-center h-screen gap-4"}>
+            {renderToastContainer()}
+            <Card  className={'w-[420px]'}>
+                <CardSection rFor={'meta'}>
+                    <CardTitle>Create your account</CardTitle>
+                    <CardDescription>Delve into the world of ...</CardDescription>
+                </CardSection>
+                <CardSection>
+                    <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl name={'email'} type={'input'} render={({...fields}) => (
+                            <TextInput block {...fields} placeholder={'eg : rael@gmail.com'}/>
+                        )}/>
+                        <FormDescription>We recommend to use a professional email</FormDescription>
+                        <FormMessage name={'email'}/>
+                    </FormItem>
+                    <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl name={'password'} type={'input'} render={({...fields}) => (
+                            <PasswordInput block {...fields} placeholder={''}/>
+                        )}/>
+                        <FormMessage name={'password'}/>
+                    </FormItem>
+                    <FormItem>
+                        <FormLabel>Confirm</FormLabel>
+                        <FormControl name={'confirm'} type={'input'} render={({...fields}) => (
+                            <PasswordInput block {...fields} placeholder={''}/>
+                        )}/>
+                        <FormDescription>Confirm your password</FormDescription>
+                        <FormMessage name={'confirm'}/>
+                    </FormItem>
+                    <FormItem>
+                        <FormLabel>Country</FormLabel>
+                        <FormControl type={'select'} name={'country'} render={({...fields}) => (
+                            <Select block {...fields}>
+                                <SelectTrigger>
+                                    <SelectLabel placeholder={'Select your country'}/>
+                                    <ChevronDown/>
+                                </SelectTrigger>
+                                <SelectGroupContainer>
+                                    <SelectGroup>
+                                        <SelectGroupTitle>Countries</SelectGroupTitle>
+                                        {
+                                            countries.map(country => (
+                                                <SelectItem key={country} value={country}>{country}</SelectItem>))
+                                        }
+                                    </SelectGroup>
+                                </SelectGroupContainer>
+                            </Select>
+                        )}/>
+                        <FormDescription>This wont be publicly displayed</FormDescription>
+                        <FormMessage name={'country'}/>
+                    </FormItem>
+                    <FormItem>
+                        <FormControl name={'condition'} type={'checkbox'} render={({...fields}) => (
+                            <Checkbox {...fields}>
+                                <CheckboxLabel>I accept terms and conditions</CheckboxLabel>
+                            </Checkbox>
+                        )}/>
+                        <FormMessage name={'condition'}/>
+                    </FormItem>
+                </CardSection>
+                <CardSection>
+                    <Button type={'submit'} onClick={() => {
+                        toast({
+                            title : 'Toast'
+                        })
+                    }} loading={form.isSubmitting} block>Login</Button>
+                </CardSection>
+            </Card>
+        </Form>
+    )
+}
+
+
+````
+
+
