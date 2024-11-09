@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const selectContainerVariants = cva(' outline-none relative space-y-2', {
     variants : {
@@ -39,10 +40,9 @@ export const SelectTriggerVariants = cva('flex w-full items-center justify-betwe
 
     },
     defaultVariants: {
-        variant: 'outline',
-        size: 'md',
-        radius : 'md',
-        focused : false,
+        variant : defaultVariants.variant,
+        size : defaultVariants.size,
+        radius : defaultVariants.radius,
     }
 })
 

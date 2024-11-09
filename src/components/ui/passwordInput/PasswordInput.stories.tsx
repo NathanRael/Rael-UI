@@ -2,6 +2,7 @@ import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
 import {PasswordInput} from "./index.ts";
+import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof PasswordInput> & {
     placeholder: string;
@@ -12,7 +13,11 @@ const meta : Meta<StoryProps> = {
     tags : ['autodocs'],
     args : {
         onChange : fn(),
-    }
+    },
+    argTypes : {
+        ...argTypes,
+    },
+    render : ({...args}) => <PasswordInput {...args}/>
 }
 
 export default meta;
@@ -23,8 +28,8 @@ export const Outline : Story = {
     args : {
         placeholder : 'Enter your password',
         variant : 'outline',
+        size : 'md',
     },
-    render : ({...args}) => <PasswordInput {...args}/>
 }
 
 export const Fill : Story = {
@@ -32,7 +37,6 @@ export const Fill : Story = {
         placeholder : 'Enter your password',
         variant : 'fill',
     },
-    render : ({...args}) => <PasswordInput {...args}/>
 }
 
 export const HideIcon : Story = {
@@ -40,6 +44,5 @@ export const HideIcon : Story = {
         ...Outline.args,
         showIcon : false,
     },
-    render : (args) => <PasswordInput {...args}/>
 }
 

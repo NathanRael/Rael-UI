@@ -1,8 +1,9 @@
 import {RadioGroupContext, useRadioGroupContext, useRadio} from "./Radio.context.ts";
 import {useMemo} from "react";
-import {defaultVariant, radioIconVariants, radioVariants, sharedVariants} from "./Radio.variants.ts";
+import { radioIconVariants, radioVariants, sharedVariants} from "./Radio.variants.ts";
 import {cn} from "@/utils/cn.ts";
 import {useComponentStyle} from "@/components";
+import {Variant} from "@/components/global.types.ts";
 
 type RadioGroupProps = {
     children: React.ReactNode,
@@ -11,7 +12,7 @@ type RadioGroupProps = {
     disabled?: boolean;
     name?: string;
     className?: string;
-    variant?: 'fill' | 'outline';
+    variant?: Variant;
 }
 
 type RadioItemProps =  {
@@ -28,7 +29,7 @@ const RadioGroup = (props: RadioGroupProps) => {
         defaultValue,
         onChange = () => {
         },
-        disabled = defaultVariant.disabled,
+        disabled = false,
         name,
         className,
         variant,
@@ -59,6 +60,7 @@ export const RadioItem = ({value, label, className}: RadioItemProps) => {
     const {selectedValue, setSelectedValue, disabled, variant} = useRadioGroupContext();
     const {cVariant} = useComponentStyle();
     const selected = useMemo(() => selectedValue == value, [selectedValue, value]);
+    const radioId = useMemo(() => `radio-${Math.random().toString(36).slice(2, 9)}-${value}`, [value]);
 
     const handleSelectedValue = () => {
         if (disabled)
@@ -72,7 +74,7 @@ export const RadioItem = ({value, label, className}: RadioItemProps) => {
                 <label htmlFor={value} className="relative flex items-center">
                     <input disabled={disabled}
                            className={`${sharedVariants({disabled})} ${radioVariants({variant : variant || cVariant})} `}
-                           id={value}
+                           id={radioId}
                            onChange={handleSelectedValue}
                            checked={selected}
                            type="radio"/>
@@ -84,7 +86,7 @@ export const RadioItem = ({value, label, className}: RadioItemProps) => {
             </div>
             {
                 label && <label className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)} onClick={handleSelectedValue}
-                                htmlFor={value}>{label}</label>
+                                htmlFor={radioId}>{label}</label>
             }
         </div>
     )

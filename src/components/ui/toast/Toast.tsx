@@ -1,13 +1,14 @@
-import {cn} from "../../../utils/cn.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {cn} from "@/utils/cn.ts";
+import {useComponentStyle} from "@/components";
 import {X} from "lucide-react";
 import {toastMessageVariants, toastTitleVariants, toastVariants} from "./Toast.variants.ts";
+import {Radius, Variant} from "@/components/global.types.ts";
 
 type ToastProps = {
     title?: React.ReactNode;
     message?: React.ReactNode;
-    variant?: 'fill' | 'outline';
-    radius? : 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full';
+    variant?: Variant;
+    radius? : Radius;
     className?: string;
     onClose?: () => void;
 }

@@ -4,11 +4,12 @@ import {
     AutoCompleteInputContext,
     useAutoCompleteInput,
     useAutoCompleteInputContext
-} from "./AutoComplete.Context.ts";
+} from "./AutoComplete.context.ts";
 import {PropsWithChildren} from "react";
-import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.Variants.ts";
+import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.variants.ts";
 import {realInputVariants, textInputVariants} from "../textInput/TextInput.variants.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components/ui/ComponentStyle.Context.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     onChange?: ({target: {name, value}}: {
@@ -20,9 +21,9 @@ export type AutoCompleteInputProps = Required<PropsWithChildren> & {
     }) => void;
     placeholder?: string;
 
-    variant?: "outline" | "fill";
-    size?: "sm" | "md" | "lg" ;
-    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    variant?: Variant;
+    size?: Size ;
+    radius?: Radius;
     block?: boolean;
     className?: string;
     name : string;

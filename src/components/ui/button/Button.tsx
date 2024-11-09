@@ -2,11 +2,12 @@ import {LoaderCircle} from "lucide-react";
 import {ButtonHTMLAttributes} from "react";
 import {cn} from "../../../utils/cn.ts";
 import {buttonVariants, LoaderVariants} from "./Button.variants.ts";
+import {ButtonVariant, Radius, Size} from "@/components/global.types.ts";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-    variant?: "primary" | "secondary" | "ghost" | "outline",
-    size?: "sm" | "md" | "lg",
-    radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full",
+    variant?: ButtonVariant,
+    size?: Size,
+    radius?: Radius,
     block?: boolean,
     loading?: boolean,
     disabled?: boolean,

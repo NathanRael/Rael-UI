@@ -2,6 +2,7 @@ import {Textarea} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
+import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof Textarea> & {
     buttonText : React.ReactNode;
@@ -10,6 +11,9 @@ type StoryProps = ComponentProps<typeof Textarea> & {
 const meta : Meta<StoryProps> = {
     component : Textarea,
     tags : ['autodocs'],
+    argTypes : {
+        ...argTypes,
+    },
     args : {
         onClick : fn(),
     }

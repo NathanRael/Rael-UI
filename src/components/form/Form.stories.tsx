@@ -16,7 +16,7 @@ import {useForm, ValidationRules} from "./Form.Context.ts";
 import {Card, CardDescription, CardSection, CardTitle} from "../ui/card";
 import {PasswordInput} from "../ui/passwordInput";
 import {Button} from "../ui/button";
-import {Checkbox} from "../ui/checkbox";
+import {Checkbox, CheckboxLabel} from "../ui/checkbox";
 
 const countries = ["Madgascar", "Paris", "Tokyo", "London", "Beijing", "Moscow", "Rome", "Berlin", "Vienna", "Madrid", "Stockholm"]
 
@@ -81,7 +81,7 @@ const FormExample = () => {
     }
     return (
         <Form form={form} onSubmit={onSubmit} className={"flex flex-col gap-4"}>
-            <Card variant={'outline'} className={'w-[360px]'}>
+            <Card variant={'fill'} className={'w-[380px]'}>
                 <CardSection rFor={'meta'}>
                     <CardTitle>Create your account</CardTitle>
                     <CardDescription>Delve into the world of ...</CardDescription>
@@ -134,7 +134,9 @@ const FormExample = () => {
                     </FormItem>
                     <FormItem>
                         <FormControl name={'condition'} type={'checkbox'} render={({...fields}) => (
-                            <Checkbox {...fields}  label={'I accept terms and conditions'}/>
+                            <Checkbox {...fields}>
+                                <CheckboxLabel>I accept terms and conditions</CheckboxLabel>
+                            </Checkbox>
                         )}/>
                         <FormMessage name={'condition'}/>
                     </FormItem>

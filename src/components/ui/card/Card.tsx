@@ -1,11 +1,12 @@
 import {PropsWithChildren} from "react";
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {cardDescriptionVariants, cardSectionVariants, cardTitleVariants, cardVariants} from "./Card.variants.ts";
 import ComponentStyleContext, {useComponentStyle, useComponentStyleContext} from "../ComponentStyle.Context.ts";
+import {Radius, Variant} from "@/components/global.types.ts";
 
 type CardProps = Required<PropsWithChildren> & {
-    variant?: "outline" | "fill";
-    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    variant?: Variant;
+    radius?: Radius;
     className?: string;
 }
 

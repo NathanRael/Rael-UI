@@ -2,6 +2,7 @@ import {Button} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
+import {argTypes, buttonVariantOptions} from "@/components/default.ts";
 type StoryProps = ComponentProps<typeof Button> & {
     buttonText : React.ReactNode;
 }
@@ -9,6 +10,13 @@ type StoryProps = ComponentProps<typeof Button> & {
 const meta : Meta<StoryProps> = {
     component : Button,
     tags : ['autodocs'],
+    argTypes : {
+        ...argTypes,
+        variant : {
+            control : {type : "select"},
+            options : buttonVariantOptions
+        }
+    },
     args : {
         onClick : fn(),
     }

@@ -1,8 +1,7 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
-export const defaultVariant = {
-    disabled: false
-}
+
 export const sharedVariants = cva('', {
     variants: {
         disabled: {
@@ -11,7 +10,7 @@ export const sharedVariants = cva('', {
         }
     },
     defaultVariants: {
-        disabled: defaultVariant.disabled
+        disabled: false
     }
 })
 
@@ -21,6 +20,9 @@ export const radioVariants = cva('appearance-none size-4 rounded-full border-2  
             outline : 'border-input-outline-l-border dark:border-input-outline-d-border ',
             fill : 'bg-input-fill-l-bg border-input-fill-l-bg dark:bg-input-fill-d-bg dark:border-input-fill-d-bg checked:bg-primary checked:border-primary dark:checked:border-primary  dark:checked:bg-primary',
         },
+    },
+    defaultVariants : {
+        variant : defaultVariants.variant,
     }
 })
 
@@ -30,5 +32,5 @@ export const radioIconVariants = cva(' absolute size-2 rounded-full  left-1/2 to
             outline : 'bg-primary',
             fill : 'bg-white'
         }
-    }
+    },
 })

@@ -14,5 +14,5 @@ export * from './form'
 export * from './ui/toast'
 export * from "./ui/card";
 
-export * from './default.ts'
+// export * from './default.ts'
 export * from './ui/ComponentStyle.Context.ts'

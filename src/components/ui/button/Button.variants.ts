@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const buttonVariants = cva(
     "flex items-center justify-center transition-color duration-200  antialiased font-medium  hover:opacity-80 focus:outline-none focus:ring-1 focus:ring-white",
@@ -34,11 +35,11 @@ export const buttonVariants = cva(
             }
         },
         defaultVariants: {
-            variant: "primary",
-            size: "md",
-            radius: "xl",
-            block: false,
-            disabled: false,
+            variant : defaultVariants.btnVariant,
+            size : defaultVariants.size,
+            radius : defaultVariants.radius,
+            block: defaultVariants.block,
+            disabled: defaultVariants.disabled,
         },
     }
 );
@@ -53,6 +54,6 @@ export const LoaderVariants = cva('animate-spin', {
         }
     },
     defaultVariants: {
-        size: 'sm'
+        size : defaultVariants.size,
     }
 })

@@ -3,6 +3,7 @@ import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
 import {TextInput} from "./index.ts";
 import {LucideMail} from "lucide-react";
+import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof TextInput> & {
     placeholder: string;
@@ -11,6 +12,9 @@ type StoryProps = ComponentProps<typeof TextInput> & {
 const meta : Meta<StoryProps> = {
     component : TextInput,
     tags : ['autodocs'],
+    argTypes : {
+        ...argTypes,
+    },
     args : {
         onChange : fn(),
     }

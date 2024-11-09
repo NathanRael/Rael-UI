@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const textareaVariants = cva('flex items-start outline-none min-h-[120px] ', {
     variants: {
@@ -7,9 +8,9 @@ export const textareaVariants = cva('flex items-start outline-none min-h-[120px]
             fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
         },
         size : {
-            md: 'px-4 py-2',
-            lg : 'px-6 py-3',
-            xl : '',
+            sm : 'px-2 py-1 gap-2 text-[14px]',
+            md: 'px-4 py-2 gap-2',
+            lg: 'px-6 py-3 gap-3',
         },
         radius : {
             none: 'rounded-none',
@@ -27,10 +28,10 @@ export const textareaVariants = cva('flex items-start outline-none min-h-[120px]
     },
 
     defaultVariants : {
-        variant : 'outline',
-        size : 'md',
-        radius : 'md',
-        block : false,
+        variant: defaultVariants.variant,
+        size: defaultVariants.size,
+        radius: defaultVariants.radius,
+        block: defaultVariants.block,
     }
 })
 

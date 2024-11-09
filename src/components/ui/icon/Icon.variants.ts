@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const iconVariants = cva('flex items-center  antialiased font-semibold hover:opacity-50', {
     variants: {
@@ -32,10 +33,9 @@ export const iconVariants = cva('flex items-center  antialiased font-semibold ho
         }
     },
     defaultVariants: {
-        variant: 'primary',
-        size: 'md',
-        radius: 'full',
-        block: false,
-        disabled: false,
+        variant: defaultVariants.btnVariant,
+        size: defaultVariants.size,
+        block: defaultVariants.block,
+        disabled: defaultVariants.disabled,
     },
 })

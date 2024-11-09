@@ -9,6 +9,7 @@ import {
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {SearchIcon} from "lucide-react";
+import {argTypes} from "@/components/default.ts";
 
 const DESIGNER_TOOLS = [
     {
@@ -31,6 +32,9 @@ const DESIGNER_TOOLS = [
 type StoryProps = ComponentProps<typeof AutoComplete>
 const meta: Meta<StoryProps> = {
     component: AutoComplete,
+    argTypes : {
+        ...argTypes
+    },
     tags: ['autodocs'],
     render: (args) =>
         (

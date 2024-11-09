@@ -4,6 +4,7 @@ import {Meta, StoryObj} from "@storybook/react";
 import useToast from "../../../hooks/useToast.tsx";
 import {Button} from "../button";
 import ComponentStyleContext from "../ComponentStyle.Context.ts";
+import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof Toast> & {
     buttonText: React.ReactNode;
@@ -34,6 +35,10 @@ const ToastDemo = (args : StoryProps) => {
 const meta: Meta<StoryProps> = {
     component: Toast,
     tags: ['autodocs'],
+    argTypes : {
+        radius : argTypes.radius,
+        variant : argTypes.variant,
+    }
 }
 
 

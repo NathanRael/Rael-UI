@@ -1,12 +1,12 @@
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 
 type ProgressProps = {
     value: number,
-    variant?: 'fill' | 'outline',
-    size?: 'md' | 'lg' | 'xl',
-    radius?: 'none' | 'sm' | 'md' | 'lg' | 'xl',
-
+    variant?: Variant,
+    size?: Size,
+    radius?: Radius,
     className?: string,
 
 }

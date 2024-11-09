@@ -1,6 +1,8 @@
 import {Badge} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
+import {argTypes} from "@/components/default.ts";
+
 
 type StoryProps = ComponentProps<typeof Badge> & {
     BadgeText : React.ReactNode;
@@ -9,6 +11,10 @@ type StoryProps = ComponentProps<typeof Badge> & {
 const meta : Meta<StoryProps> = {
     component : Badge,
     tags : ['autodocs'],
+    argTypes : {
+        ...argTypes,
+    },
+    render : ({BadgeText,...args}) => <Badge {...args}>{BadgeText}</Badge>
 }
 
 export default meta;
@@ -22,7 +28,6 @@ export const Fill : Story = {
         size : 'sm',
         radius : 'xl',
     },
-    render : ({BadgeText,...args}) => <Badge {...args}>{BadgeText}</Badge>
 }
 
 export const Outline : Story = {
@@ -30,7 +35,6 @@ export const Outline : Story = {
         ...Fill.args,
         variant : 'outline',
     },
-    render : ({BadgeText,...args}) => <Badge {...args}>{BadgeText}</Badge>
 }
 
 
@@ -40,5 +44,4 @@ export const Dot : Story = {
         variant : 'outline',
         BadgeText : '',
     },
-    render : ({BadgeText,...args}) => <Badge {...args}>{BadgeText}</Badge>
 }

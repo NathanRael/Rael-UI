@@ -1,4 +1,6 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 export const badgeVariants = cva('rounded-full  w-fit min-w-3 min-h-3', {
     variants : {
@@ -9,6 +11,7 @@ export const badgeVariants = cva('rounded-full  w-fit min-w-3 min-h-3', {
         size : {
             sm : 'py-1 px-3 text-[12px]',
             md : 'py-2 px-4 text-[12px]',
+            // lg: 'py-2 px-4 text-[12px]'
         },
         radius: {
             none: "rounded-none",
@@ -21,8 +24,8 @@ export const badgeVariants = cva('rounded-full  w-fit min-w-3 min-h-3', {
         },
     },
     defaultVariants: {
-        variant : 'fill',
-        size : 'sm',
-        radius : 'full',
+        variant : defaultVariants.variant as Variant,
+        size : defaultVariants.size as Exclude<Size, 'lg'>,
+        radius : defaultVariants.radius as Radius,
     }
 })

@@ -1,4 +1,6 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
+import {Radius, Variant} from "@/components/global.types.ts";
 
 export const autoCompleteContainerVariants = cva('space-y-2 relative', {
     variants : {
@@ -29,7 +31,7 @@ export const autoCompleteGroupContainerVariants = cva('absolute z-30 flex flex-c
         },
     },
     defaultVariants : {
-        variant : 'outline',
-        radius : 'md'
+        variant : defaultVariants.variant as Variant,
+        radius : defaultVariants.radius as Radius,
     }
 })

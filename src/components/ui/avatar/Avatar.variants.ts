@@ -1,4 +1,6 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
+import {Radius, Size} from "@/components/global.types.ts";
 
 export const avatarVariants = cva('overflow-hidden object-cover flex bg-white font-bold items-center justify-center', {
     variants : {
@@ -18,7 +20,7 @@ export const avatarVariants = cva('overflow-hidden object-cover flex bg-white fo
         },
     },
     defaultVariants : {
-        size : 'md',
-        radius : 'full'
+        size : defaultVariants.size as Size,
+        radius : defaultVariants.radius as Radius,
     }
 })

@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
@@ -17,8 +18,8 @@ export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
         }
     },
     defaultVariants:{
-        variant : 'outline',
-        radius : 'lg',
+        variant : defaultVariants.variant ,
+        radius : defaultVariants.radius,
     }
 })
 
@@ -30,7 +31,7 @@ export const cardSectionVariants = cva('flex flex-col', {
         }
     },
     defaultVariants : {
-        rFor : 'content',
+        rFor : defaultVariants.rFor,
     }
 })
 
@@ -42,7 +43,7 @@ export const cardTitleVariants = cva('text-3xl font-semibold', {
         }
     },
     defaultVariants : {
-        variant : 'outline',
+        variant : defaultVariants.variant,
     }
 })
 
@@ -54,6 +55,6 @@ export const cardDescriptionVariants = cva('text-base', {
         }
     },
     defaultVariants : {
-        variant : 'outline',
+        variant : defaultVariants.variant,
     }
 })

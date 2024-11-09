@@ -1,5 +1,6 @@
 import {cva} from "class-variance-authority";
-import {defaultVariants} from "../../default.ts";
+import {defaultVariants} from "@/components/default.ts";
+import {Size} from "@/components/global.types.ts";
 
 export const checkboxVariants = cva('peer   transition-all appearance-none border border-gray-500 rounded shadow  hover:shadow-md ', {
     variants: {
@@ -25,7 +26,10 @@ export const checkboxVariants = cva('peer   transition-all appearance-none borde
             full: "rounded-full",
         },
     },
-    defaultVariants: {...defaultVariants, radius: 'md', variant: 'fill', size: 'md'}
+    defaultVariants: {
+        ...defaultVariants,
+        size : defaultVariants.size as Exclude<Size, 'lg'>,
+    }
 })
 
 export const sharedVariants = cva(' ', {

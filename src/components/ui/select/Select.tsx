@@ -1,8 +1,9 @@
 import {PropsWithChildren, useEffect} from "react";
 import {SelectInputContext, useSelectInput, useSelectInputContext} from "./SelectInput.context.ts";
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {selectContainerVariants, selectGroupContainerVariants, SelectTriggerVariants} from "./SelectInput.variants.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     onChange?: ({target: {name, value}}: {
@@ -14,9 +15,9 @@ export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     }) => void;
     placeholder?: string;
 
-    variant?: "outline" | "fill";
-    size?: "sm" | "md" | "lg";
-    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    variant?: Variant;
+    size?: Size;
+    radius?: Radius;
     block?: boolean;
     className?: string;
     name?: string;

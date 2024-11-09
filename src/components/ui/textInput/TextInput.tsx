@@ -1,13 +1,14 @@
 import {InputHTMLAttributes} from "react";
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {realInputVariants, textInputVariants} from "./TextInput.variants.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 
 type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
-    variant?: "outline" | "fill",
-    size?: "sm" | "md" | "lg",
-    radius?: "none" | "sm" | "md" | "lg" | "xl",
+    variant?: Variant,
+    size?: Size,
+    radius?: Radius,
     block?: boolean,
     leftContent?: React.ReactNode,
     rightContent?: React.ReactNode,

@@ -1,7 +1,8 @@
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {checkboxIconVariants, checkboxVariants, sharedVariants} from "./Checkbox.variants.ts";
 import {ChangeEventHandler, PropsWithChildren, useMemo} from "react";
 import CheckboxContext, {useCheckboxContext} from "@/components/ui/checkbox/Checkbox.context.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 type CheckboxProps = PropsWithChildren & {
     checked?: boolean;
@@ -10,9 +11,9 @@ type CheckboxProps = PropsWithChildren & {
     name?: string;
     onChange?: ChangeEventHandler<HTMLInputElement>;
     className?: string;
-    radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full";
-    variant?: "fill" | "outline";
-    size?: 'sm' | 'md';
+    radius?: Radius;
+    variant?: Variant;
+    size?: Exclude<Size, 'lg'>;
 
 }
 

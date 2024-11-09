@@ -3,6 +3,7 @@ import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {fn} from "@storybook/test";
 import {Rocket} from "lucide-react";
+import {argTypes, buttonVariantOptions} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof Icon> & {
     buttonText : React.ReactNode;
@@ -11,9 +12,17 @@ type StoryProps = ComponentProps<typeof Icon> & {
 const meta : Meta<StoryProps> = {
     component : Icon,
     tags : ['autodocs'],
+    argTypes : {
+        ...argTypes,
+        variant : {
+            control : {type : "select"},
+            options : buttonVariantOptions
+        },
+    },
     args : {
         onClick : fn(),
-    }
+    },
+    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
 }
 
 export default meta;
@@ -26,7 +35,6 @@ export const Primary : Story = {
         size : 'md',
         radius : 'full',
     },
-    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
 }
 
 
@@ -35,7 +43,6 @@ export const Secondary : Story = {
         ...Primary.args,
         variant : 'secondary',
     },
-    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
 }
 
 export const Ghost : Story = {
@@ -43,7 +50,6 @@ export const Ghost : Story = {
         ...Primary.args,
         variant : 'ghost',
     },
-    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
     
 }
 
@@ -52,6 +58,5 @@ export const Outline : Story = {
         ...Primary.args,
         variant : 'outline',
     },
-    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
     
 }

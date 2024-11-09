@@ -1,13 +1,14 @@
 import {Eye, EyeOff} from "lucide-react";
 import {InputHTMLAttributes, MouseEventHandler, useState} from "react";
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {passwordInputVariants, realInputVariants} from "./PasswordInput.variants.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components/ui/ComponentStyle.Context.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 type PasswordInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
-    variant?: "outline" | "fill";
-    size?: "sm" | "md" | "lg";
-    radius?: "none" | "sm" | "md" | "lg" | "xl";
+    variant?: Variant;
+    size?: Size;
+    radius?: Radius;
     block?: boolean;
     showIcon?: boolean;
     className? : string;

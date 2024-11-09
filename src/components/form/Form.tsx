@@ -1,8 +1,8 @@
 import React, {PropsWithChildren, useMemo} from "react";
 import {FormContext, useFormContext, UseFormReturnType} from "./Form.Context.ts";
-import {cn} from "../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {formDescriptionVariants, formLabelVariants} from "./Form.variant.ts";
-import {useComponentStyle} from "../ui/ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components";
 
 export interface Validations {
     required?: boolean | string;

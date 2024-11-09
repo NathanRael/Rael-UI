@@ -1,11 +1,12 @@
 import {PropsWithChildren} from "react";
-import {cn} from "../../../utils/cn.ts";
-import AvatarContext, {useAvatar, useAvatarContext, useAvatarImage} from "./Avatar.Context.ts";
-import {avatarVariants} from "./Avatar.Variants.ts";
+import {cn} from "@/utils/cn.ts";
+import AvatarContext, {useAvatar, useAvatarContext, useAvatarImage} from "./Avatar.context.ts";
+import {avatarVariants} from "./Avatar.variants.ts";
+import {Radius, Size} from "@/components/global.types.ts";
 export type AvatarProps = Required<PropsWithChildren> & {
     className?: string,
-    size? : 'sm' | 'md' | 'lg',
-    radius? : "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full",
+    size? : Size,
+    radius? : Radius,
 }
 
 type AvatarImageProps = {

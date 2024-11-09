@@ -6,12 +6,16 @@ import {FormDescription, FormItem, FormLabel} from "../../form";
 import {TextInput} from "../textInput";
 import {Button} from "../button";
 import {PasswordInput} from "../passwordInput";
-import {AtSign, ChevronDown, Lock} from "lucide-react";
-import {Select, SelectGroup, SelectGroupContainer, SelectItem, SelectLabel, SelectTrigger} from "../select";
+import {AtSign, Lock} from "lucide-react";
+import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof Card>
 const meta: Meta<StoryProps> = {
     component: Card,
+    argTypes : {
+        radius : argTypes.radius,
+        variant : argTypes.variant,
+    } ,
     tags: ['autodocs'],
     render:  args => (
         <Card  className={'w-[420px]'} {...args}>
@@ -30,19 +34,6 @@ const meta: Meta<StoryProps> = {
                     <PasswordInput leftContent={<Lock size={16}/>} block placeholder={''}/>
                     <FormDescription>Your email will be blocked after 5 wrong attempts</FormDescription>
                 </FormItem>
-                {/*<Select block>
-                    <SelectTrigger>
-                        <SelectLabel placeholder={'test'}/>
-                        <ChevronDown/>
-                    </SelectTrigger>
-                    <SelectGroupContainer>
-                        <SelectGroup>
-                            <SelectItem value={'1'}> 1</SelectItem>
-                            <SelectItem value={'1'}> 1</SelectItem>
-                            <SelectItem value={'1'}> 1</SelectItem>
-                        </SelectGroup>
-                    </SelectGroupContainer>
-                </Select>*/}
             </CardSection>
             <CardSection rFor={'meta'}>
                 <Button type="submit">Login</Button>
@@ -55,16 +46,17 @@ export default meta;
 
 type Story = StoryObj<StoryProps>;
 
-export const Outline: Story = {
-    args: {
-        variant: 'outline',
-        radius: 'lg',
-    },
-}
-
 export const Fill: Story = {
     args: {
-        ...Outline.args,
+        radius : 'lg',
         variant: 'fill',
     },
 }
+
+export const Outline: Story = {
+    args: {
+        ...Fill.args,
+        variant: 'outline',
+    },
+}
+

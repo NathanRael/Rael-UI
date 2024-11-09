@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const passwordInputVariants = cva('flex items-center justify-between  ', {
     variants : {
@@ -7,8 +8,9 @@ export const passwordInputVariants = cva('flex items-center justify-between  ', 
             fill: 'bg-neutral-200 text-black dark:text-white dark:bg-zinc-800 focus-within:ring-[3px] focus-within:ring-primary',
         },
         size: {
-            md : 'px-4 py-2 gap-2',
-            lg : 'px-6 py-3 gap-3',
+            sm : 'px-2 py-1 gap-2 text-[14px]',
+            md: 'px-4 py-2 gap-2',
+            lg: 'px-6 py-3 gap-3',
         },
         radius: {
             none: 'rounded-none',
@@ -25,10 +27,7 @@ export const passwordInputVariants = cva('flex items-center justify-between  ', 
         }
     },
     defaultVariants : {
-        variant: 'outline',
-        size: 'md',
-        radius: 'md',
-        block : false
+        ...defaultVariants,
     }
 })
 

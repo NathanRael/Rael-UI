@@ -1,12 +1,16 @@
 import {RadioGroup, RadioItem} from "./index.ts";
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
+import {argTypes} from "@/components/default.ts";
 
 
 type StoryProps = ComponentProps<typeof RadioGroup>
 const meta : Meta<StoryProps> = {
     component : RadioGroup,
     tags : ['autodocs'],
+    argTypes : {
+        variant : argTypes.variant,
+    },
     render : ({...args}) => {
         return (
             <RadioGroup  {...args}>

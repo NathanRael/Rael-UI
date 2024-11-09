@@ -1,10 +1,7 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
-export const defaultVariants = {
-    disabled: true,
-    checked: false,
 
-}
 
 export const switchVariants = cva(`peer h-6 w-11 rounded-full border after:absolute after:left-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border  after:transition-all after:content-['']  peer-checked:after:translate-x-full  `, {
     variants: {
@@ -16,12 +13,11 @@ export const switchVariants = cva(`peer h-6 w-11 rounded-full border after:absol
             true: 'after:bg-black after:border-black  cursor-not-allowed ',
             false: ''
         },
-
-
+        
     },
     defaultVariants: {
-        variant : 'fill' ,
-        disabled : true,
+        variant :  defaultVariants.variant,
+        disabled : defaultVariants.disabled,
     }
 })
 

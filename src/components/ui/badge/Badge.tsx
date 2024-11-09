@@ -1,18 +1,19 @@
 import {PropsWithChildren} from "react";
-import {cn} from "../../../utils/cn.ts";
-import {badgeVariants} from "./Badge.Variants.ts";
+import {cn} from "@/utils/cn.ts";
+import {badgeVariants} from "./Badge.variants.ts";
+import {Radius, Size, Variant} from "@/components/global.types.ts";
 
 type BadgeProps = PropsWithChildren & {
-    variant?: 'outline' |'fill' ;
-    size? : 'sm' | 'md';
-    radius? : 'none' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | 'full' ;
+    variant?: Variant;
+    size? : Exclude<Size, 'lg'>;
+    radius? : Radius ;
     className?: string;
 }
 
 type DotProps = {
     className?: string;
 }
-const Badge = ({children = null, className, variant, size} : BadgeProps) => {
+const Badge = ({children, className, variant, size} : BadgeProps) => {
     const userProps = {variant, size}
     
     if (!children)

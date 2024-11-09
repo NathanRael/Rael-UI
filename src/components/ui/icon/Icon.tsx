@@ -1,11 +1,12 @@
 import {ButtonHTMLAttributes, PropsWithChildren} from "react";
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {iconVariants} from "./Icon.variants.ts";
+import {ButtonVariant, Radius, Size} from "@/components/global.types.ts";
 
 type IconProps = ButtonHTMLAttributes<HTMLButtonElement> & Required<PropsWithChildren> & {
-    variant?: "primary" | "secondary" | "ghost" | "outline",
-    size?: "sm" | "md" | "lg",
-    radius?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "full",
+    variant?: ButtonVariant,
+    size?: Size,
+    radius?: Radius,
     block?: boolean,
     loading?: boolean,
     disabled?: boolean,

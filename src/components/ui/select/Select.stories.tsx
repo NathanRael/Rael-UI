@@ -10,6 +10,7 @@ import {
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {ChevronDownIcon} from "lucide-react";
+import {argTypes} from "@/components/default.ts";
 
 const DESIGNER_TOOLS = [
     {
@@ -33,6 +34,9 @@ type StoryProps = ComponentProps<typeof Select>
 const meta: Meta<StoryProps> = {
     component: Select,
     tags: ['autodocs'],
+    argTypes : {
+        ...argTypes,
+    },
     render : (args) => (
         <Select
             {...args}

@@ -1,8 +1,9 @@
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils/cn.ts";
 import {ChangeEventHandler, PropsWithChildren, useMemo} from "react";
 import {sharedVariants, switchVariants} from "./Switch.variants.ts";
-import {useComponentStyle} from "../ComponentStyle.Context.ts";
+import {useComponentStyle} from "@/components";
 import SwitchContext, {useSwitchContext} from "@/components/ui/switch/Switch.context.ts";
+import {Variant} from "@/components/global.types.ts";
 
 type SwitchProps = PropsWithChildren & {
     checked?: boolean,
@@ -11,7 +12,7 @@ type SwitchProps = PropsWithChildren & {
     onChange?: ChangeEventHandler<HTMLInputElement>,
     className?: string,
 
-    variant?: "fill" | "outline"
+    variant?: Variant,
 }
 
 type SwitchLabelProps = Required<PropsWithChildren> & {

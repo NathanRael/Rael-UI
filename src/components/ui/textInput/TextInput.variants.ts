@@ -1,4 +1,5 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const textInputVariants = cva('flex text-base items-center justify-center outline-none', {
     variants: {
@@ -26,10 +27,10 @@ export const textInputVariants = cva('flex text-base items-center justify-center
         }
     },
     defaultVariants: {
-        variant: 'outline',
-        size: 'md',
-        radius: 'md',
-        block: false,
+        variant : defaultVariants.variant,
+        size : defaultVariants.size,
+        radius : defaultVariants.radius,
+        block: defaultVariants.block,
     }
 })
 
