@@ -12,7 +12,7 @@ import {
     SelectTrigger
 } from "../ui/select";
 import {ChevronDown} from "lucide-react";
-import {useForm, ValidationRules} from "./Form.Context.ts";
+import {Stack, useForm, ValidationRules} from "@/components";
 import {Card, CardDescription, CardSection, CardTitle} from "../ui/card";
 import {PasswordInput} from "../ui/passwordInput";
 import {Button} from "../ui/button";
@@ -31,42 +31,42 @@ type FormField = {
 const FormExample = () => {
     const validations: ValidationRules<FormField>[] = [
         {
-            name : 'email',
-            pattern : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+            name: 'email',
+            pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
             required: true,
-            message : 'Please enter a valid email address'
+            message: 'Please enter a valid email address'
         },
         {
-             name : 'password',
-            valid : ({password}) => password!.length >= 5,
+            name: 'password',
+            valid: ({password}) => password!.length >= 5,
             required: true,
-            message : 'Password must be at least 5 characters',
+            message: 'Password must be at least 5 characters',
         },
         {
-            name : 'confirm',
-            valid : ({confirm, password}) => confirm === password,
-            required : true,
-            message : "The password doesn't match"
+            name: 'confirm',
+            valid: ({confirm, password}) => confirm === password,
+            required: true,
+            message: "The password doesn't match"
         },
         {
-            name : 'country',
-            required : true,
+            name: 'country',
+            required: true,
         },
         {
-            name : 'condition',
-            required : true,
-            valid : ({condition}) => condition!,
-            message : 'We cannot create your account unless you accept the terms and conditions'
+            name: 'condition',
+            required: true,
+            valid: ({condition}) => condition!,
+            message: 'We cannot create your account unless you accept the terms and conditions'
         }
     ]
 
     const form = useForm<FormField>({
-        defaultValue : {
-            password : '',
-            country : '',
+        defaultValue: {
+            password: '',
+            country: '',
             confirm: '',
-            email : '',
-            condition : false,
+            email: '',
+            condition: false,
         },
         validations
     });
@@ -83,7 +83,7 @@ const FormExample = () => {
         <Form form={form} onSubmit={onSubmit} className={"flex flex-col gap-4"}>
             <Card variant={'fill'} className={'w-[380px]'}>
                 <CardSection rFor={'meta'}>
-                    <CardTitle>Create your account</CardTitle>
+                    <CardTitle>Let's get started</CardTitle>
                     <CardDescription>Delve into the world of ...</CardDescription>
                 </CardSection>
                 <CardSection>
@@ -92,7 +92,7 @@ const FormExample = () => {
                         <FormControl name={'email'} type={'input'} render={({...fields}) => (
                             <TextInput block {...fields} placeholder={'eg : rael@gmail.com'}/>
                         )}/>
-                        <FormDescription>We recommend to use a professional email</FormDescription>
+                        <FormDescription>We recommend to use professional email</FormDescription>
                         <FormMessage name={'email'}/>
                     </FormItem>
                     <FormItem>
@@ -141,9 +141,16 @@ const FormExample = () => {
                         <FormMessage name={'condition'}/>
                     </FormItem>
                 </CardSection>
-                <CardSection className="flex flex-row justify-between">
-                    <Button type={'reset'} block variant={'secondary'} onClick={form.reset}>Cancel</Button>
-                    <Button type={'submit'} block loading={form.isSubmitting} >Login</Button>
+                <CardSection>
+                    <Stack align={'start'}>
+                        <Button
+                            type={'reset'}
+                            variant={'secondary'}
+                            onClick={form.reset}>
+                            Cancel
+                        </Button>
+                        <Button type={'submit'} loading={form.isSubmitting}>Create account</Button>
+                    </Stack>
                 </CardSection>
             </Card>
         </Form>

@@ -1,38 +1,42 @@
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
-import {Card} from "./index.ts";
-import {CardDescription, CardSection, CardTitle} from "./Card.tsx";
-import {FormDescription, FormItem, FormLabel} from "../../form";
-import {TextInput} from "../textInput";
-import {Button} from "../button";
-import {PasswordInput} from "../passwordInput";
+import {
+    Card,
+    CardDescription,
+    CardSection,
+    CardTitle,
+    PasswordInput,
+    FormItem,
+    FormLabel,
+    TextInput,
+    Button
+} from "@/components";
 import {AtSign, Lock} from "lucide-react";
 import {argTypes} from "@/components/default.ts";
 
 type StoryProps = ComponentProps<typeof Card>
 const meta: Meta<StoryProps> = {
     component: Card,
-    argTypes : {
-        radius : argTypes.radius,
-        variant : argTypes.variant,
-    } ,
+    argTypes: {
+        radius: argTypes.radius,
+        variant: argTypes.variant,
+    },
     tags: ['autodocs'],
-    render:  args => (
-        <Card  className={'w-[420px]'} {...args}>
+    render: args => (
+        <Card className={'w-[420px]'} {...args}>
             <CardSection rFor={'meta'}>
                 <CardTitle>Login</CardTitle>
-                <CardDescription>Login into your account to access the whole app features</CardDescription>
+                <CardDescription>Log into your account to access the whole app features</CardDescription>
             </CardSection>
             <CardSection>
                 <FormItem>
                     <FormLabel>Email</FormLabel>
-                    <TextInput block  placeholder={'rael@gmail.com'} leftContent={<AtSign size={16}/>}/>
-                    <FormDescription>At the your fist login, we will send you a validation code</FormDescription>
+                    <TextInput block placeholder={'rael@gmail.com'} leftContent={<AtSign size={16}/>}/>
+                    {/*<FormDescription>At the your fist login, we will send you a validation code</FormDescription>*/}
                 </FormItem>
                 <FormItem>
                     <FormLabel>Password</FormLabel>
                     <PasswordInput leftContent={<Lock size={16}/>} block placeholder={''}/>
-                    <FormDescription>Your email will be blocked after 5 wrong attempts</FormDescription>
                 </FormItem>
             </CardSection>
             <CardSection rFor={'meta'}>
@@ -48,7 +52,7 @@ type Story = StoryObj<StoryProps>;
 
 export const Fill: Story = {
     args: {
-        radius : 'lg',
+        radius: 'lg',
         variant: 'fill',
     },
 }
