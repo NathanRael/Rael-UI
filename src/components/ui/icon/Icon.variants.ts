@@ -37,5 +37,6 @@ export const iconVariants = cva('flex items-center  antialiased font-semibold ho
         size: defaultVariants.size,
         block: defaultVariants.block,
         disabled: defaultVariants.disabled,
+        radius : 'full',
     },
 })

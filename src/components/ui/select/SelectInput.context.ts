@@ -23,6 +23,8 @@ type SelectInputContext = {
     radius: SelectInputDefaultProps['radius'];
     block: SelectInputDefaultProps['block'];
     name?: string;
+    defaultValue? : string;
+    registerValue : (value: string) => void;
 
 }
 
@@ -38,11 +40,12 @@ export const useSelectInputContext = () => {
     return context;
 }
 
-export const useSelectInput = () => {
-    const [selectedItem, setSelectedItem] = useState("");
+export const useSelectInput = ({defaultValue} : {defaultValue?: string}) => {
+    const [selectedItem, setSelectedItem] = useState(defaultValue || '');
     const [showSelectGroup, setShowSelectGroup] = useState(false);
     const selectRef = useRef<HTMLDivElement>(null);
     const [focused, setFocused] = useState(false);
+    const [registeredOptions, setRegisteredOptions] = useState<string[]>([]);
 
     useOutsideClicked({
         ref: selectRef,
@@ -52,7 +55,12 @@ export const useSelectInput = () => {
                  setFocused(false)*/
         }
     })
-
+    
+    
+    const registerValue = (value : string) => {
+        setRegisteredOptions(prev => [...prev, value])
+    };
+    
 
     return {
         selectedItem,
@@ -61,6 +69,8 @@ export const useSelectInput = () => {
         selectRef,
         setShowSelectGroup,
         focused,
+        registerValue,
+        registeredOptions,
         setFocused,
     }
 }

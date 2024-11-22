@@ -2,7 +2,7 @@ import {cva} from "class-variance-authority";
 import {defaultVariants} from "@/components/default.ts";
 import {Radius, Size} from "@/components/global.types.ts";
 
-export const avatarVariants = cva('overflow-hidden object-cover flex bg-white font-bold items-center justify-center', {
+export const avatarVariants = cva('overflow-hidden text-black dark:text-white object-cover flex bg-white font-bold items-center justify-center', {
     variants : {
         size : {
             sm : 'size-7 text-base',

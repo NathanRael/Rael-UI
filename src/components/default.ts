@@ -24,7 +24,7 @@ export const defaultVariants : DefaultVariants = {
     rFor : 'content',
     
     
-    stackDirection : "horizontal",
+    stackDirection : "vertical",
     stackGap : 16,
 }
 

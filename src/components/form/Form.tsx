@@ -100,7 +100,7 @@ export const FormControl = <T extends ControlType>({name, render, type}: FormCon
             case 'input':
                 return { ...commonProps, value: formData[name as string] };
             case 'select':
-                return { ...commonProps };
+                return { ...commonProps, defaultValue: formData[name as string] };
             case 'checkbox':
                 return { ...commonProps, checked: formData[name as string] };
             case 'radio':

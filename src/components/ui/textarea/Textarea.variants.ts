@@ -35,3 +35,12 @@ export const textareaVariants = cva('flex items-start outline-none min-h-[120px]
     }
 })
 
+
+export const realTextareaVariants = cva('bg-transparent resize-none px-0 py-0 flex-1 outline-none', {
+    variants: {
+        variant: {
+            'outline' : 'placeholder:text-input-outline-l-placeholder dark:placeholder:text-input-outline-d-placeholder',
+            'fill' : 'placeholder:text-input-fill-l-placeholder dark:placeholder:text-input-fill-d-placeholder',
+        },
+    }
+})

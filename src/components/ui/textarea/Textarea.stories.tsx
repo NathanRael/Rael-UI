@@ -36,7 +36,7 @@ export const Fill : Story = {
         ...Outline.args,
         variant : 'fill',
     },
-    render : ({...args}) => <Textarea {...args} />
+    render : ({...args}) => <Textarea  rows={1} {...args} />
 }
 
 

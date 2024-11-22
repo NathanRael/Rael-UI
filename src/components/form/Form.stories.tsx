@@ -63,7 +63,7 @@ const FormExample = () => {
     const form = useForm<FormField>({
         defaultValue: {
             password: '',
-            country: '',
+            country: 'Madgascar',
             confirm: '',
             email: '',
             condition: false,
@@ -142,7 +142,7 @@ const FormExample = () => {
                     </FormItem>
                 </CardSection>
                 <CardSection>
-                    <Stack align={'start'}>
+                    <Stack align={'start'} direction={'horizontal'}>
                         <Button
                             type={'reset'}
                             variant={'secondary'}

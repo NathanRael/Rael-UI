@@ -1,4 +1,4 @@
-import {InputHTMLAttributes} from "react";
+import {InputHTMLAttributes, useRef} from "react";
 import {cn} from "@/utils/cn.ts";
 import {realInputVariants, textInputVariants} from "./TextInput.variants.ts";
 import {useComponentStyle} from "@/components";
@@ -17,12 +17,14 @@ type TextInputProps = Omit<InputHTMLAttributes<HTMLInputElement>, "type"> & {
 const TextInput = ({variant, size, radius, block, className, leftContent, rightContent, ...props}: TextInputProps) => {
     const {cVariant} = useComponentStyle();
     const userProps = { variant : variant || cVariant, size, radius, block};
-
+   const inputRef = useRef<HTMLInputElement>(null);
+    
     return (
-        <div tabIndex={-1} role="presentation"
+        <div onClick={() => inputRef.current && inputRef.current.focus()} tabIndex={-1} role="presentation"
              className={cn(textInputVariants(userProps), className)}>
             {leftContent}
             <input
+                ref={inputRef}
                 className={cn(realInputVariants({variant}))}
                 {...props}
                 />

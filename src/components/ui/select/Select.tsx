@@ -21,6 +21,7 @@ export type SelectInputDefaultProps = Required<PropsWithChildren> & {
     block?: boolean;
     className?: string;
     name?: string;
+    defaultValue?: string;
 
 }
 
@@ -48,7 +49,7 @@ type SelectGroupTitleProps = Required<PropsWithChildren> & {
 type SelectItemProps = Required<PropsWithChildren> & {
     className?: string;
     value: string;
-    selected?: boolean;
+    // selected?: boolean;
 }
 
 const Select = ({
@@ -61,6 +62,7 @@ const Select = ({
                     block,
                     className,
                     name,
+    defaultValue = '',
                 }: SelectInputDefaultProps) => {
     const {
         selectRef,
@@ -69,10 +71,13 @@ const Select = ({
         selectedItem,
         setSelectedItem,
         focused,
-        setFocused
-    } = useSelectInput();
-
-
+        setFocused,registerValue,
+    } = useSelectInput({defaultValue});
+    
+    useEffect(() => {
+        onChange({target: {name: name || 'no-name-provided', value: defaultValue}});
+    }, [defaultValue])
+    
     return (
         <SelectInputContext.Provider value={{
             showSelectGroup,
@@ -87,6 +92,8 @@ const Select = ({
             focused,
             setFocused,
             name: name,
+            defaultValue : defaultValue,
+            registerValue
         }}>
 
             <div ref={selectRef} className={cn(selectContainerVariants({block}), className)}>
@@ -142,20 +149,10 @@ export const SelectGroupTitle = ({children, className}: SelectGroupTitleProps) =
     return (<p className={cn(`mb-1 font-semibold  w-full py-1 px-4`, className)}>{children}</p>)
 }
 
-export const SelectItem = ({children, value, className, selected}: SelectItemProps) => {
+export const SelectItem = ({children, value, className}: SelectItemProps) => {
     const {onSelect, setShowSelectGroup, setSelectedItem, name} = useSelectInputContext();
     const randomName = 'no-name-provided';
     
-    const handleChange = () => {
-        setSelectedItem(value);
-        onSelect({target: {name: name || randomName, value: value}});
-        setShowSelectGroup(false);
-    }
-    useEffect(() => {
-        if (selected){
-            handleChange()
-        }
-    }, [selected]);
     
     return (
         <div onClick={() => {
