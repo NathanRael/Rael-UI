@@ -35,6 +35,7 @@ export const Primary : Story = {
         size : 'md',
         radius : 'full',
     },
+    render : ({...args}) => <Icon {...args}><Rocket size={16}/></Icon>
 }
 
 
@@ -58,5 +59,14 @@ export const Outline : Story = {
         ...Primary.args,
         variant : 'outline',
     },
+    
+}
+
+export const Large : Story = {
+    args : {
+        ...Primary.args,
+        size : 'lg'
+    },
+    render : ({...args}) => <Icon {...args}><Rocket size={24}/></Icon>
     
 }

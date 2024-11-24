@@ -10,9 +10,9 @@ export const iconVariants = cva('flex items-center  antialiased font-semibold ho
             outline: "border border-primary text-primary hover:bg-primary hover:text-white "
         },
         size: {
-            sm: 'p-2 size-8 gap-2',
-            md: 'py-2 px-3 size-10 gap-3',
-            lg: 'py-2 px-4 gap-4 size-12 font-bold',
+            sm: 'p-2  gap-2',
+            md: 'py-3 px-3  gap-3',
+            lg: 'py-4 px-4 gap-4  font-bold',
         },
         radius: {
             none: 'rounded-none',
