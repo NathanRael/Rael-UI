@@ -195,7 +195,7 @@ input[type="password"]::-ms-clear {
 
 ## Documentation
 
-Coming soon ...
+You can check the documentation  at : https://rael-ui-doc.vercel.app/
 
 ## Form Management Example
 ````tsx

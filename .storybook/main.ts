@@ -29,15 +29,6 @@ const config: StorybookConfig = {
       }
     });
   }
-  /*viteFinal : async (config) => {
-    config.plugins?.push(
-        tsconfigPaths({
-          projects : [path.resolve(path.dirname(__dirname), "tsconfig.json")],
-        })
-    )
-    
-    return config
-  }*/
   
 };
 export default config;
