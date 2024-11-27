@@ -167,6 +167,18 @@ input[type="password"]::-ms-clear {
     display: none;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  background: transparent;
+  width: 8px;
+}
+
+.hide-scrollbar::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  border: none;
+  background: #9ca3af;
+
+}
+
 
 @keyframes slide-in {
     from {

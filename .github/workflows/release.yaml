@@ -1,0 +1,43 @@
+name: Publish Release to rael-ui-releases
+
+on:
+  push:
+    tags:
+      - 'v*.*.*' 
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+#      - name: Install dependencies
+#        run: npm install
+
+      - name: Build project
+        run: npm run build  
+
+      - name: Prepare dist folder for release
+        run: |
+          mkdir release
+          cp -r dist/* release/  # Copy the dist folder into the release directory
+
+      - name: Create Release on project-name-releases repo
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/**/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO_TOKEN: ${{ secrets.REPO_TOKEN }}
+
+      - name: Push release to rael-ui-release repository
+        run: |
+          git remote add release https://x-access-token:${{ secrets.REPO_TOKEN }}@github.com/NathanRael/rael-ui-releases
+          git push release HEAD:main

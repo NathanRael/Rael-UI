@@ -24,7 +24,7 @@ const Textarea = ({variant, radius, block, className, size, leftContent, rightCo
         <div onClick={() => inputRef.current && inputRef.current.focus()} tabIndex={-1} role="presentation"
              className={cn(textareaVariants(userProps), className)}>
             {leftContent}
-            <textarea ref={inputRef} className={cn(realTextareaVariants({variant:  userProps.variant}), inputClassName)} {...props}/>
+            <textarea  ref={inputRef} className={cn(realTextareaVariants({variant:  userProps.variant}), inputClassName)} {...props}/>
             {rightContent}
         </div>
     )

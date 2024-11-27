@@ -1,7 +1,7 @@
 import {cva} from "class-variance-authority";
 import {defaultVariants} from "@/components/default.ts";
 
-export const textareaVariants = cva('flex items-start outline-none min-h-[120px] ', {
+export const textareaVariants = cva('flex items-center justify-center  outline-none h-fit ', {
     variants: {
         variant: {
             outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
@@ -36,7 +36,7 @@ export const textareaVariants = cva('flex items-start outline-none min-h-[120px]
 })
 
 
-export const realTextareaVariants = cva('bg-transparent resize-none px-0 py-0 flex-1 outline-none', {
+export const realTextareaVariants = cva('bg-transparent h-full  resize-none px-0 py-0 flex-1 outline-none hide-scrollbar ', {
     variants: {
         variant: {
             'outline' : 'placeholder:text-input-outline-l-placeholder dark:placeholder:text-input-outline-d-placeholder',
