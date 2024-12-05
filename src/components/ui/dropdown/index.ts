@@ -1,1 +1,1 @@
-export {DropDownContent, DropDownItem, DropDownTrigger, default as DropDown} from './Dropdown.tsx'
+export { default as Dropdown, DropdownContent, DropdownItem, DropdownTrigger} from './Dropdown'

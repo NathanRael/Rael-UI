@@ -13,6 +13,7 @@ export * from './ui/icon'
 export * from './ui/toast'
 export * from "./ui/card";
 export * from "./ui/avatar";
+export * from "./ui/dropdown";
 
 export * from './form'
 

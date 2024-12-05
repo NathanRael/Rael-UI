@@ -1,7 +1,7 @@
 import {ComponentProps} from "react";
 import {Meta, StoryObj} from "@storybook/react";
 import {argTypes} from "@/components/default.ts";
-import Dropdown, {DropDownContent, DropDownItem, DropDownTrigger} from "@/components/ui/dropdown/Dropdown.tsx";
+import  {Dropdown, DropdownContent, DropdownItem, DropdownTrigger} from "@/index.ts";
 import Button from "@/components/ui/button/Button.tsx";
 import {Moon, Sun} from "lucide-react";
 
@@ -16,13 +16,13 @@ const meta: Meta<StoryProps> = {
     },
     render: ({...args}) => (
         <Dropdown {...args}>
-            <DropDownTrigger>
+            <DropdownTrigger>
                 <Button>Theme</Button>
-            </DropDownTrigger>
-            <DropDownContent>
-                <DropDownItem> <Sun size={16}/> Light </DropDownItem>
-                <DropDownItem> <Moon size={16}/> Dark</DropDownItem>
-            </DropDownContent>
+            </DropdownTrigger>
+            <DropdownContent>
+                <DropdownItem> <Sun size={16}/> Light </DropdownItem>
+                <DropdownItem> <Moon size={16}/> Dark</DropdownItem>
+            </DropdownContent>
         </Dropdown>
     )
 }
@@ -41,3 +41,4 @@ export const Outline: Story = {
         variant: 'outline',
     }
 }
+

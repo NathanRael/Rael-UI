@@ -50,8 +50,8 @@ export const SelectTriggerVariants = cva('flex w-full items-center justify-betwe
 export const selectGroupContainerVariants = cva('absolute z-30 flex overflow-y-auto hide-scrollbar max-h-[240px] flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
     variants : {
         variant: {
-            outline: 'bg-white dark:bg-black border border-neutral-400 text-black  dark:border-neutral-300 dark:text-white focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-neutral-200 text-black dark:text-white dark:bg-zinc-800 focus-within:ring-[3px] focus-within:ring-primary',
+            outline: 'bg-input-outline-l-bg dark:bg-input-outline-l-bg border dark:border-input-outline-l-border dark:text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
+            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
         },
         radius : {
             none: 'rounded-none',
@@ -64,7 +64,7 @@ export const selectGroupContainerVariants = cva('absolute z-30 flex overflow-y-a
         },
     },
     defaultVariants : {
-        variant : 'outline',
-        radius : 'md'
+        variant : defaultVariants.variant,
+        radius : defaultVariants.radius,
     }
 })

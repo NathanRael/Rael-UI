@@ -13,7 +13,7 @@ interface DropdownItemProps {
 
 interface DropdownProps {
     className?: string;
-    children?: React.ReactNode;
+    children: React.ReactNode;
     variant?: Variant;
     // size?: Size;
     radius?: Radius;
@@ -36,7 +36,7 @@ const Dropdown = ({children, className, radius, variant}: DropdownProps) => {
     )
 }
 
-export const DropDownTrigger = ({children, className}: Required<PropsWithChildren> & ClassName) => {
+export const DropdownTrigger = ({children, className}: Required<PropsWithChildren> & ClassName) => {
     const {setShowContent, showContent} = useDropdownContext();
 
     return (
@@ -46,7 +46,7 @@ export const DropDownTrigger = ({children, className}: Required<PropsWithChildre
     )
 }
 
-export const DropDownContent = ({children, className}: Required<PropsWithChildren> & ClassName) => {
+export const DropdownContent = ({children, className}: Required<PropsWithChildren> & ClassName) => {
     const {showContent, variant, radius} = useDropdownContext();
     const {cVariant} = useComponentStyle();
     if (!showContent)
@@ -60,7 +60,7 @@ export const DropDownContent = ({children, className}: Required<PropsWithChildre
     )
 }
 
-export const DropDownItem = ({
+export const DropdownItem = ({
                                  onClick = () => {
                                  }, className, children
                              }: DropdownItemProps) => {
@@ -75,6 +75,7 @@ export const DropDownItem = ({
         </div>
     )
 }
+
 
 export default Dropdown
 

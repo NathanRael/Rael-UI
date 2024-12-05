@@ -13,7 +13,7 @@ interface DropdownContext {
 export const DropdownContext = createContext<DropdownContext | undefined>(undefined);
 
 export const useDropdown = () => {
-    const [showContent, setShowContent] = useState(true);
+    const [showContent, setShowContent] = useState(false);
     const dropdownRef = useRef<HTMLDivElement | null>(null);
     useOutsideClicked({
         ref : dropdownRef,

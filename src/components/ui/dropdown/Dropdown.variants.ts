@@ -1,7 +1,7 @@
 import {cva} from "class-variance-authority";
 import {defaultVariants} from "@/components/default.ts";
 
-export const dropdownVariants = cva('absolute top-12 left-0 z-30 p-2 max-h-[240px] overflow-y-auto hide-scrollbar', {
+export const dropdownVariants = cva('absolute top-12 left-0 z-30 p-2 max-h-[240px] overflow-y-auto overflow-x-hidden hide-scrollbar', {
     variants : {
         variant: {
             outline: 'bg-white dark:bg-black border border-neutral-400 text-black  dark:border-neutral-300 dark:text-white focus-within:ring-[3px] focus-within:ring-primary',
