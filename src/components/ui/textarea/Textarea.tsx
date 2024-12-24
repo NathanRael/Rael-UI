@@ -15,20 +15,27 @@ type TextAreaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
     rightContent?: React.ReactNode;
 }
 
-const Textarea = ({variant, radius, block, className, size, leftContent, rightContent, inputClassName, ...props} : TextAreaProps) => {
+
+const Textarea = ({variant, radius, block, className, size, leftContent, rightContent, inputClassName, ...props} : TextAreaProps)=> {
     const  {cVariant} = useComponentStyle();
     const inputRef = useRef<HTMLTextAreaElement>(null);
     
     const userProps = {variant : variant || cVariant , radius, block, size};
+    
+    // useImperativeHandle(ref, () => inputRef.current as HTMLTextAreaElement, [inputRef]);
+    
     return (
-        <div onClick={() => inputRef.current && inputRef.current.focus()} tabIndex={-1} role="presentation"
+        <div onClick={() => {
+            if (inputRef.current && document.activeElement !== inputRef.current) {
+                inputRef.current.focus();
+            }
+        }} tabIndex={-1} role="presentation"
              className={cn(textareaVariants(userProps), className)}>
             {leftContent}
             <textarea  ref={inputRef} className={cn(realTextareaVariants({variant:  userProps.variant}), inputClassName)} {...props}/>
             {rightContent}
         </div>
     )
-}
-
+};
 export default Textarea
 

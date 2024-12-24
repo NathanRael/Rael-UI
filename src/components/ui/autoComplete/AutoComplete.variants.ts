@@ -17,8 +17,9 @@ export const autoCompleteContainerVariants = cva('space-y-2 relative', {
 export const autoCompleteGroupContainerVariants = cva('absolute z-30 flex flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer max-h-[240px] hide-scrollbar', {
     variants : {
         variant: {
-            outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
+            fill : 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
+            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-100 dark:text-white-100',
+
         },
         radius : {
             none: 'rounded-none',

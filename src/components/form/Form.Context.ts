@@ -34,16 +34,16 @@ export const useForm = <T extends Record<string, any>>({defaultValue, validation
     const [isSubmitting, setIsSubmitting] = useState(false);
     
     
-    const setValue = <V, >(name: keyof T, value: V) => {
+    const setValue = <V, >(name: string, value: V) => {
         setFormData(prev => ({...prev, [name]: value}))
     }
 
-    const setError = <V, >(name: keyof T, value: V) => {
+    const setError = <V, >(name: string, value: V) => {
         setErrors(prev => ({...prev, [name]: value}))
     }
     
     const reset = () => {
-        setFormData({} as T);
+        setFormData(defaultValue || {} as T);
     }
 
     const handleChange = <V, >(name: string, value: V) => {
@@ -122,6 +122,7 @@ export const useForm = <T extends Record<string, any>>({defaultValue, validation
         errors,
         isSubmitting,
         reset,
+        setValue,
     }
 }
 

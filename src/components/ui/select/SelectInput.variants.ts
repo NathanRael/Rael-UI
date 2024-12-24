@@ -16,8 +16,8 @@ export const selectContainerVariants = cva(' outline-none relative space-y-2', {
 export const SelectTriggerVariants = cva('flex w-full items-center justify-between cursor-pointer ', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
+            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-100 dark:text-white-100',
+            fill : 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
         },
         size: {
             sm : 'px-2 py-1 gap-2 text-[14px]',
@@ -50,8 +50,9 @@ export const SelectTriggerVariants = cva('flex w-full items-center justify-betwe
 export const selectGroupContainerVariants = cva('absolute z-30 flex overflow-y-auto hide-scrollbar max-h-[240px] flex-col  w-full items-center justify-between p-2 gap-2 cursor-pointer ', {
     variants : {
         variant: {
-            outline: 'bg-input-outline-l-bg dark:bg-input-outline-l-bg border dark:border-input-outline-l-border dark:text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
+            fill : 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
+            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-100 dark:text-white-100',
+
         },
         radius : {
             none: 'rounded-none',

@@ -1,10 +1,6 @@
-import {cn} from "../../../utils/cn.ts";
+import {cn} from "@/utils";
 
-import {
-    AutoCompleteInputContext,
-    useAutoCompleteInput,
-    useAutoCompleteInputContext
-} from "./AutoComplete.context.ts";
+import {AutoCompleteInputContext, useAutoCompleteInput, useAutoCompleteInputContext} from "./AutoComplete.context.ts";
 import {PropsWithChildren} from "react";
 import {autoCompleteContainerVariants, autoCompleteGroupContainerVariants} from "./AutoComplete.variants.ts";
 import {realInputVariants, textInputVariants} from "../textInput/TextInput.variants.ts";

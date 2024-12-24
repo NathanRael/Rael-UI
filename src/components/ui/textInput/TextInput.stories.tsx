@@ -9,6 +9,7 @@ type StoryProps = ComponentProps<typeof TextInput> & {
     placeholder: string;
 }
 
+
 const meta : Meta<StoryProps> = {
     component : TextInput,
     tags : ['autodocs'],

@@ -4,8 +4,8 @@ import {defaultVariants} from "@/components/default.ts";
 export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
-            fill : 'bg-meta-fill-l-bg  border border-meta-fill-l-border shadow-md dark:bg-meta-fill-d-bg dark:border-meta-fill-d-border',
-            outline : 'border bg-meta-outline-l-bg dark:bg-meta-outline-d-bg border-meta-outline-l-border dark:border-meta-outline-d-border',
+            fill : 'bg-neutral-light-100  border-neutral-light-60 shadow-sm border dark:border-none dark:bg-neutral-dark-60',
+            outline : 'bg-neutral-light-100  border-neutral-light-60 shadow-sm border dark:border-none dark:bg-neutral-dark-60',
         },
         radius : {
             none: "rounded-none",

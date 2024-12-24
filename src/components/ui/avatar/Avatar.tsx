@@ -54,7 +54,7 @@ export const AvatarImage = ({alt, src, className}: AvatarImageProps) => {
 export const AvatarFallback = ({children, className}: AvatarFallbackProps) => {
     const {isLoading, error, size, radius} = useAvatarContext();
     return (isLoading || error) && (
-        <div className={cn( avatarVariants({size, radius}), className)}>{children}</div>
+        <div className={cn( avatarVariants({size, radius}), "bg-neutral-light-100 shadow-md border border-neutral-light-60 text-black-100 dark:text-white-100 dark:bg-neutral-dark-80 dark:border-neutral-dark-60 " ,className)}>{children}</div>
     )
 }
 
