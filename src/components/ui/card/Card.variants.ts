@@ -5,7 +5,7 @@ export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
             fill : 'bg-neutral-light-100  border-neutral-light-60 shadow-sm border dark:border-none dark:bg-neutral-dark-60',
-            outline : 'bg-neutral-light-100  border-neutral-light-60 shadow-sm border dark:border-none dark:bg-neutral-dark-60',
+            outline : 'bg-transparent   border-neutral-light-60 dark:border-dark-light-60 shadow-sm border  ',
         },
         radius : {
             none: "rounded-none",
@@ -38,8 +38,8 @@ export const cardSectionVariants = cva('flex flex-col', {
 export const cardTitleVariants = cva('text-3xl font-semibold', {
     variants : {
         variant : {
-            fill : 'text-meta-fill-l-text dark:text-meta-fill-d-text',
-            outline : 'text-meta-outline-l-text dark:text-meta-outline-d-text',
+            fill : 'text-neutral-dark-100 dark:text-neutral-light-100',
+            outline : 'text-neutral-dark-80 dark:text-neutral-light-80',
         }
     },
     defaultVariants : {
