@@ -47,107 +47,87 @@ Add the following to your `tailwind.config.js` and `index.css` files:
 <summary><code>tailwind.config.ts</code></summary>
 
 ```js
+
 const colors = {
-    'primary': '#421BDD',
-    'secondary': '#423A5E',
-    'danger': '#e74c3c',
-    'black': '#09090b',
-    // 'black': '#09090b',
-    'white': '#fafafa',
-    'dark': '#12161C',
+  'primary': '#421BDD',
+  'secondary' : '#423A5E',
+  'danger': '#e74c3c',
+  'black': '#09090b',
+  // 'black': '#09090b',
+  'white': '#fafafa',
+  'dark': '#12161C',
 }
 
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    darkMode: ['class', '[data-mode="dark"]', 'selector'],
-    theme: {
-        extend: {
-            colors: {
-
-                // Base colors
-
-                'primary': colors.primary,
-                'secondary': colors.secondary,
-                'danger': colors.danger,
-                'black': colors.black,
-                'white': colors.white,
-                'dark': colors.dark,
-
-
-                // Component colors 
-
-                input: {
-                    fill: {
-                        d: {
-                            'bg': '#27272a',
-                            'placeholder': '#737373',
-                            'text': colors.white,
-                            'border': colors.black,
-                        },
-                        l: {
-                            'bg': '#e5e5e5',
-                            'placeholder': '#737373',
-                            'text': colors.black,
-                            'border': colors.white,
-
-                        }
-                    },
-                    outline: {
-                        d: {
-                            'bg': colors.black,
-                            'border': '#a3a3a3',
-                            'placeholder': '#a3a3a3',
-                            'text': colors.white,
-                        },
-                        l: {
-                            'bg': colors.white,
-                            'border': '#a3a3a3',
-                            'placeholder': '#737373',
-                            'text': colors.black,
-                        }
-                    }
-                },
-                meta: {
-                    fill: {
-                        d: {
-                            'bg': '#18181b',
-                            'border': '#262626',
-                            'text': colors.white,
-                            'text-sec': '#9ca3af',
-                        },
-                        l: {
-                            'bg': '#fff',
-                            'border': '#e4e4e7',
-                            'text': colors.black,
-                            'text-sec': '#4b5563',
-                        },
-                    },
-                    outline: {
-                        d: {
-                            'bg': colors.black,
-                            'border': '#a3a3a3',
-                            'text': colors.white,
-                            'text-sec': '#6b7280',
-                        },
-                        l: {
-                            'bg': colors.white,
-                            'border': '#a3a3a3',
-                            'text': colors.black,
-                            'text-sec': '#6b7280',
-                        },
-                    },
-                }
-            },
-            animation: {
-                'slide-in': 'slide-in 0.3s ease-out forwards',
-                'slide-out': 'slide-out 0.3s ease-out forwards',
-            },
-
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  darkMode: ['class', '[data-mode="dark"]', 'selector'],
+  theme: {
+    extend: {
+      colors: {
+        'danger': colors.danger,
+        'dark': colors.dark,
+        primary: {
+          DEFAULT: colors.primary,
+          100: 'hsl(var(--color-primary-100))',
+          80: 'hsl(var(--color-primary-80))',
+          60: 'hsl(var(--color-primary-60))',
         },
+        secondary: {
+          DEFAULT: colors.secondary,
+          100: 'hsl(var(--color-secondary-100))',
+          80: 'hsl(var(--color-secondary-80))',
+        },
+        white: {
+          DEFAULT: colors.white,
+          100: 'hsl(var(--color-white-100))',
+          80: 'hsl(var(--color-white-80))',
+        },
+        black: {
+          DEFAULT: colors.black,
+          100: 'hsl(var(--color-black-100))',
+          80: 'hsl(var(--color-black-80))',
+          60: 'hsl(var(--color-black-60))',
+        },
+        'neutral-dark': {
+          100: 'hsl(var(--color-neutral-dark-100))',
+          80: 'hsl(var(--color-neutral-dark-80))',
+          60: 'hsl(var(--color-neutral-dark-60))',
+          40: 'hsl(var(--color-neutral-dark-40))',
+        }
+        ,
+        'neutral-light': {
+          100: 'hsl(var(--color-neutral-light-100))',
+          80: 'hsl(var(--color-neutral-light-80))',
+          60: 'hsl(var(--color-neutral-light-60))',
+        }
+        ,
+      },
+      fontSize: {
+        "title":
+                "56px",
+        "button":
+                "17px"
+      }
+      ,
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'],
+      }
+      ,
+      animation: {
+        'slide-in':
+                'slide-in 0.3s ease-out forwards',
+        'slide-out':
+                'slide-out 0.3s ease-out forwards',
+      }
+      ,
+
     },
-    plugins: [],
-};
+  },
+  plugins: [],
+}
+;
+
 ```
 
 </details>
@@ -162,45 +142,77 @@ export default {
 @tailwind components;
 @tailwind utilities;
 
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
+
+@layer base {
+  .rael-password-input::-ms-reveal,
+  .rael-password-input::-ms-clear {
     display: none;
-}
+  }
 
-.hide-scrollbar::-webkit-scrollbar {
-  background: transparent;
-  width: 8px;
-}
+  .rael-number-input::-webkit-inner-spin-button {
+    display: none;
+  }
 
-.hide-scrollbar::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  border: none;
-  background: #9ca3af;
+  .hide-scrollbar::-webkit-scrollbar {
+    background: transparent;
+    width: 8px;
+  }
 
+  .hide-scrollbar::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: none;
+    background: #9ca3af;
+  }
+
+  :root {
+    --color-primary-100: 252 78% 49%;
+    --color-primary-80: 252 78% 60%;
+    --color-primary-60: 252 78% 80%;
+
+    --color-secondary-100: 253 24% 30%;
+    --color-secondary-80: 254 78% 40%;
+
+    --color-white-100: 255 80% 98%;
+    --color-white-80: 255 80% 90%;
+
+    --color-black-100: 255 80% 10%;
+    --color-black-80: 240 19% 39%;
+    --color-black-60: 240 19% 45%;
+
+    --color-neutral-dark-100: 215 22% 9%;
+    --color-neutral-dark-80: 215 22% 16%;
+    --color-neutral-dark-60: 215 22% 20%;
+    --color-neutral-dark-40: 215 22% 30%;
+
+    --color-neutral-light-100: 0 0% 100%;
+    --color-neutral-light-80: 0 0% 93%;
+    --color-neutral-light-60: 0 0% 84%;
+  }
 }
 
 
 @keyframes slide-in {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slide-out {
-    from {
-        opacity: 1;
-        transform: translateY(0);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(10px);
-    }
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
+
 ```
 
 </details>
@@ -210,6 +222,10 @@ input[type="password"]::-ms-clear {
 You can check the documentation  at : https://rael-ui-doc.vercel.app/
 
 ## Form Management Example
+
+<details>
+<summary>Form management example</summary>
+
 ````tsx
 import {Button, Card,
   CardDescription,
@@ -364,6 +380,8 @@ const FormTest = () => {
 }
 
 ````
+
+</details>
 
 ## Author
 
