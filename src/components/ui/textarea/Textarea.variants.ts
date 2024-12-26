@@ -4,8 +4,8 @@ import {defaultVariants} from "@/components/default.ts";
 export const textareaVariants = cva('flex items-center justify-center  outline-none h-fit ', {
     variants: {
         variant: {
-            outline: 'bg-transparent border border-input-outline-l-border  text-input-outline-l-text  dark:border-input-outline-d-border dark:text-input-outline-d-text focus-within:ring-[3px] focus-within:ring-primary',
-            fill: 'bg-input-fill-l-bg text-input-fill-l-text dark:text-input-fill-d-text dark:bg-input-fill-d-bg focus-within:ring-[3px] focus-within:ring-primary',
+            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-100-80 dark:text-white-80',
+            fill : 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
         },
         size : {
             sm : 'px-2 py-1 gap-2 text-[14px]',
@@ -39,8 +39,8 @@ export const textareaVariants = cva('flex items-center justify-center  outline-n
 export const realTextareaVariants = cva('bg-transparent h-full  resize-none px-0 py-0 flex-1 outline-none hide-scrollbar ', {
     variants: {
         variant: {
-            'outline' : 'placeholder:text-input-outline-l-placeholder dark:placeholder:text-input-outline-d-placeholder',
-            'fill' : 'placeholder:text-input-fill-l-placeholder dark:placeholder:text-input-fill-d-placeholder',
+            'outline' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
+            'fill' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
         },
     }
 })

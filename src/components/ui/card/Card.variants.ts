@@ -38,8 +38,8 @@ export const cardSectionVariants = cva('flex flex-col', {
 export const cardTitleVariants = cva('text-3xl font-semibold', {
     variants : {
         variant : {
-            fill : 'text-neutral-dark-100 dark:text-neutral-light-100',
-            outline : 'text-neutral-dark-80 dark:text-neutral-light-80',
+            fill : 'text-black-100 dark:text-white-100',
+            outline : 'text-black-80 dark:text-white-80',
         }
     },
     defaultVariants : {
@@ -50,8 +50,8 @@ export const cardTitleVariants = cva('text-3xl font-semibold', {
 export const cardDescriptionVariants = cva('text-base', {
     variants : {
         variant : {
-            fill : 'text-meta-fill-l-text-sec dark:text-meta-fill-d-text-sec',
-            outline : 'text-meta-outline-l-text-sec dark:text-meta-outline-d-text-sec',
+            fill : 'text-black-100 dark:text-white-100',
+            outline : 'text-black-80 dark:text-white-80',
         }
     },
     defaultVariants : {

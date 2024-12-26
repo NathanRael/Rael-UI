@@ -2,10 +2,10 @@ import {cva} from "class-variance-authority";
 import {defaultVariants} from "@/components/default.ts";
 import {Size} from "@/components/global.types.ts";
 
-export const checkboxVariants = cva('peer   transition-all appearance-none border border-gray-500 rounded shadow  hover:shadow-md ', {
+export const checkboxVariants = cva('peer   transition-all appearance-none border border-neutral-light-60 dark:border-white-60 rounded ', {
     variants: {
         variant: {
-            fill: 'checked:bg-primary checked:border-primary',
+            fill: 'checked:bg-primary-100 checked:border-primary-100',
             outline: 'text-black-100',
         },
         disabled: {
