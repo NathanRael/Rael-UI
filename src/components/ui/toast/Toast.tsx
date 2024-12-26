@@ -2,13 +2,11 @@ import {cn} from "@/utils/cn.ts";
 import {useComponentStyle} from "@/components";
 import {X} from "lucide-react";
 import {toastMessageVariants, toastTitleVariants, toastVariants} from "./Toast.variants.ts";
-import {Radius, Variant} from "@/components/global.types.ts";
+import {VariantProps} from "class-variance-authority";
 
-type ToastProps = {
+type ToastProps = VariantProps<typeof toastVariants> & {
     title?: React.ReactNode;
     message?: React.ReactNode;
-    variant?: Variant;
-    radius? : Radius;
     className?: string;
     onClose?: () => void;
 }

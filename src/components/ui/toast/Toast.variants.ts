@@ -1,10 +1,11 @@
 import {cva} from "class-variance-authority";
+import {defaultVariants} from "@/components/default.ts";
 
 export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:w-full', {
     variants: {
         variant: {
-            fill: 'bg-meta-fill-l-bg border border-meta-fill-l-border shadow-sm dark:bg-meta-fill-d-bg dark:border-meta-fill-d-border',
-            outline: 'border border-meta-outline-l-border bg-meta-outline-l-bg dark:border-meta-outline-d-border dark:bg-meta-outline-d-bg',
+            fill: 'bg-neutral-light-100 shadow-sm border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none',
+            outline: 'border bg-neutral-light-100 dark:bg-neutral-dark-100 border-neutral-light-60 dark:border-neutral-dark-60',
         },
         radius : {
             none: "rounded-none",
@@ -17,16 +18,16 @@ export const toastVariants = cva('flex flex-col gap-2 p-4 w-[360px] max-[360px]:
         }
     },
     defaultVariants:{
-        variant : 'outline',
-        radius : 'lg',
+        variant : defaultVariants.variant,
+        radius : defaultVariants.radius,
     }
 });
 
 export const toastTitleVariants = cva('text-lg', {
     variants: {
         variant: {
-            fill: 'text-meta-fill-l-text dark:text-meta-fill-d-text',
-            outline: 'text-meta-outline-l-text dark:text-meta-outline-d-text'
+            fill: 'text-black-100 dark:text-white-100',
+            outline: 'text-black-100 dark:text-white-100',
         },
     },
     defaultVariants: {
@@ -37,11 +38,11 @@ export const toastTitleVariants = cva('text-lg', {
 export const toastMessageVariants = cva('text-[14px]', {
     variants: {
         variant: {
-            fill: 'text-meta-fill-l-text-sec  dark:text-meta-fill-d-text-sec',
-            outline: 'text-meta-outline-l-text-sec dark:text-meta-outline-d-text-sec'
+            fill: 'text-black-60 dark:text-white-80',
+            outline: 'text-black-60 dark:text-white-80'
         },
     },
     defaultVariants: {
-        variant: 'outline'
+        variant: defaultVariants.variant,
     }
 })

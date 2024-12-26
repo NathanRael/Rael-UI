@@ -19,6 +19,7 @@ const ToastDemo = (args : StoryProps) => {
             message: "We've added some new UI",
             onClose: () => console.log('Toast closed'),
             position : 'bottom-left',
+            duration : 1000000
         });
     };
 
