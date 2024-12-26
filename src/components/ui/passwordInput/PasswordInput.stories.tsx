@@ -4,9 +4,7 @@ import {fn} from "@storybook/test";
 import {PasswordInput} from "./index.ts";
 import {argTypes} from "@/components/default.ts";
 
-type StoryProps = ComponentProps<typeof PasswordInput> & {
-    placeholder: string;
-}
+type StoryProps = ComponentProps<typeof PasswordInput>
 
 const meta : Meta<StoryProps> = {
     component : PasswordInput,
