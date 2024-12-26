@@ -4,7 +4,7 @@ import {defaultVariants} from "@/components/default.ts";
 export const passwordInputVariants = cva('flex items-center justify-between focus-within:ring-[2px] focus-within:ring-primary-80 ', {
     variants: {
         variant: {
-            outline: 'border border-neutral-light-60 dark:border-neutral-dark-40',
+            outline: 'border border-neutral-light-60 dark:border-neutral-dark-40 text-white-100  dark:text-white-100',
             fill: 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
         },
         size: {
