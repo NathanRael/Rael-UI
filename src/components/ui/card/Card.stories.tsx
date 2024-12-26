@@ -32,7 +32,6 @@ const meta: Meta<StoryProps> = {
                 <FormItem>
                     <FormLabel>Email</FormLabel>
                     <TextInput block placeholder={'rael@gmail.com'} leftContent={<AtSign size={16}/>}/>
-                    {/*<FormDescription>At the your fist login, we will send you a validation code</FormDescription>*/}
                 </FormItem>
                 <FormItem>
                     <FormLabel>Password</FormLabel>

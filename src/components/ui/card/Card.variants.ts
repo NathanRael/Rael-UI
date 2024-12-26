@@ -5,7 +5,7 @@ export const cardVariants = cva('flex flex-col p-6 gap-8 w-fit', {
     variants : {
         variant : {
             fill : 'bg-neutral-light-100  border-neutral-light-60 shadow-sm border dark:border-none dark:bg-neutral-dark-60',
-            outline : 'bg-transparent   border-neutral-light-60 dark:border-dark-light-60 shadow-sm border  ',
+            outline : 'bg-transparent   border-neutral-light-60 dark:border-neutral-dark-60 shadow-sm border  ',
         },
         radius : {
             none: "rounded-none",
