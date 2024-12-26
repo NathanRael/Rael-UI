@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 
-/* Loading fonts */
 @font-face {
     font-family: "Helevetica";
     src: url("./assets/fonts/Helvetica.ttf");
@@ -20,47 +19,50 @@
 }
 
 
-input[type="password"]::-ms-reveal,
-input[type="password"]::-ms-clear {
-    display: none;
-}
-
-.hide-scrollbar::-webkit-scrollbar {
-    background: transparent;
-    width: 8px;
-}
-
-.hide-scrollbar::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    border: none;
-    background: #9ca3af;
-
-}
-
 @layer base {
-    :root{
+    .rael-password-input::-ms-reveal,
+    .rael-password-input::-ms-clear {
+        display: none;
+    }
+
+    .rael-number-input::-webkit-inner-spin-button {
+        display: none;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar {
+        background: transparent;
+        width: 8px;
+    }
+
+    .hide-scrollbar::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        border: none;
+        background: #9ca3af;
+    }
+
+    :root {
         --color-primary-100: 252 78% 49%;
-        --color-primary-80 : 252 78% 60%;
-        --color-primary-60 : 252 78% 80%;
-        
+        --color-primary-80: 252 78% 60%;
+        --color-primary-60: 252 78% 80%;
+
         --color-secondary-100: 253 24% 30%;
-        --color-secondary-80 : 254 78% 40%;
-        
+        --color-secondary-80: 254 78% 40%;
+
         --color-white-100: 255 80% 98%;
-        --color-white-80 : 255 80% 90%;
-        
+        --color-white-80: 255 80% 90%;
+
         --color-black-100: 255 80% 10%;
-        --color-black-80 : 240 19% 39%;
-        --color-black-60 : 240 19% 45%;
+        --color-black-80: 240 19% 39%;
+        --color-black-60: 240 19% 45%;
 
-        --color-neutral-dark-100 : 215 22% 9%;
-        --color-neutral-dark-80 : 215 22% 16%;
-        --color-neutral-dark-60 : 215 22% 20%;
-        --color-neutral-dark-40 : 215 22% 30%;
+        --color-neutral-dark-100: 215 22% 9%;
+        --color-neutral-dark-80: 215 22% 16%;
+        --color-neutral-dark-60: 215 22% 20%;
+        --color-neutral-dark-40: 215 22% 30%;
 
-        --color-neutral-light-100 : 0 0% 100%;
-        --color-neutral-light-80 : 0 0% 93%;
-        --color-neutral-light-60 : 0 0% 84%;
+        --color-neutral-light-100: 0 0% 100%;
+        --color-neutral-light-80: 0 0% 93%;
+        --color-neutral-light-60: 0 0% 84%;
     }
 }
 

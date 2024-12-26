@@ -38,8 +38,8 @@ export const toastTitleVariants = cva('text-lg', {
 export const toastMessageVariants = cva('text-[14px]', {
     variants: {
         variant: {
-            fill: 'text-black-60 dark:text-white-80',
-            outline: 'text-black-60 dark:text-white-80'
+            fill: 'text-black-100-60 dark:text-white-80',
+            outline: 'text-black-100-60 dark:text-white-80'
         },
     },
     defaultVariants: {

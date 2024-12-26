@@ -61,7 +61,7 @@ export const CheckboxLabel = ({children, className}: CheckboxLabelProps) => {
     const {checkboxId, disabled} = useCheckboxContext();
     return (
         <label htmlFor={checkboxId}
-               className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
+               className={cn(`text-base text-black-100 dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
     )
 }
 

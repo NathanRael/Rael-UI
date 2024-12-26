@@ -6,7 +6,6 @@ export * from "./ui/select"
 export * from "./ui/checkbox"
 export * from "./ui/radio"
 export * from "./ui/autoComplete"
-export * from "./ui/progress"
 export * from "./ui/switch" 
 export * from "./ui/badge"
 export * from './ui/icon'
@@ -14,6 +13,7 @@ export * from './ui/toast'
 export * from "./ui/card";
 export * from "./ui/avatar";
 export * from "./ui/dropdown";
+export * from "./ui/numberInput"
 
 export * from './form'
 

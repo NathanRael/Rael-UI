@@ -34,8 +34,8 @@ export const passwordInputVariants = cva('flex items-center justify-between focu
 export const realInputVariants = cva(' bg-transparent px-0 py-0 flex-1 outline-none placeholder:text-gray-500', {
     variants: {
         variant: {
-            'outline' : 'placeholder:text-black-60 dark:placeholder:text-white-60',
-            'fill' : 'placeholder:text-black-60 dark:placeholder:text-white-60',
+            'outline' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
+            'fill' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
         },
     }
 })

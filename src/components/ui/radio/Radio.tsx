@@ -85,7 +85,7 @@ export const RadioItem = ({value, label, className}: RadioItemProps) => {
                 </label>
             </div>
             {
-                label && <label className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)} onClick={handleSelectedValue}
+                label && <label className={cn(`text-base text-black-100 dark:text-white ${sharedVariants({disabled})}`, className)} onClick={handleSelectedValue}
                                 htmlFor={radioId}>{label}</label>
             }
         </div>
@@ -96,7 +96,7 @@ export const RadioItem = ({value, label, className}: RadioItemProps) => {
     const {disabled, value, handleSelectedValue} = useRadioGroupContext();
     return (
         <label onClick={handleSelectedValue} htmlFor={value}
-               className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
+               className={cn(`text-base text-black-100 dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
     )
 }*/
 

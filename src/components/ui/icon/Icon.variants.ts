@@ -6,7 +6,7 @@ export const iconVariants = cva('flex items-center  antialiased font-semibold ho
         variant: {
             primary: "bg-primary text-white",
             secondary: "bg-secondary text-white",
-            ghost: " dark:text-white text-black hover:opacity-100 hover:bg-gray-300 dark:hover:bg-gray-200 hover:text-black dark:hover:text-black",
+            ghost: " dark:text-white text-black-100 hover:opacity-100 hover:bg-gray-300 dark:hover:bg-gray-200 hover:text-black-100 dark:hover:text-black-100",
             outline: "border border-primary text-primary hover:bg-primary hover:text-white "
         },
         size: {

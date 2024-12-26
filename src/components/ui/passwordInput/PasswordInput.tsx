@@ -6,10 +6,6 @@ import {useComponentStyle} from "@/components/ui/ComponentStyle.Context.ts";
 import {VariantProps} from "class-variance-authority";
 
 type PasswordInputProps = Omit<React.ComponentProps<'input'>, 'size'> & VariantProps<typeof passwordInputVariants> &  {
-    // variant?: Variant;
-    // size?: Size;
-    // radius?: Radius;
-    // block?: boolean;
     showIcon?: boolean;
     className? : string;
     leftContent?: React.ReactNode,
@@ -37,7 +33,7 @@ const PasswordInput = forwardRef<HTMLInputElement, PasswordInputProps>(({variant
     return (
         <div tabIndex={-1} role="presentation" className={cn(passwordInputVariants(userProps), className)}>
             {leftContent}
-            <input ref={inputRef}  type={showPassword ? "text" : "password"}  {...props} className={cn(` secure ${realInputVariants({variant})}`, className)}/>
+            <input ref={inputRef}  type={showPassword ? "text" : "password"}  {...props} className={cn("rael-password-input",`${realInputVariants({variant})}`, className)}/>
             {showIcon && <ShowPasswordIcon onClick={handlePasswordIconClicked}  passwordShown={showPassword} className="cursor-pointer"/>}
             {rightContent}
         </div>

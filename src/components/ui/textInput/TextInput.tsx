@@ -5,10 +5,9 @@ import {useComponentStyle} from "@/components";
 import {VariantProps} from "class-variance-authority";
 
 
-type TextInputProps = Omit<ComponentProps<'input'>, 'size'> & VariantProps<typeof textInputVariants> &{
+type TextInputProps = Omit<ComponentProps<'input'>, 'size' & 'type'> & VariantProps<typeof textInputVariants> &{
     leftContent?: React.ReactNode,
     rightContent?: React.ReactNode,
-
 }
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(({

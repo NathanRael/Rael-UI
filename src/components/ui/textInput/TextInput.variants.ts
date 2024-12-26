@@ -4,7 +4,7 @@ import {defaultVariants} from "@/components/default.ts";
 export const textInputVariants = cva('flex text-base items-center justify-center outline-none focus-within:ring-[2px] focus-within:ring-primary-80', {
     variants: {
         variant: {
-            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-80 dark:text-white-80',
+            outline : 'border border-neutral-light-60 dark:border-neutral-dark-40 text-black-100-80 dark:text-white-80',
             fill : 'bg-neutral-light-80 text-black-100 border border-neutral-light-60 dark:bg-neutral-dark-80 dark:border-none dark:text-white-100 ',
         },
         size: {
@@ -37,8 +37,8 @@ export const textInputVariants = cva('flex text-base items-center justify-center
 export const realInputVariants = cva('bg-transparent px-0 py-0 flex-1 outline-none placeholder:text-gray-500', {
     variants: {
         variant: {
-            'outline' : 'placeholder:text-black-60 dark:placeholder:text-white-60',
-            'fill' : 'placeholder:text-black-60 dark:placeholder:text-white-60',
+            'outline' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
+            'fill' : 'placeholder:text-black-100-60 dark:placeholder:text-white-60',
         },
     }
 })

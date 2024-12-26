@@ -6,7 +6,7 @@ export const checkboxVariants = cva('peer   transition-all appearance-none borde
     variants: {
         variant: {
             fill: 'checked:bg-primary checked:border-primary',
-            outline: 'text-black',
+            outline: 'text-black-100',
         },
         disabled: {
             true: 'disabled:bg-gray-600 disabled:border-gray-600',
@@ -48,7 +48,7 @@ export const sharedVariants = cva(' ', {
 export const checkboxIconVariants = cva('absolute  opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none ', {
     variants : {
         variant : {
-            outline : 'text-black dark:text-white',
+            outline : 'text-black-100 dark:text-white',
             fill : 'text-white',
         }
     }

@@ -59,7 +59,7 @@ export const SwitchLabel = ({children, className}: SwitchLabelProps) => {
     const {switchId, disabled} = useSwitchContext();
     return (
         <label htmlFor={switchId}
-               className={cn(`text-base text-black dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
+               className={cn(`text-base text-black-100 dark:text-white ${sharedVariants({disabled})}`, className)}>{children}</label>
     )
 }
 
