@@ -5,9 +5,7 @@ import {TextInput} from "./index.ts";
 import {LucideMail} from "lucide-react";
 import {argTypes} from "@/components/default.ts";
 
-type StoryProps = ComponentProps<typeof TextInput> & {
-    placeholder: string;
-}
+type StoryProps = ComponentProps<typeof TextInput>
 
 
 const meta : Meta<StoryProps> = {
