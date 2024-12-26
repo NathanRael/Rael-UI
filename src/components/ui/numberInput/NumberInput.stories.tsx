@@ -4,9 +4,10 @@ import {fn} from "@storybook/test";
 import {NumberInput} from "./index.ts";
 
 import {argTypes} from "@/components/default.ts";
-import {LucideMail} from "lucide-react";
 
 type StoryProps = ComponentProps<typeof NumberInput>
+
+
 
 
 const meta : Meta<StoryProps> = {
@@ -18,8 +19,9 @@ const meta : Meta<StoryProps> = {
     args : {
         onChange : fn(),
     },
-    render : (args) => <NumberInput {...args}/>, 
+    render : (args) => <NumberInput {...args}/>
 }
+
 
 export default meta;
 
@@ -28,7 +30,6 @@ type Story  = StoryObj<StoryProps>;
 export const Outline : Story = {
     args : {
         variant : 'outline',
-        
     },
 }
 
@@ -42,6 +43,6 @@ export const Fill : Story = {
 export const LeftContent : Story = {
     args : {
         ...Outline.args,
+        leftContent  : <p>+1</p>
     },
-    render : ({...args}) => <NumberInput leftContent={<LucideMail size={16}/>} {...args}/>
 }
