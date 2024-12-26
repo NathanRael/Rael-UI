@@ -1,9 +1,9 @@
 import {PropsWithChildren} from "react";
 import {cn} from "@/utils";
 import {DropdownContext, useDropdown, useDropdownContext} from "@/components/ui/dropdown/Dropdown.context.ts";
-import {Radius, Variant} from "@/components/global.types.ts";
 import {dropdownVariants} from "@/components/ui/dropdown/Dropdown.variants.ts";
 import {useComponentStyle} from "@/components";
+import {VariantProps} from "class-variance-authority";
 
 interface DropdownItemProps {
     className?: string;
@@ -11,12 +11,9 @@ interface DropdownItemProps {
     children?: React.ReactNode;
 }
 
-interface DropdownProps {
+type  DropdownProps = VariantProps<typeof dropdownVariants> &  {
     className?: string;
     children: React.ReactNode;
-    variant?: Variant;
-    // size?: Size;
-    radius?: Radius;
 }
 
 interface ClassName {

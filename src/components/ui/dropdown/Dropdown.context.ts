@@ -1,13 +1,11 @@
 import {createContext, useContext, useRef, useState} from "react";
 import useOutsideClicked from "@/hooks/useOutsideClicked.ts";
-import {Radius, Variant} from "@/components/global.types.ts";
+import {VariantProps} from "class-variance-authority";
+import {dropdownVariants} from "@/components/ui/dropdown/Dropdown.variants.ts";
 
-interface DropdownContext {
+type DropdownContext  = VariantProps<typeof dropdownVariants> & {
     showContent : boolean;
     setShowContent : (show: boolean) => void;
-    // size?: Size;
-    radius? : Radius;
-    variant? : Variant;
 }
 
 export const DropdownContext = createContext<DropdownContext | undefined>(undefined);
