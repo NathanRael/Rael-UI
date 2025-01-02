@@ -75,8 +75,10 @@ const Select = ({
     } = useSelectInput({defaultValue});
     
     useEffect(() => {
+        setSelectedItem(defaultValue);
         onChange({target: {name: name || 'no-name-provided', value: defaultValue}});
     }, [defaultValue])
+    
     
     return (
         <SelectInputContext.Provider value={{

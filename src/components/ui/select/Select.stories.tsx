@@ -40,6 +40,7 @@ const meta: Meta<StoryProps> = {
     render : (args) => (
         <Select
             {...args}
+            defaultValue={'Figma'}
             onChange={(selectedItem) => console.log("Selected Item : ", selectedItem)}
         >
             <SelectTrigger>
