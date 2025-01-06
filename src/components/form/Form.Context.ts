@@ -46,6 +46,8 @@ export const useForm = <T extends Record<string, any>>({defaultValue, validation
         setFormData(defaultValue || {} as T);
     }
 
+    
+
     const handleChange = <V, >(name: string, value: V) => {
         setValue(name, value);
         const validation = validations?.find(v => v.name === name);
